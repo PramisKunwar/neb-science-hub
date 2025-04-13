@@ -1,4 +1,3 @@
-
 export type Subject = {
   id: string;
   name: string;
@@ -16,6 +15,7 @@ export type Chapter = {
   id: number;
   title: string;
   notesPath?: string;
+  preview?: string;
 };
 
 export const subjects: Subject[] = [
@@ -23,14 +23,29 @@ export const subjects: Subject[] = [
     id: "physics",
     name: "Physics",
     icon: "atom",
-    description: "Study of matter, its motion, and behavior through space and time",
+    description: "Exploration of matter, motion, energy, and the fundamental forces of the universe.",
     areas: [
       {
         name: "Mechanics",
         chapters: [
-          { id: 1, title: "Physical Quantities", notesPath: "/notes/physics/physical-quantities.pdf" },
-          { id: 2, title: "Vectors", notesPath: "/notes/physics/vectors.pdf" },
-          { id: 3, title: "Kinematics", notesPath: "/notes/physics/kinematics.pdf" },
+          { 
+            id: 1, 
+            title: "Physical Quantities", 
+            notesPath: "/notes/physics/physical-quantities.pdf",
+            preview: "Introduction to physical quantities and their measurements. Covers fundamental and derived units, dimensional analysis, and measurement accuracy." 
+          },
+          { 
+            id: 2, 
+            title: "Vectors", 
+            notesPath: "/notes/physics/vectors.pdf",
+            preview: "Study of vector quantities, vector operations, and their applications in physics. Includes vector addition, subtraction, and multiplication methods." 
+          },
+          { 
+            id: 3, 
+            title: "Kinematics", 
+            notesPath: "/notes/physics/kinematics.pdf",
+            preview: "Analysis of motion without considering its causes. Covers displacement, velocity, acceleration, and equations of motion." 
+          },
           { id: 4, title: "Dynamics", notesPath: "/notes/physics/dynamics.pdf" },
           { id: 5, title: "Work, Energy, Power", notesPath: "/notes/physics/work-energy-power.pdf" },
           { id: 6, title: "Circular Motion", notesPath: "/notes/physics/circular-motion.pdf" },
@@ -82,13 +97,23 @@ export const subjects: Subject[] = [
     id: "chemistry",
     name: "Chemistry",
     icon: "flask-conical",
-    description: "Study of matter, its properties, and the changes it undergoes",
+    description: "Investigation of matter, its composition, properties, and transformations.",
     areas: [
       {
         name: "General and Physical Chemistry",
         chapters: [
-          { id: 1, title: "Foundation and Fundamentals", notesPath: "/notes/chemistry/foundations.pdf" },
-          { id: 2, title: "Stoichiometry", notesPath: "/notes/chemistry/stoichiometry.pdf" },
+          { 
+            id: 1, 
+            title: "Foundation and Fundamentals", 
+            notesPath: "/notes/chemistry/foundations.pdf",
+            preview: "Introduction to basic chemistry concepts and principles. Covers scientific method, matter classification, and physical/chemical changes."
+          },
+          { 
+            id: 2, 
+            title: "Stoichiometry", 
+            notesPath: "/notes/chemistry/stoichiometry.pdf",
+            preview: "Study of quantitative relationships in chemical reactions. Includes mole concepts, limiting reactants, and percent yield calculations."
+          },
           { id: 3, title: "Atomic Structure", notesPath: "/notes/chemistry/atomic-structure.pdf" },
           { id: 4, title: "Classification of Elements", notesPath: "/notes/chemistry/classification.pdf" },
           { id: 5, title: "Chemical Bonding", notesPath: "/notes/chemistry/chemical-bonding.pdf" },
@@ -127,13 +152,23 @@ export const subjects: Subject[] = [
     id: "mathematics",
     name: "Mathematics",
     icon: "calculator",
-    description: "Study of numbers, quantities, and shapes",
+    description: "Analysis of patterns, numbers, quantities, structures, and their relationships.",
     areas: [
       {
         name: "Algebra",
         chapters: [
-          { id: 1, title: "Logic and Set", notesPath: "/notes/mathematics/logic-set.pdf" },
-          { id: 2, title: "Functions", notesPath: "/notes/mathematics/functions.pdf" },
+          { 
+            id: 1, 
+            title: "Logic and Set", 
+            notesPath: "/notes/mathematics/logic-set.pdf",
+            preview: "Fundamentals of logical reasoning and set theory. Covers logical operations, set operations, and their applications in mathematics."
+          },
+          { 
+            id: 2, 
+            title: "Functions", 
+            notesPath: "/notes/mathematics/functions.pdf",
+            preview: "Study of relations between sets. Includes domain, range, types of functions, and functional operations."
+          },
           { id: 3, title: "Sequence/Series", notesPath: "/notes/mathematics/sequence-series.pdf" },
           { id: 4, title: "Matrices", notesPath: "/notes/mathematics/matrices.pdf" },
           { id: 5, title: "Quadratic Equations", notesPath: "/notes/mathematics/quadratic-equations.pdf" },
@@ -192,16 +227,62 @@ export const subjects: Subject[] = [
     id: "botany",
     name: "Botany",
     icon: "leaf",
-    description: "Study of plants and their structures",
+    description: "Exploration of plant life, their structures, processes, and ecological roles.",
     areas: [
       {
-        name: "Plant Sciences",
+        name: "Unit 1: Biomolecules and Cell Biology",
         chapters: [
-          { id: 1, title: "Biomolecules & Cell Biology", notesPath: "/notes/botany/biomolecules.pdf" },
-          { id: 2, title: "Floral Diversity", notesPath: "/notes/botany/floral-diversity.pdf" },
-          { id: 3, title: "Introductory Microbiology", notesPath: "/notes/botany/microbiology.pdf" },
-          { id: 4, title: "Ecology", notesPath: "/notes/botany/ecology.pdf" },
-          { id: 5, title: "Vegetation", notesPath: "/notes/botany/vegetation.pdf" }
+          { id: 1, title: "Biomolecules", notesPath: "/notes/botany/biomolecules.pdf" },
+          { id: 2, title: "Cell", notesPath: "/notes/botany/cell.pdf" }
+        ]
+      },
+      {
+        name: "Unit 2: Floral Diversity",
+        chapters: [
+          { id: 3, title: "Introduction", notesPath: "/notes/botany/floral-intro.pdf" },
+          { id: 4, title: "Fungi", notesPath: "/notes/botany/fungi.pdf" },
+          { id: 5, title: "Lichen", notesPath: "/notes/botany/lichen.pdf" },
+          { id: 6, title: "Algae", notesPath: "/notes/botany/algae.pdf" },
+          { id: 7, title: "Bryophyta", notesPath: "/notes/botany/bryophyta.pdf" },
+          { id: 8, title: "Pteridophyta", notesPath: "/notes/botany/pteridophyta.pdf" },
+          { id: 9, title: "Gymnosperm", notesPath: "/notes/botany/gymnosperm.pdf" },
+          { id: 10, title: "Angiosperm", notesPath: "/notes/botany/angiosperm.pdf" }
+        ]
+      },
+      {
+        name: "Unit 3: Introductory Microbiology",
+        chapters: [
+          { id: 11, title: "Monera", notesPath: "/notes/botany/monera.pdf" },
+          { id: 12, title: "Virus", notesPath: "/notes/botany/virus.pdf" },
+          { id: 13, title: "Impacts of Biotechnology", notesPath: "/notes/botany/biotechnology.pdf" }
+        ]
+      },
+      {
+        name: "Unit 4: Ecology",
+        chapters: [
+          { id: 14, title: "Ecosystem Ecology", notesPath: "/notes/botany/ecosystem.pdf" },
+          { id: 15, title: "Ecological Adaptation", notesPath: "/notes/botany/adaptation.pdf" },
+          { id: 16, title: "Ecological Imbalances", notesPath: "/notes/botany/imbalances.pdf" }
+        ]
+      },
+      {
+        name: "Unit 5: Vegetation",
+        chapters: [
+          { id: 17, title: "Vegetation", notesPath: "/notes/botany/vegetation.pdf" }
+        ]
+      },
+      {
+        name: "Unit 6: Introduction to Biology",
+        chapters: [
+          { id: 18, title: "Introduction to Biology", notesPath: "/notes/botany/intro-biology.pdf" }
+        ]
+      },
+      {
+        name: "Unit 7: Evolutionary Biology",
+        chapters: [
+          { id: 19, title: "Life and its Origin", notesPath: "/notes/botany/life-origin.pdf" },
+          { id: 20, title: "Evidences of Evolution", notesPath: "/notes/botany/evolution-evidence.pdf" },
+          { id: 21, title: "Theories of Evolution", notesPath: "/notes/botany/evolution-theories.pdf" }
         ]
       }
     ]
@@ -210,16 +291,41 @@ export const subjects: Subject[] = [
     id: "zoology",
     name: "Zoology",
     icon: "mouse",
-    description: "Study of animals and their behavior",
+    description: "Exploration of animal life, including their behavior, biology, and habitats.",
     areas: [
       {
-        name: "Animal Sciences",
+        name: "Unit 1: Biomolecules and Cell Biology",
         chapters: [
-          { id: 1, title: "Introduction to Biology", notesPath: "/notes/zoology/intro-biology.pdf" },
-          { id: 2, title: "Evolutionary Biology", notesPath: "/notes/zoology/evolutionary.pdf" },
-          { id: 3, title: "Faunal Diversity", notesPath: "/notes/zoology/faunal-diversity.pdf" },
-          { id: 4, title: "Biota and Environment", notesPath: "/notes/zoology/biota-environment.pdf" },
-          { id: 5, title: "Conservation Biology", notesPath: "/notes/zoology/conservation.pdf" }
+          { id: 1, title: "Cell Division", notesPath: "/notes/zoology/cell-division.pdf" }
+        ]
+      },
+      {
+        name: "Unit 7: Evolutionary Biology",
+        chapters: [
+          { id: 2, title: "Human Evolution", notesPath: "/notes/zoology/human-evolution.pdf" }
+        ]
+      },
+      {
+        name: "Unit 8: Faunal Diversity",
+        chapters: [
+          { id: 3, title: "Protista", notesPath: "/notes/zoology/protista.pdf" },
+          { id: 4, title: "Animalia", notesPath: "/notes/zoology/animalia.pdf" },
+          { id: 5, title: "Earthworm", notesPath: "/notes/zoology/earthworm.pdf" },
+          { id: 6, title: "Frog", notesPath: "/notes/zoology/frog.pdf" }
+        ]
+      },
+      {
+        name: "Unit 9: Biota and Environment",
+        chapters: [
+          { id: 7, title: "Animal Adaptation", notesPath: "/notes/zoology/adaptation.pdf" },
+          { id: 8, title: "Animal Behavior", notesPath: "/notes/zoology/behavior.pdf" },
+          { id: 9, title: "Environmental Pollution", notesPath: "/notes/zoology/pollution.pdf" }
+        ]
+      },
+      {
+        name: "Unit 10: Conservation Biology",
+        chapters: [
+          { id: 10, title: "Conservation Biology", notesPath: "/notes/zoology/conservation.pdf" }
         ]
       }
     ]
@@ -228,7 +334,7 @@ export const subjects: Subject[] = [
     id: "computer-science",
     name: "Computer Science",
     icon: "laptop",
-    description: "Study of computers and computational systems",
+    description: "Study of algorithms, computational systems, and the principles of programming and data processing.",
     areas: [
       {
         name: "Computer Science",
@@ -249,17 +355,55 @@ export const subjects: Subject[] = [
     id: "english",
     name: "English",
     icon: "book-text",
-    description: "Study of English language and literature",
+    description: "Exploration of the English language, its literature, and communication skills.",
     areas: [
       {
-        name: "Language Skills",
+        name: "Section II: Literature",
         chapters: [
-          { id: 1, title: "Listening", notesPath: "/notes/english/listening.pdf" },
-          { id: 2, title: "Speaking", notesPath: "/notes/english/speaking.pdf" },
-          { id: 3, title: "Reading", notesPath: "/notes/english/reading.pdf" },
-          { id: 4, title: "Writing", notesPath: "/notes/english/writing.pdf" },
-          { id: 5, title: "Grammar", notesPath: "/notes/english/grammar.pdf" },
-          { id: 6, title: "Vocabulary", notesPath: "/notes/english/vocabulary.pdf" }
+          { id: 1, title: "Short Stories", notesPath: "/notes/english/short-stories.pdf" },
+          { id: 2, title: "Poems", notesPath: "/notes/english/poems.pdf" },
+          { id: 3, title: "Essays", notesPath: "/notes/english/essays.pdf" },
+          { id: 4, title: "One Act Plays", notesPath: "/notes/english/one-act-plays.pdf" }
+        ]
+      },
+      {
+        name: "Short Stories",
+        chapters: [
+          { id: 5, title: "The Selfish Giant", notesPath: "/notes/english/short-stories/selfish-giant.pdf" },
+          { id: 6, title: "The Oval Portrait", notesPath: "/notes/english/short-stories/oval-portrait.pdf" },
+          { id: 7, title: "God Sees the Truth but Waits", notesPath: "/notes/english/short-stories/god-sees-truth.pdf" },
+          { id: 8, title: "The Wish", notesPath: "/notes/english/short-stories/wish.pdf" },
+          { id: 9, title: "Civil Peace", notesPath: "/notes/english/short-stories/civil-peace.pdf" },
+          { id: 10, title: "Two Little Soldiers", notesPath: "/notes/english/short-stories/two-little-soldiers.pdf" },
+          { id: 11, title: "An Astrologer's Day", notesPath: "/notes/english/short-stories/astrologers-day.pdf" }
+        ]
+      },
+      {
+        name: "Poems",
+        chapters: [
+          { id: 12, title: "Corona Says", notesPath: "/notes/english/poems/corona-says.pdf" },
+          { id: 13, title: "A Red, Red Rose", notesPath: "/notes/english/poems/red-rose.pdf" },
+          { id: 14, title: "All the World's a Stage", notesPath: "/notes/english/poems/worlds-stage.pdf" },
+          { id: 15, title: "Who are you, little i?", notesPath: "/notes/english/poems/who-are-you.pdf" },
+          { id: 16, title: "The Gift in Wartime", notesPath: "/notes/english/poems/gift-wartime.pdf" }
+        ]
+      },
+      {
+        name: "Essays",
+        chapters: [
+          { id: 17, title: "Sharing Tradition", notesPath: "/notes/english/essays/sharing-tradition.pdf" },
+          { id: 18, title: "How to Live Before You Die", notesPath: "/notes/english/essays/how-to-live.pdf" },
+          { id: 19, title: "What I Require from Life", notesPath: "/notes/english/essays/require-life.pdf" },
+          { id: 20, title: "What is Poverty?", notesPath: "/notes/english/essays/what-poverty.pdf" },
+          { id: 21, title: "Scientific Research is a Token of Humankind's Survival", notesPath: "/notes/english/essays/scientific-research.pdf" }
+        ]
+      },
+      {
+        name: "One Act Plays",
+        chapters: [
+          { id: 22, title: "Trifles", notesPath: "/notes/english/one-act-plays/trifles.pdf" },
+          { id: 23, title: "A Sunny Morning", notesPath: "/notes/english/one-act-plays/sunny-morning.pdf" },
+          { id: 24, title: "Refund", notesPath: "/notes/english/one-act-plays/refund.pdf" }
         ]
       }
     ]
@@ -268,7 +412,7 @@ export const subjects: Subject[] = [
     id: "nepali",
     name: "नेपाली",
     icon: "book",
-    description: "Study of Nepali language and literature",
+    description: "Exploration of the Nepali language, its literature, and cultural significance.",
     areas: [
       {
         name: "Language and Literature",

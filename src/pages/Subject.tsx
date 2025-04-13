@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import Header from "@/components/Header";
@@ -13,6 +12,11 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card";
 
 const Subject = () => {
   const { subjectId } = useParams<{ subjectId: string }>();
@@ -85,7 +89,54 @@ const Subject = () => {
                           {area.chapters.map((chapter) => (
                             <AccordionItem key={chapter.id} value={`chapter-${chapter.id}`}>
                               <AccordionTrigger className="text-left">
-                                <span className="font-medium">{chapter.title}</span>
+                                <div className="flex items-center">
+                                  <HoverCard>
+                                    <HoverCardTrigger asChild>
+                                      <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-nebBlue text-white text-xs font-medium mr-2 cursor-pointer">
+                                        {chapter.id}
+                                      </span>
+                                    </HoverCardTrigger>
+                                    <HoverCardContent className="w-80">
+                                      <div className="space-y-3">
+                                        <div className="flex items-center gap-2">
+                                          <span className="flex items-center justify-center h-6 w-6 rounded-full bg-nebBlue text-white text-xs font-medium">
+                                            {chapter.id}
+                                          </span>
+                                          <h4 className="text-sm font-semibold">{chapter.title}</h4>
+                                        </div>
+                                        
+                                        {chapter.preview && (
+                                          <div className="bg-gray-50 p-2 rounded border border-gray-100">
+                                            <p className="text-sm text-gray-700">
+                                              {chapter.preview}
+                                            </p>
+                                          </div>
+                                        )}
+                                        
+                                        {!chapter.preview && (
+                                          <p className="text-sm text-gray-600">
+                                            {chapter.notesPath 
+                                              ? "Click to view comprehensive notes covering all key concepts for this chapter."
+                                              : "Notes for this chapter are coming soon."}
+                                          </p>
+                                        )}
+                                        
+                                        {chapter.notesPath && (
+                                          <a 
+                                            href={chapter.notesPath} 
+                                            target="_blank" 
+                                            rel="noopener noreferrer"
+                                            className="inline-flex items-center text-xs text-nebBlue hover:underline"
+                                          >
+                                            <FileDown className="mr-1 h-3 w-3" />
+                                            View Notes
+                                          </a>
+                                        )}
+                                      </div>
+                                    </HoverCardContent>
+                                  </HoverCard>
+                                  <span className="font-medium">{chapter.title}</span>
+                                </div>
                               </AccordionTrigger>
                               <AccordionContent>
                                 <div className="pt-2 space-y-4">

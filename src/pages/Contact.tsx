@@ -94,8 +94,8 @@ const Contact = () => {
                         </div>
                         <div>
                           <h3 className="font-medium">Email</h3>
-                          <p className="text-sm text-gray-600">contact@nebsciencehub.com</p>
-                          <p className="text-sm text-gray-600">support@nebsciencehub.com</p>
+                          <p className="text-sm text-gray-600">pramiskwr123@gmail.com</p>
+                          <p className="text-sm text-gray-600">pramiskwr123@gmail.com</p>
                         </div>
                       </div>
                     </CardContent>
@@ -109,8 +109,8 @@ const Contact = () => {
                         </div>
                         <div>
                           <h3 className="font-medium">Phone</h3>
-                          <p className="text-sm text-gray-600">+977 9812345678</p>
-                          <p className="text-sm text-gray-600">01-4567890</p>
+                          <p className="text-sm text-gray-600">+977 9805427945</p>
+                          <p className="text-sm text-gray-600">+977 9764344670</p>
                         </div>
                       </div>
                     </CardContent>
@@ -125,7 +125,7 @@ const Contact = () => {
                         <div>
                           <h3 className="font-medium">Address</h3>
                           <p className="text-sm text-gray-600">
-                            New Baneshwor, Kathmandu<br />
+                            Manigram, Rupandehi<br />
                             Nepal
                           </p>
                         </div>

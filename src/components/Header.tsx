@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -14,6 +13,7 @@ import {
 import { Menu, X } from "lucide-react";
 import { subjects } from "@/data/subjects";
 import { cn } from "@/lib/utils";
+import { Card, CardHeader, CardContent, CardFooter } from "@/components/ui/card";
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -35,7 +35,7 @@ export default function Header() {
           <NavigationMenuList>
             <NavigationMenuItem>
               <Link to="/">
-                <NavigationMenuLink 
+                <NavigationMenuLink
                   className={navigationMenuTriggerStyle()}
                   active={location.pathname === '/'}
                 >
@@ -55,9 +55,7 @@ export default function Header() {
                           to={`/subjects/${subject.id}`}
                         >
                           <div className="text-sm font-medium leading-none">{subject.name}</div>
-                          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-                            {subject.description}
-                          </p>
+                          <p className="text-sm text-gray-600 mb-4 line-clamp-2">{subject.description}</p>
                         </Link>
                       </NavigationMenuLink>
                     </li>
@@ -67,7 +65,7 @@ export default function Header() {
             </NavigationMenuItem>
             <NavigationMenuItem>
               <Link to="/pyq">
-                <NavigationMenuLink 
+                <NavigationMenuLink
                   className={navigationMenuTriggerStyle()}
                   active={location.pathname === '/pyq'}
                 >
@@ -77,7 +75,7 @@ export default function Header() {
             </NavigationMenuItem>
             <NavigationMenuItem>
               <Link to="/about">
-                <NavigationMenuLink 
+                <NavigationMenuLink
                   className={navigationMenuTriggerStyle()}
                   active={location.pathname === '/about'}
                 >
@@ -87,7 +85,7 @@ export default function Header() {
             </NavigationMenuItem>
             <NavigationMenuItem>
               <Link to="/contact">
-                <NavigationMenuLink 
+                <NavigationMenuLink
                   className={navigationMenuTriggerStyle()}
                   active={location.pathname === '/contact'}
                 >
@@ -99,8 +97,8 @@ export default function Header() {
         </NavigationMenu>
 
         {/* Mobile Menu Button */}
-        <Button 
-          variant="outline" 
+        <Button
+          variant="outline"
           size="icon"
           className="md:hidden"
           onClick={toggleMobileMenu}
@@ -112,8 +110,8 @@ export default function Header() {
         {mobileMenuOpen && (
           <div className="fixed inset-0 z-50 bg-white pt-16 px-4">
             <nav className="space-y-4">
-              <Link 
-                to="/" 
+              <Link
+                to="/"
                 className={cn(
                   "block py-2 text-lg font-medium hover:text-nebBlue",
                   location.pathname === '/' ? "text-nebBlue" : "text-gray-600"
@@ -131,8 +129,8 @@ export default function Header() {
                       to={`/subjects/${subject.id}`}
                       className={cn(
                         "block py-1 hover:text-nebBlue",
-                        location.pathname === `/subjects/${subject.id}` 
-                          ? "text-nebBlue" 
+                        location.pathname === `/subjects/${subject.id}`
+                          ? "text-nebBlue"
                           : "text-gray-600"
                       )}
                       onClick={toggleMobileMenu}
@@ -142,8 +140,8 @@ export default function Header() {
                   ))}
                 </div>
               </div>
-              <Link 
-                to="/pyq" 
+              <Link
+                to="/pyq"
                 className={cn(
                   "block py-2 text-lg font-medium hover:text-nebBlue",
                   location.pathname === '/pyq' ? "text-nebBlue" : "text-gray-600"
@@ -152,8 +150,8 @@ export default function Header() {
               >
                 PYQ
               </Link>
-              <Link 
-                to="/about" 
+              <Link
+                to="/about"
                 className={cn(
                   "block py-2 text-lg font-medium hover:text-nebBlue",
                   location.pathname === '/about' ? "text-nebBlue" : "text-gray-600"
@@ -162,8 +160,8 @@ export default function Header() {
               >
                 About
               </Link>
-              <Link 
-                to="/contact" 
+              <Link
+                to="/contact"
                 className={cn(
                   "block py-2 text-lg font-medium hover:text-nebBlue",
                   location.pathname === '/contact' ? "text-nebBlue" : "text-gray-600"
