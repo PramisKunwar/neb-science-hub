@@ -1,4 +1,3 @@
-
 import { type Config } from "tailwindcss"
 import { fontFamily } from "tailwindcss/defaultTheme"
 
@@ -57,12 +56,12 @@ export default {
         nebAccent: "hsl(var(--neb-accent))",
         nebBackground: "hsl(var(--neb-background))",
         nebText: "hsl(var(--neb-text))",
-        // New color for the gradient effect
+        // Updated color for the gradient effect
         nebPrimary: "#42445A",
-        nebPrimaryLight: "#535677",
-        nebPrimaryDark: "#363749",
-        nebGradientStart: "#0A1E3D",
-        nebGradientEnd: "#274F9E",
+        nebPrimaryLight: "#5D6080",
+        nebPrimaryDark: "#333342",
+        nebGradientStart: "#333342",
+        nebGradientEnd: "#5D6080",
       },
       borderRadius: {
         lg: "var(--radius)",

@@ -25,7 +25,7 @@ const About = () => {
       </Suspense>
       <main className="flex-1">
         {/* Header Banner with improved contrast */}
-        <section className="w-full bg-gradient-to-r from-nebBlue to-blue-800 py-16 text-white">
+        <section className="w-full bg-gradient-to-r from-nebGradientStart to-nebGradientEnd py-16 text-white">
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center text-center space-y-6">
               <h1 className="text-3xl md:text-5xl font-bold tracking-tighter animate-fade-in">About Us</h1>
@@ -34,7 +34,7 @@ const About = () => {
               </p>
               {/* Clear CTA for navigation */}
               <div className="flex flex-wrap justify-center gap-4 mt-4 animate-fade-in">
-                <Button asChild size="lg" className="bg-white text-nebBlue hover:bg-gray-100 hover:scale-105 transition-transform duration-200">
+                <Button asChild size="lg" className="bg-white text-nebPrimary hover:bg-gray-100 hover:scale-105 transition-transform duration-200">
                   <a href="#mission">Our Mission</a>
                 </Button>
                 <Button asChild variant="outline" size="lg" className="bg-transparent border-white text-white hover:bg-white/10 hover:scale-105 transition-transform duration-200">
@@ -55,20 +55,20 @@ const About = () => {
               </p>
               <ul className="space-y-3 text-gray-700">
                 <li className="flex items-start space-x-3">
-                  <div className="bg-nebBlue bg-opacity-10 p-1.5 rounded-full mt-0.5">
-                    <Award className="h-5 w-5 text-nebBlue" />
+                  <div className="bg-nebPrimary bg-opacity-10 p-1.5 rounded-full mt-0.5">
+                    <Award className="h-5 w-5 text-nebPrimary" />
                   </div>
                   <span className="text-lg">Subject-specific notes aligned with the latest NEB curriculum</span>
                 </li>
                 <li className="flex items-start space-x-3">
-                  <div className="bg-nebBlue bg-opacity-10 p-1.5 rounded-full mt-0.5">
-                    <Award className="h-5 w-5 text-nebBlue" />
+                  <div className="bg-nebPrimary bg-opacity-10 p-1.5 rounded-full mt-0.5">
+                    <Award className="h-5 w-5 text-nebPrimary" />
                   </div>
                   <span className="text-lg">Previous year question papers with detailed solutions</span>
                 </li>
                 <li className="flex items-start space-x-3">
-                  <div className="bg-nebBlue bg-opacity-10 p-1.5 rounded-full mt-0.5">
-                    <Award className="h-5 w-5 text-nebBlue" />
+                  <div className="bg-nebPrimary bg-opacity-10 p-1.5 rounded-full mt-0.5">
+                    <Award className="h-5 w-5 text-nebPrimary" />
                   </div>
                   <span className="text-lg">Resources created by experienced educators and subject specialists</span>
                 </li>
@@ -85,11 +85,11 @@ const About = () => {
 
               {/* Mission & Vision Cards with hover effects */}
               <div id="mission" className="grid grid-cols-1 md:grid-cols-2 gap-6 my-12">
-                <Card className="hover:shadow-lg hover:translate-y-[-4px] transition-all duration-300 border-l-4 border-l-nebBlue animate-fade-in group">
+                <Card className="hover:shadow-lg hover:translate-y-[-4px] transition-all duration-300 border-l-4 border-l-nebPrimary animate-fade-in group">
                   <CardContent className="pt-6">
                     <div className="flex items-start space-x-4">
-                      <div className="bg-nebBlue bg-opacity-10 p-3 rounded-full group-hover:bg-opacity-20 transition-all duration-300">
-                        <BookOpen className="h-6 w-6 text-nebBlue group-hover:scale-110 transition-transform duration-300" />
+                      <div className="bg-nebPrimary bg-opacity-10 p-3 rounded-full group-hover:bg-opacity-20 transition-all duration-300">
+                        <BookOpen className="h-6 w-6 text-nebPrimary group-hover:scale-110 transition-transform duration-300" />
                       </div>
                       <div>
                         <h3 className="text-xl font-bold mb-3 text-gray-900">Our Mission</h3>
@@ -132,8 +132,8 @@ const About = () => {
                 <h3 className="text-2xl font-bold mb-6 text-gray-900">Why Choose NEB Science Hub?</h3>
                 <ul className="space-y-4">
                   <li className="flex items-start space-x-4">
-                    <div className="bg-nebBlue bg-opacity-10 p-2 rounded-full mt-1 flex-shrink-0">
-                      <Award className="h-5 w-5 text-nebBlue" />
+                    <div className="bg-nebPrimary bg-opacity-10 p-2 rounded-full mt-1 flex-shrink-0">
+                      <Award className="h-5 w-5 text-nebPrimary" />
                     </div>
                     <div>
                       <span className="font-bold text-gray-900">Curriculum-Aligned Content</span>
@@ -143,8 +143,8 @@ const About = () => {
                     </div>
                   </li>
                   <li className="flex items-start space-x-4">
-                    <div className="bg-nebBlue bg-opacity-10 p-2 rounded-full mt-1 flex-shrink-0">
-                      <Award className="h-5 w-5 text-nebBlue" />
+                    <div className="bg-nebPrimary bg-opacity-10 p-2 rounded-full mt-1 flex-shrink-0">
+                      <Award className="h-5 w-5 text-nebPrimary" />
                     </div>
                     <div>
                       <span className="font-bold text-gray-900">Expert-Created Resources</span>
@@ -154,8 +154,8 @@ const About = () => {
                     </div>
                   </li>
                   <li className="flex items-start space-x-4">
-                    <div className="bg-nebBlue bg-opacity-10 p-2 rounded-full mt-1 flex-shrink-0">
-                      <Award className="h-5 w-5 text-nebBlue" />
+                    <div className="bg-nebPrimary bg-opacity-10 p-2 rounded-full mt-1 flex-shrink-0">
+                      <Award className="h-5 w-5 text-nebPrimary" />
                     </div>
                     <div>
                       <span className="font-bold text-gray-900">Comprehensive Coverage</span>
@@ -165,8 +165,8 @@ const About = () => {
                     </div>
                   </li>
                   <li className="flex items-start space-x-4">
-                    <div className="bg-nebBlue bg-opacity-10 p-2 rounded-full mt-1 flex-shrink-0">
-                      <Award className="h-5 w-5 text-nebBlue" />
+                    <div className="bg-nebPrimary bg-opacity-10 p-2 rounded-full mt-1 flex-shrink-0">
+                      <Award className="h-5 w-5 text-nebPrimary" />
                     </div>
                     <div>
                       <span className="font-bold text-gray-900">Accessibility</span>
@@ -220,8 +220,8 @@ const About = () => {
                       <Card className={`hover:shadow-lg hover:translate-y-[-4px] transition-all duration-300 cursor-pointer ${member.color}`}>
                         <CardContent className="pt-6">
                           <div className="flex items-start space-x-4">
-                            <div className="bg-nebBlue bg-opacity-10 p-3 rounded-full group-hover:bg-opacity-20 transition-all duration-300">
-                              <Users className="h-6 w-6 text-nebBlue" />
+                            <div className="bg-nebPrimary bg-opacity-10 p-3 rounded-full group-hover:bg-opacity-20 transition-all duration-300">
+                              <Users className="h-6 w-6 text-nebPrimary" />
                             </div>
                             <div>
                               <h4 className="text-lg font-bold text-gray-900">{member.name}</h4>
@@ -279,14 +279,14 @@ const About = () => {
         </section>
 
         {/* Clear CTA Section */}
-        <section className="w-full py-12 bg-nebBlue text-white">
+        <section className="w-full py-12 bg-nebPrimary text-white">
           <div className="container px-4 md:px-6 text-center">
             <h2 className="text-2xl md:text-3xl font-bold mb-4">Ready to enhance your NEB Science studies?</h2>
             <p className="text-lg mb-6 max-w-2xl mx-auto">
               Explore our comprehensive resources designed specifically for Grade 11 science students in Nepal.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Button asChild size="lg" className="bg-white text-nebBlue hover:bg-gray-100 hover:scale-105 transition-transform duration-200">
+              <Button asChild size="lg" className="bg-white text-nebPrimary hover:bg-gray-100 hover:scale-105 transition-transform duration-200">
                 <Link to="/" onClick={() => window.scrollTo(0, 0)}>Explore Subjects</Link>
               </Button>
               <Button asChild variant="outline" size="lg" className="bg-amber-500 border-amber-500 text-white hover:bg-amber-600 hover:border-amber-600 hover:scale-105 transition-all duration-200">

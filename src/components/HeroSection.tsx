@@ -40,7 +40,7 @@ export default function HeroSection({ onExploreClick }: HeroSectionProps) {
   };
 
   return (
-    <section className="w-full py-12 md:py-24 lg:py-28 bg-gradient-to-r from-nebBlue to-blue-700 text-white relative overflow-hidden">
+    <section className="w-full py-12 md:py-24 lg:py-28 bg-gradient-to-r from-nebGradientStart to-nebGradientEnd text-white relative overflow-hidden">
       {/* Decorative elements */}
       <div className="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
       <div className="absolute bottom-0 left-0 w-32 h-32 bg-white opacity-5 rounded-full translate-y-1/2 -translate-x-1/2"></div>

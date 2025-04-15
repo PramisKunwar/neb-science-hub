@@ -99,7 +99,7 @@ export default function Footer() {
             className={`space-y-4 transition-all duration-500 ${fadeInClass}`} 
             style={animationDelayStyle(0)}
           >
-            <h3 className="text-lg font-bold text-nebBlue relative inline-block after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-nebBlue after:transition-all after:duration-300 group-hover:after:w-full">
+            <h3 className="text-lg font-bold text-nebPrimary relative inline-block after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-nebPrimary after:transition-all after:duration-300 group-hover:after:w-full">
               NEB Science Hub
             </h3>
             <p className="text-sm text-gray-600">
@@ -134,7 +134,7 @@ export default function Footer() {
             className={`space-y-4 transition-all duration-500 ${fadeInClass}`} 
             style={animationDelayStyle(1)}
           >
-            <h3 className="text-lg font-bold text-nebBlue relative inline-block after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-nebBlue after:transition-all after:duration-300 hover:after:w-full">
+            <h3 className="text-lg font-bold text-nebPrimary relative inline-block after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-nebPrimary after:transition-all after:duration-300 hover:after:w-full">
               Quick Links
             </h3>
             <nav className="flex flex-col space-y-2">
@@ -169,7 +169,7 @@ export default function Footer() {
             className={`space-y-4 transition-all duration-500 ${fadeInClass}`} 
             style={animationDelayStyle(2)}
           >
-            <h3 className="text-lg font-bold text-nebBlue relative inline-block after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-nebBlue after:transition-all after:duration-300 hover:after:w-full">
+            <h3 className="text-lg font-bold text-nebPrimary relative inline-block after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-nebPrimary after:transition-all after:duration-300 hover:after:w-full">
               Get Updates & Insights
             </h3>
             <p className="text-sm text-gray-600">

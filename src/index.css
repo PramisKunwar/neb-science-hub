@@ -171,25 +171,25 @@ html {
 
 @keyframes pulseGlow {
   0% {
-    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+    box-shadow: 0 0 0 0 rgba(66, 68, 90, 0);
   }
   50% {
-    box-shadow: 0 0 10px 4px rgba(59, 130, 246, 0.1);
+    box-shadow: 0 0 10px 4px rgba(66, 68, 90, 0.2);
   }
   100% {
-    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+    box-shadow: 0 0 0 0 rgba(66, 68, 90, 0);
   }
 }
 
 @keyframes borderHighlight {
   0% {
-    border-color: rgba(59, 130, 246, 0.2);
+    border-color: rgba(66, 68, 90, 0.2);
   }
   50% {
-    border-color: rgba(59, 130, 246, 0.5);
+    border-color: rgba(66, 68, 90, 0.5);
   }
   100% {
-    border-color: rgba(59, 130, 246, 0.2);
+    border-color: rgba(66, 68, 90, 0.2);
   }
 }
 
@@ -237,7 +237,7 @@ html {
   @apply min-w-full;
 }
 
-/* Active navigation indicator - Updated for better visibility */
+/* Active navigation indicator - Enhanced for better visibility */
 .nav-active {
   @apply text-nebPrimary font-semibold relative;
 }
@@ -247,7 +247,7 @@ html {
   @apply absolute bottom-0 left-0 w-full h-0.5 bg-nebPrimary transform scale-x-100 transition-transform duration-300;
 }
 
-/* Custom styles for the new navigation */
+/* Custom styles for the navigation - Enhanced active state */
 .nav-item {
   @apply relative px-3 py-2 transition-colors duration-200;
 }
@@ -262,23 +262,24 @@ html {
 }
 
 .nav-item-active {
-  @apply text-nebPrimary font-semibold;
+  @apply text-nebPrimary font-semibold bg-gray-100 rounded;
 }
 
 .nav-item-active::after {
-  @apply scale-x-100;
+  content: '';
+  @apply absolute bottom-0 left-0 w-full h-1 bg-nebPrimary transform scale-x-100 transition-transform duration-300;
 }
 
-/* Mobile nav styles */
+/* Mobile nav styles - Enhanced for clarity */
 .mobile-nav-item {
   @apply relative block w-full py-3 font-medium transition-colors;
 }
 
 .mobile-nav-item-active {
-  @apply text-nebPrimary font-semibold;
+  @apply text-nebPrimary font-semibold bg-gray-100 pl-4 rounded;
 }
 
 .mobile-nav-item-active::before {
   content: '';
-  @apply absolute left-0 top-0 h-full w-1 bg-nebPrimary rounded-r;
+  @apply absolute left-0 top-0 h-full w-2 bg-nebPrimary rounded-r;
 }

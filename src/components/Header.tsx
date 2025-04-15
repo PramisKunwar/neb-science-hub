@@ -1,4 +1,3 @@
-
 import { useState, lazy, Suspense, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -85,22 +84,28 @@ export default function Header() {
               <Link to="/" onClick={() => window.scrollTo(0, 0)}>
                 <NavigationMenuLink
                   className={cn(
-                    "nav-item px-3 py-1.5 text-sm font-medium",
+                    "nav-item px-3 py-1.5 text-sm font-medium relative group",
                     isActiveRoute('/') && "nav-item-active"
                   )}
                 >
                   Home
+                  {isActiveRoute('/') && (
+                    <span className="absolute -bottom-1 left-0 w-full h-1 bg-nebPrimary rounded-full"></span>
+                  )}
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
               <NavigationMenuTrigger 
                 className={cn(
-                  "nav-item px-3 py-1.5 text-sm font-medium",
+                  "nav-item px-3 py-1.5 text-sm font-medium relative group",
                   isActiveRoute('/subjects') && "nav-item-active"
                 )}
               >
                 Subjects
+                {isActiveRoute('/subjects') && (
+                  <span className="absolute -bottom-1 left-0 w-full h-1 bg-nebPrimary rounded-full"></span>
+                )}
               </NavigationMenuTrigger>
               <Suspense fallback={<div className="p-4 text-center">Loading...</div>}>
                 <NavigationMenuContent>
@@ -163,11 +168,14 @@ export default function Header() {
               <Link to="/pyq" onClick={() => window.scrollTo(0, 0)}>
                 <NavigationMenuLink
                   className={cn(
-                    "nav-item px-3 py-1.5 text-sm font-medium",
+                    "nav-item px-3 py-1.5 text-sm font-medium relative group",
                     isActiveRoute('/pyq') && "nav-item-active"
                   )}
                 >
                   PYQ
+                  {isActiveRoute('/pyq') && (
+                    <span className="absolute -bottom-1 left-0 w-full h-1 bg-nebPrimary rounded-full"></span>
+                  )}
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
@@ -175,11 +183,14 @@ export default function Header() {
               <Link to="/about" onClick={() => window.scrollTo(0, 0)}>
                 <NavigationMenuLink
                   className={cn(
-                    "nav-item px-3 py-1.5 text-sm font-medium",
+                    "nav-item px-3 py-1.5 text-sm font-medium relative group",
                     isActiveRoute('/about') && "nav-item-active"
                   )}
                 >
                   About
+                  {isActiveRoute('/about') && (
+                    <span className="absolute -bottom-1 left-0 w-full h-1 bg-nebPrimary rounded-full"></span>
+                  )}
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
@@ -187,11 +198,14 @@ export default function Header() {
               <Link to="/contact" onClick={() => window.scrollTo(0, 0)}>
                 <NavigationMenuLink
                   className={cn(
-                    "nav-item px-3 py-1.5 text-sm font-medium",
+                    "nav-item px-3 py-1.5 text-sm font-medium relative group",
                     isActiveRoute('/contact') && "nav-item-active"
                   )}
                 >
                   Contact
+                  {isActiveRoute('/contact') && (
+                    <span className="absolute -bottom-1 left-0 w-full h-1 bg-nebPrimary rounded-full"></span>
+                  )}
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
