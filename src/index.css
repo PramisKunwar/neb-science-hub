@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -51,6 +52,24 @@
     --sidebar-border: 220 13% 91%;
 
     --sidebar-ring: 217.2 91.2% 59.8%;
+    
+    /* New variables for consistent spacing */
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-6: 1.5rem;
+    --space-8: 2rem;
+    --space-12: 3rem;
+    --space-16: 4rem;
+    --space-24: 6rem;
+    
+    /* Brand colors */
+    --neb-blue: 214 100% 50%;
+    --neb-blue-dark: 214 100% 40%;
+    --neb-accent: 35 100% 50%;
+    --neb-background: 0 0% 100%;
+    --neb-text: 214 20% 25%;
   }
 
   .dark {
@@ -102,12 +121,41 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-sans font-bold;
+    @apply font-heading font-bold text-gray-800;
+  }
+  
+  h1 {
+    @apply text-3xl md:text-4xl lg:text-5xl;
+  }
+  
+  h2 {
+    @apply text-2xl md:text-3xl mb-4; 
+  }
+  
+  h3 {
+    @apply text-xl md:text-2xl mb-3;
+  }
+  
+  h4 {
+    @apply text-lg md:text-xl mb-2;
+  }
+  
+  p {
+    @apply mb-4 leading-relaxed;
+  }
+  
+  section {
+    @apply py-12;
+  }
+  
+  .container {
+    @apply px-4 md:px-6;
   }
 }
 
 html {
   scroll-behavior: smooth;
+  font-family: 'Open Sans', 'Poppins', sans-serif;
 }
 
 /* Custom animations */
@@ -157,4 +205,45 @@ html {
 
 .animate-border-highlight:focus-within {
   animation: borderHighlight 2s infinite;
+}
+
+/* Layout classes for consistent spacing */
+.section-spacing {
+  @apply py-12 md:py-16 lg:py-24;
+}
+
+.content-spacing {
+  @apply space-y-8 md:space-y-12;
+}
+
+/* Accessibility helper classes */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Mobile-friendly table styles */
+.responsive-table {
+  @apply w-full overflow-x-auto;
+}
+
+.responsive-table table {
+  @apply min-w-full;
+}
+
+/* Active navigation indicator */
+.nav-active {
+  @apply text-nebBlue font-medium relative;
+}
+
+.nav-active::after {
+  content: '';
+  @apply absolute bottom-0 left-0 w-full h-0.5 bg-nebBlue transform scale-x-100 transition-transform duration-300;
 }
