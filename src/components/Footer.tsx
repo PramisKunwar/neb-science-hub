@@ -108,9 +108,9 @@ export default function Footer() {
             </p>
             <div className="flex space-x-4 pt-2">
               {[
-                { icon: Facebook, label: "Facebook", href: "https://www.facebook.com/PramisKunwar123/", id: "facebook" },
-                { icon: Youtube, label: "YouTube", href: "https://www.youtube.com/", id: "youtube" },
-                { icon: TikTokIcon, label: "TikTok", href: "https://www.tiktok.com/", id: "tiktok" },
+                { icon: Facebook, label: "Facebook", href: "https://www.facebook.com/profile.php?id=61569376490315", id: "facebook" },
+                { icon: Youtube, label: "YouTube", href: "https://www.youtube.com/@AP2DShiksha", id: "youtube" },
+                { icon: TikTokIcon, label: "TikTok", href: "https://www.tiktok.com/@ap2dshiksha", id: "tiktok" },
                 { icon: Instagram, label: "Instagram", href: "https://www.instagram.com/pramiskunwar/?hl=en", id: "instagram" }
               ].map((social, index) => (
                 <a 
@@ -140,10 +140,9 @@ export default function Footer() {
             <nav className="flex flex-col space-y-2">
               {[
                 { to: "/", label: "Home" },
-                { to: "/#subjects", label: "Subjects" },
-                { to: "/pyq", label: "Past Papers" },
-                { to: "/about", label: "About Us" },
-                { to: "/contact", label: "Contact" }
+                { to: "/pyq", label: "Previous Year Questions" },
+                { to: "/about", label: "About" },
+                { to: "/contact", label: "Contact Us" }
               ].map((link, index) => (
                 <Link 
                   key={link.to}
@@ -151,6 +150,7 @@ export default function Footer() {
                   className={`text-gray-600 ${colors.navigation.hover} text-sm flex items-center ${colors.navigation.link}`}
                   onMouseEnter={() => setIsHovered(`link-${index}`)}
                   onMouseLeave={() => setIsHovered(null)}
+                  onClick={() => window.scrollTo(0, 0)}
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-gray-300 mr-2 transition-all duration-300 ease-in-out" 
                     style={{ 
@@ -227,7 +227,7 @@ export default function Footer() {
         <Separator className="my-6" />
 
         <div className="text-center text-sm text-gray-600 transition-opacity duration-500" style={{ opacity: isVisible ? 1 : 0 }}>
-          <p>© 2081 NEB Science Hub. All rights reserved.</p>
+          <p>© 2081/82 NEB Science Hub. All rights reserved.</p>
         </div>
       </div>
     </footer>
