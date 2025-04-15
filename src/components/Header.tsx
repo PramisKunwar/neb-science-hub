@@ -1,5 +1,5 @@
 
-import { useState, lazy, Suspense } from "react";
+import { useState, lazy, Suspense, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import {
@@ -22,6 +22,7 @@ const LazyContent = lazy(() => Promise.resolve({ default: NavigationMenuContent 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const [scrolled, setScrolled] = useState(false);
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
@@ -35,23 +36,39 @@ export default function Header() {
     return location.pathname.startsWith(path);
   };
 
+  // Handle scroll effect for header
+  useEffect(() => {
+    const handleScroll = () => {
+      const isScrolled = window.scrollY > 10;
+      if (isScrolled !== scrolled) {
+        setScrolled(isScrolled);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [scrolled]);
+
   // Group subjects into columns for more compact display
   const leftColumnSubjects = subjects.slice(0, Math.ceil(subjects.length / 2));
   const rightColumnSubjects = subjects.slice(Math.ceil(subjects.length / 2));
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-white border-b border-gray-200 shadow-sm">
+    <header className={cn(
+      "sticky top-0 z-50 w-full bg-white transition-all duration-300",
+      scrolled ? "border-b border-gray-200 shadow-sm" : ""
+    )}>
       <div className="container flex items-center justify-between h-16 px-4 md:px-6 mx-auto">
         <Link to="/" className="flex items-center group transition-transform duration-300 hover:scale-105" aria-label="NEB Science Hub Home">
-          <div className="bg-blue-600 mr-2 p-1 rounded text-white">
+          <div className="bg-nebPrimary mr-2 p-1 rounded text-white">
             <Bookmark className="h-5 w-5" aria-hidden="true" />
           </div>
           <div className="flex flex-col">
-            <span className="text-xl font-extrabold text-blue-600 tracking-tight">
+            <span className="text-xl font-extrabold text-nebPrimary tracking-tight">
               NEB 
               <span className="relative">
                 Science
-                <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-blue-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300" aria-hidden="true"></span>
+                <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-nebPrimary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300" aria-hidden="true"></span>
               </span>
               <span className="text-gray-700 font-bold"> Hub</span>
             </span>
@@ -68,8 +85,8 @@ export default function Header() {
               <Link to="/" onClick={() => window.scrollTo(0, 0)}>
                 <NavigationMenuLink
                   className={cn(
-                    navigationMenuTriggerStyle({ className: "px-3 py-1.5" }),
-                    isActiveRoute('/') && "text-blue-600 font-medium after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-blue-600"
+                    "nav-item px-3 py-1.5 text-sm font-medium",
+                    isActiveRoute('/') && "nav-item-active"
                   )}
                 >
                   Home
@@ -77,10 +94,12 @@ export default function Header() {
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <NavigationMenuTrigger className={cn(
-                "px-3 py-1.5",
-                isActiveRoute('/subjects') && "text-blue-600 font-medium"
-              )}>
+              <NavigationMenuTrigger 
+                className={cn(
+                  "nav-item px-3 py-1.5 text-sm font-medium",
+                  isActiveRoute('/subjects') && "nav-item-active"
+                )}
+              >
                 Subjects
               </NavigationMenuTrigger>
               <Suspense fallback={<div className="p-4 text-center">Loading...</div>}>
@@ -94,13 +113,13 @@ export default function Header() {
                           onClick={() => window.scrollTo(0, 0)}
                           className={cn(
                             "flex items-start py-2 group border-b border-gray-100 hover:bg-gray-50 rounded-md px-2",
-                            isActiveRoute(`/subjects/${subject.id}`) && "bg-blue-50"
+                            isActiveRoute(`/subjects/${subject.id}`) && "bg-gray-50"
                           )}
                         >
                           <div className="flex-1 min-w-0">
                             <p className={cn(
-                              "text-sm font-medium group-hover:text-blue-600 transition-colors",
-                              isActiveRoute(`/subjects/${subject.id}`) ? "text-blue-600" : "text-gray-800"
+                              "text-sm font-medium group-hover:text-nebPrimary transition-colors",
+                              isActiveRoute(`/subjects/${subject.id}`) ? "text-nebPrimary" : "text-gray-800"
                             )}>
                               {subject.name}
                             </p>
@@ -119,13 +138,13 @@ export default function Header() {
                           onClick={() => window.scrollTo(0, 0)}
                           className={cn(
                             "flex items-start py-2 group border-b border-gray-100 hover:bg-gray-50 rounded-md px-2",
-                            isActiveRoute(`/subjects/${subject.id}`) && "bg-blue-50"
+                            isActiveRoute(`/subjects/${subject.id}`) && "bg-gray-50"
                           )}
                         >
                           <div className="flex-1 min-w-0">
                             <p className={cn(
-                              "text-sm font-medium group-hover:text-blue-600 transition-colors",
-                              isActiveRoute(`/subjects/${subject.id}`) ? "text-blue-600" : "text-gray-800"
+                              "text-sm font-medium group-hover:text-nebPrimary transition-colors",
+                              isActiveRoute(`/subjects/${subject.id}`) ? "text-nebPrimary" : "text-gray-800"
                             )}>
                               {subject.name}
                             </p>
@@ -144,8 +163,8 @@ export default function Header() {
               <Link to="/pyq" onClick={() => window.scrollTo(0, 0)}>
                 <NavigationMenuLink
                   className={cn(
-                    navigationMenuTriggerStyle({ className: "px-3 py-1.5" }),
-                    isActiveRoute('/pyq') && "text-blue-600 font-medium after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-blue-600"
+                    "nav-item px-3 py-1.5 text-sm font-medium",
+                    isActiveRoute('/pyq') && "nav-item-active"
                   )}
                 >
                   PYQ
@@ -156,8 +175,8 @@ export default function Header() {
               <Link to="/about" onClick={() => window.scrollTo(0, 0)}>
                 <NavigationMenuLink
                   className={cn(
-                    navigationMenuTriggerStyle({ className: "px-3 py-1.5" }),
-                    isActiveRoute('/about') && "text-blue-600 font-medium after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-blue-600"
+                    "nav-item px-3 py-1.5 text-sm font-medium",
+                    isActiveRoute('/about') && "nav-item-active"
                   )}
                 >
                   About
@@ -168,8 +187,8 @@ export default function Header() {
               <Link to="/contact" onClick={() => window.scrollTo(0, 0)}>
                 <NavigationMenuLink
                   className={cn(
-                    navigationMenuTriggerStyle({ className: "px-3 py-1.5" }),
-                    isActiveRoute('/contact') && "text-blue-600 font-medium after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-blue-600"
+                    "nav-item px-3 py-1.5 text-sm font-medium",
+                    isActiveRoute('/contact') && "nav-item-active"
                   )}
                 >
                   Contact
@@ -198,16 +217,16 @@ export default function Header() {
               <Link
                 to="/"
                 className={cn(
-                  "block py-2 text-lg font-medium hover:text-blue-600 transition-colors flex items-center",
-                  isActiveRoute('/') ? "text-blue-600" : "text-gray-600"
+                  "mobile-nav-item pl-4",
+                  isActiveRoute('/') ? "mobile-nav-item-active" : "text-gray-600"
                 )}
                 onClick={() => {
                   toggleMobileMenu();
                   window.scrollTo(0, 0);
                 }}
               >
-                <span className="bg-blue-50 p-1 rounded mr-2 text-blue-600">
-                  <Sparkles className="h-4 w-4" aria-hidden="true" />
+                <span className="bg-gray-50 p-1 rounded mr-2 text-nebPrimary">
+                  <Sparkles className="h-4 w-4 inline" aria-hidden="true" />
                 </span>
                 Home
               </Link>
@@ -219,8 +238,8 @@ export default function Header() {
                       key={subject.id}
                       to={`/subjects/${subject.id}`}
                       className={cn(
-                        "block py-1 hover:text-blue-600 transition-colors",
-                        isActiveRoute(`/subjects/${subject.id}`) ? "text-blue-600 font-medium" : "text-gray-600"
+                        "mobile-nav-item pl-4",
+                        isActiveRoute(`/subjects/${subject.id}`) ? "mobile-nav-item-active" : "text-gray-600"
                       )}
                       onClick={() => {
                         toggleMobileMenu();
@@ -235,8 +254,8 @@ export default function Header() {
               <Link
                 to="/pyq"
                 className={cn(
-                  "block py-2 text-lg font-medium hover:text-blue-600 transition-colors",
-                  isActiveRoute('/pyq') ? "text-blue-600" : "text-gray-600"
+                  "mobile-nav-item pl-4",
+                  isActiveRoute('/pyq') ? "mobile-nav-item-active" : "text-gray-600"
                 )}
                 onClick={() => {
                   toggleMobileMenu();
@@ -248,8 +267,8 @@ export default function Header() {
               <Link
                 to="/about"
                 className={cn(
-                  "block py-2 text-lg font-medium hover:text-blue-600 transition-colors",
-                  isActiveRoute('/about') ? "text-blue-600" : "text-gray-600"
+                  "mobile-nav-item pl-4",
+                  isActiveRoute('/about') ? "mobile-nav-item-active" : "text-gray-600"
                 )}
                 onClick={() => {
                   toggleMobileMenu();
@@ -261,8 +280,8 @@ export default function Header() {
               <Link
                 to="/contact"
                 className={cn(
-                  "block py-2 text-lg font-medium hover:text-blue-600 transition-colors",
-                  isActiveRoute('/contact') ? "text-blue-600" : "text-gray-600"
+                  "mobile-nav-item pl-4", 
+                  isActiveRoute('/contact') ? "mobile-nav-item-active" : "text-gray-600"
                 )}
                 onClick={() => {
                   toggleMobileMenu();

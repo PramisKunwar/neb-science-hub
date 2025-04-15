@@ -57,6 +57,12 @@ export default {
         nebAccent: "hsl(var(--neb-accent))",
         nebBackground: "hsl(var(--neb-background))",
         nebText: "hsl(var(--neb-text))",
+        // New color for the gradient effect
+        nebPrimary: "#42445A",
+        nebPrimaryLight: "#535677",
+        nebPrimaryDark: "#363749",
+        nebGradientStart: "#0A1E3D",
+        nebGradientEnd: "#274F9E",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -128,6 +134,9 @@ export default {
         "fade-in": "fade-in 0.3s ease-out forwards",
         "scale-in": "scale-in 0.2s ease-out forwards",
         "slide-in": "slide-in 0.3s ease-out forwards"
+      },
+      backgroundImage: {
+        'neb-gradient': 'linear-gradient(135deg, #0A1E3D 0%, #274F9E 100%)',
       },
     },
   },
