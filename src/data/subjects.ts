@@ -417,16 +417,19 @@ export const subjects: Subject[] = [
       {
         name: "Language and Literature",
         chapters: [
-          { id: 1, title: "कविता (पद्य)", notesPath: "/notes/nepali/poetry.pdf" },
-          { id: 2, title: "कथा", notesPath: "/notes/nepali/story.pdf" },
-          { id: 3, title: "निबन्ध", notesPath: "/notes/nepali/essay.pdf" },
-          { id: 4, title: "जीवनी", notesPath: "/notes/nepali/biography.pdf" },
-          { id: 5, title: "पत्र लेखन", notesPath: "/notes/nepali/letter-writing.pdf" },
-          { id: 6, title: "लघु नाटक", notesPath: "/notes/nepali/short-drama.pdf" },
-          { id: 7, title: "रिपोर्ताज", notesPath: "/notes/nepali/reportage.pdf" },
-          { id: 8, title: "संवादात्मक रचना", notesPath: "/notes/nepali/dialogue.pdf" },
-          { id: 9, title: "दैनिकी रचना", notesPath: "/notes/nepali/diary.pdf" },
-          { id: 10, title: "वक्तृता", notesPath: "/notes/nepali/speech.pdf" }
+          { id: 1, title: "वीर पुर्खा (कविता)", notesPath: "/notes/nepali/poetry.pdf" },
+          { id: 2, title: "गाउँको माया (सामाजिक कथा)", notesPath: "/notes/nepali/story.pdf" },
+          { id: 3, title: "संस्कृतिको नयाँ यात्रा (आत्मपरक निबन्ध)", notesPath: "/notes/nepali/essay.pdf" },
+          { id: 4, title: "योगमाया (राष्ट्रिय जीवनी)", notesPath: "/notes/nepali/biography.pdf" },
+          { id: 5, title: "साथीलाई चिठी (चिठी)", notesPath: "/notes/nepali/letter-writing.pdf" },
+          { id: 6, title: "त्यो फेरि फर्कला ? (मनोवैज्ञानिक कथा)", notesPath: "/notes/nepali/short-drama.pdf" },
+          { id: 7, title: "पर्यापर्यटनका सम्भावना र आयाम (वस्तुपरक निबन्ध)", notesPath: "/notes/nepali/reportage.pdf" },
+          { id: 8, title: "लौ आयो ताजा खबर (लघु नाटक)", notesPath: "/notes/nepali/dialogue.pdf" },
+          { id: 9, title: "सफलताको कथा (रिपोर्ताजमूलक रचना)", notesPath: "/notes/nepali/diary.pdf" },
+          { id: 10, title: "कृषिशालामा एक दिन (संवाद)", notesPath: "/notes/nepali/speech.pdf" },  
+          { id: 11, title: "रारा भ्रमण (दैनिकी)", notesPath: "/notes/nepali/essay.pdf" },
+          { id: 12, title: "जलस्रोत र ऊर्जा (वक्तृता)", notesPath: "/notes/nepali/essay.pdf" }
+        
         ]
       }
     ]

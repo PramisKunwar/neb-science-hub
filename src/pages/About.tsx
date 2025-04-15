@@ -130,10 +130,10 @@ const About = () => {
                 <span className="font-medium">Join our team of contributors!</span>
               </div>
               <p className="mt-2 text-gray-600">
-               1. <b>A</b> arab Bashyal <br />
-               2. <b>P</b> ranish Khanal <br />
-               3. <b>P</b> ramis Kunwar <br />
-               4. <b>D</b> eepak Puri <br />
+               1. <b>A</b>arab Bashyal <br />
+               2. <b>P</b>ranish Khanal <br />
+               3. <b>P</b>ramis Kunwar <br />
+               4. <b>D</b>eepak Puri <br />
               Please get in touch through our <a href="/contact" className="text-nebBlue hover:underline">Contact page</a>.
               </p>
             </div>
