@@ -125,7 +125,7 @@ export const subjects: Subject[] = [
       {
         name: "Inorganic Chemistry",
         chapters: [
-          { id: 9, title: "Chemistry of Non-Metals", notesPath: "/notes/chemistry/non-metals.pdf" },
+          { id: 9, title: "Chemistry of Non-Metals", notesPath: "https://drive.google.com/file/d/15QafLxW_9jHk98iHxkpYmVkFdeb_E32W/view" },
           { id: 10, title: "Chemistry of Metals", notesPath: "/notes/chemistry/metals.pdf" },
           { id: 11, title: "Bio-inorganic Chemistry", notesPath: "/notes/chemistry/bio-inorganic.pdf" }
         ]
