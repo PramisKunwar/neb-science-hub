@@ -140,7 +140,7 @@ export default function Footer() {
             <nav className="flex flex-col space-y-2">
               {[
                 { to: "/", label: "Home" },
-                { to: "/subjects", label: "Subjects" },
+                { to: "/#subjects", label: "Subjects" },
                 { to: "/pyq", label: "Past Papers" },
                 { to: "/about", label: "About Us" },
                 { to: "/contact", label: "Contact" }
@@ -219,7 +219,7 @@ export default function Footer() {
                   transform: isHovered === 'email' ? 'scale(1.2) rotate(-5deg)' : 'scale(1) rotate(0deg)'
                 }}
               />
-              <span className="transition-colors duration-300 group-hover:text-nebBlue">pramiskwr123@gmail.com</span>
+              <span className="transition-colors duration-300 group-hover:text-nebBlue">ap2d@gmail.com</span>
             </div>
           </div>
         </div>

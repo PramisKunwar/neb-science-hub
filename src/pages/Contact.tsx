@@ -1,7 +1,4 @@
-
-import { useState } from "react";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import { useState, lazy, Suspense } from "react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
@@ -21,6 +18,17 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+
+// Lazy-loaded components
+const Header = lazy(() => import("@/components/Header"));
+const Footer = lazy(() => import("@/components/Footer"));
+
+// Loading fallback component
+const LoadingFallback = () => (
+  <div className="flex items-center justify-center h-20">
+    <div className="w-8 h-8 border-4 border-nebBlue border-t-transparent rounded-full animate-spin"></div>
+  </div>
+);
 
 const Contact = () => {
   const { toast } = useToast();
@@ -61,7 +69,9 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Header />
+      <Suspense fallback={<LoadingFallback />}>
+        <Header />
+      </Suspense>
       <main className="flex-1">
         {/* Header Banner */}
         <section className="w-full bg-gradient-to-r from-nebBlue to-blue-700 py-12 text-white">
@@ -77,50 +87,110 @@ const Contact = () => {
 
         <section className="w-full py-12">
           <div className="container px-4 md:px-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 md:gap-16 gap-8 max-w-5xl mx-auto md:relative">
               {/* Contact Information */}
-              <div className="space-y-6">
+              <div className="space-y-6 md:pr-8">
                 <h2 className="text-2xl font-bold">Get in Touch</h2>
                 <p className="text-gray-600">
                   We value your feedback and inquiries. Use the form or contact details below to reach us.
                 </p>
 
-                <div className="space-y-4 mt-8">
-                  <Card>
+                <div className="space-y-6 mt-8">
+                  <Card className="border-t-4 border-t-blue-500 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
                     <CardContent className="p-6">
                       <div className="flex items-start space-x-4">
-                        <div className="bg-nebBlue bg-opacity-10 p-3 rounded-full">
-                          <Mail className="h-5 w-5 text-nebBlue" />
+                        <div className="bg-blue-100 p-3 rounded-full transition-transform duration-300 hover:scale-110">
+                          <Mail className="h-5 w-5 text-blue-500" />
                         </div>
                         <div>
                           <h3 className="font-medium">Email</h3>
-                          <p className="text-sm text-gray-600">pramiskwr123@gmail.com</p>
-                          <p className="text-sm text-gray-600">pramiskwr123@gmail.com</p>
+                          <a 
+                            href="mailto:aarabbashyal64@gmail.com" 
+                            className="text-sm text-gray-600 hover:text-nebBlue transition-colors duration-300 block flex items-center group"
+                            aria-label="Send email to Aarab Bashyal"
+                          >
+                            <span>aarabbashyal64@gmail.com</span>
+                            <span className="ml-2 text-nebBlue opacity-0 group-hover:opacity-100 transition-opacity duration-300">↗</span>
+                          </a>
+                          <a 
+                            href="mailto:pramiskunwar123@gmail.com" 
+                            className="text-sm text-gray-600 hover:text-nebBlue transition-colors duration-300 block flex items-center group"
+                            aria-label="Send email to Pramis Kunwar"
+                          >
+                            <span>pramiskunwar123@gmail.com</span>
+                            <span className="ml-2 text-nebBlue opacity-0 group-hover:opacity-100 transition-opacity duration-300">↗</span>
+                          </a>
+                          <a 
+                            href="mailto:pranishkhanal2@gmail.com" 
+                            className="text-sm text-gray-600 hover:text-nebBlue transition-colors duration-300 block flex items-center group"
+                            aria-label="Send email to Pranish Khanal"
+                          >
+                            <span>pranishkhanal2@gmail.com</span>
+                            <span className="ml-2 text-nebBlue opacity-0 group-hover:opacity-100 transition-opacity duration-300">↗</span>
+                          </a>
+                          <a 
+                            href="mailto:deepakpuri931@gmail.com" 
+                            className="text-sm text-gray-600 hover:text-nebBlue transition-colors duration-300 block flex items-center group"
+                            aria-label="Send email to Deepak Puri"
+                          >
+                            <span>deepakpuri931@gmail.com</span>
+                            <span className="ml-2 text-nebBlue opacity-0 group-hover:opacity-100 transition-opacity duration-300">↗</span>
+                          </a>
                         </div>
                       </div>
                     </CardContent>
                   </Card>
 
-                  <Card>
+                  <Card className="border-t-4 border-t-green-500 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
                     <CardContent className="p-6">
                       <div className="flex items-start space-x-4">
-                        <div className="bg-nebBlue bg-opacity-10 p-3 rounded-full">
-                          <Phone className="h-5 w-5 text-nebBlue" />
+                        <div className="bg-green-100 p-3 rounded-full transition-transform duration-300 hover:scale-110">
+                          <Phone className="h-5 w-5 text-green-500" />
                         </div>
                         <div>
                           <h3 className="font-medium">Phone</h3>
-                          <p className="text-sm text-gray-600">+977 9805427945</p>
-                          <p className="text-sm text-gray-600">+977 9764344670</p>
+                          <a 
+                            href="tel:9847008892" 
+                            className="text-sm text-gray-600 hover:text-green-500 transition-colors duration-300 block flex items-center group"
+                            aria-label="Call this number"
+                          >
+                            <span>9847008892</span>
+                            <span className="ml-2 text-green-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300">📞</span>
+                          </a>
+                          <a 
+                            href="tel:9866615675" 
+                            className="text-sm text-gray-600 hover:text-green-500 transition-colors duration-300 block flex items-center group"
+                            aria-label="Call this number"
+                          >
+                            <span>9866615675</span>
+                            <span className="ml-2 text-green-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300">📞</span>
+                          </a>
+                          <a 
+                            href="tel:9805427945" 
+                            className="text-sm text-gray-600 hover:text-green-500 transition-colors duration-300 block flex items-center group"
+                            aria-label="Call this number"
+                          >
+                            <span>9805427945</span>
+                            <span className="ml-2 text-green-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300">📞</span>
+                          </a>
+                          <a 
+                            href="tel:9767622650" 
+                            className="text-sm text-gray-600 hover:text-green-500 transition-colors duration-300 block flex items-center group"
+                            aria-label="Call this number"
+                          >
+                            <span>9767622650</span>
+                            <span className="ml-2 text-green-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300">📞</span>
+                          </a>
                         </div>
                       </div>
                     </CardContent>
                   </Card>
 
-                  <Card>
+                  <Card className="border-t-4 border-t-purple-500 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
                     <CardContent className="p-6">
                       <div className="flex items-start space-x-4">
-                        <div className="bg-nebBlue bg-opacity-10 p-3 rounded-full">
-                          <MapPin className="h-5 w-5 text-nebBlue" />
+                        <div className="bg-purple-100 p-3 rounded-full transition-transform duration-300 hover:scale-110">
+                          <MapPin className="h-5 w-5 text-purple-500" />
                         </div>
                         <div>
                           <h3 className="font-medium">Address</h3>
@@ -135,92 +205,105 @@ const Contact = () => {
                 </div>
               </div>
 
+              {/* Divider visible only on desktop */}
+              <div className="hidden md:block absolute h-full w-px bg-gray-200 left-1/2 top-0 transform -translate-x-1/2 shadow-sm"></div>
+
               {/* Contact Form */}
-              <Card>
-                <CardHeader>
-                  <CardTitle>Send a Message</CardTitle>
-                  <CardDescription>
-                    Fill out the form below and we'll get back to you as soon as possible.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <form onSubmit={handleSubmit} className="space-y-4">
-                    <div className="space-y-2">
-                      <label htmlFor="name" className="text-sm font-medium">
-                        Full Name
-                      </label>
-                      <Input
-                        id="name"
-                        name="name"
-                        placeholder="Your name"
-                        value={formState.name}
-                        onChange={handleChange}
-                        required
-                      />
-                    </div>
-                    
-                    <div className="space-y-2">
-                      <label htmlFor="email" className="text-sm font-medium">
-                        Email
-                      </label>
-                      <Input
-                        id="email"
-                        name="email"
-                        type="email"
-                        placeholder="your.email@example.com"
-                        value={formState.email}
-                        onChange={handleChange}
-                        required
-                      />
-                    </div>
-                    
-                    <div className="space-y-2">
-                      <label htmlFor="subject" className="text-sm font-medium">
-                        Subject
-                      </label>
-                      <Select
-                        value={formState.subject}
-                        onValueChange={handleSelectChange}
+              <div className="md:pl-8">
+                <Card className="transition-all duration-300 hover:shadow-lg border-l-4 border-l-nebBlue">
+                  <CardHeader>
+                    <CardTitle>Send a Message</CardTitle>
+                    <CardDescription>
+                      Fill out the form below and we'll get back to you as soon as possible.
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <form onSubmit={handleSubmit} className="space-y-4">
+                      <div className="space-y-2">
+                        <label htmlFor="name" className="text-sm font-medium">
+                          Full Name
+                        </label>
+                        <Input
+                          id="name"
+                          name="name"
+                          placeholder="Your name"
+                          value={formState.name}
+                          onChange={handleChange}
+                          required
+                          className="transition-all duration-300 focus:ring-2 focus:ring-nebBlue focus:border-transparent"
+                        />
+                      </div>
+                      
+                      <div className="space-y-2">
+                        <label htmlFor="email" className="text-sm font-medium">
+                          Email
+                        </label>
+                        <Input
+                          id="email"
+                          name="email"
+                          type="email"
+                          placeholder="your.email@example.com"
+                          value={formState.email}
+                          onChange={handleChange}
+                          required
+                          className="transition-all duration-300 focus:ring-2 focus:ring-nebBlue focus:border-transparent"
+                        />
+                      </div>
+                      
+                      <div className="space-y-2">
+                        <label htmlFor="subject" className="text-sm font-medium">
+                          Subject
+                        </label>
+                        <Select
+                          value={formState.subject}
+                          onValueChange={handleSelectChange}
+                        >
+                          <SelectTrigger className="transition-all duration-300 hover:border-nebBlue">
+                            <SelectValue placeholder="Select a subject" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="general">General Inquiry</SelectItem>
+                            <SelectItem value="support">Technical Support</SelectItem>
+                            <SelectItem value="feedback">Feedback</SelectItem>
+                            <SelectItem value="content">Content Request</SelectItem>
+                            <SelectItem value="other">Other</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      
+                      <div className="space-y-2">
+                        <label htmlFor="message" className="text-sm font-medium">
+                          Message
+                        </label>
+                        <Textarea
+                          id="message"
+                          name="message"
+                          placeholder="Your message..."
+                          rows={5}
+                          value={formState.message}
+                          onChange={handleChange}
+                          required
+                          className="transition-all duration-300 focus:ring-2 focus:ring-nebBlue focus:border-transparent"
+                        />
+                      </div>
+                      
+                      <Button 
+                        type="submit" 
+                        className="w-full bg-nebBlue text-white hover:bg-blue-700 transition-all duration-300 hover:shadow-md transform hover:-translate-y-1"
                       >
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select a subject" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="general">General Inquiry</SelectItem>
-                          <SelectItem value="support">Technical Support</SelectItem>
-                          <SelectItem value="feedback">Feedback</SelectItem>
-                          <SelectItem value="content">Content Request</SelectItem>
-                          <SelectItem value="other">Other</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                    
-                    <div className="space-y-2">
-                      <label htmlFor="message" className="text-sm font-medium">
-                        Message
-                      </label>
-                      <Textarea
-                        id="message"
-                        name="message"
-                        placeholder="Your message..."
-                        rows={5}
-                        value={formState.message}
-                        onChange={handleChange}
-                        required
-                      />
-                    </div>
-                    
-                    <Button type="submit" className="w-full bg-nebBlue text-white hover:bg-blue-700">
-                      Send Message
-                    </Button>
-                  </form>
-                </CardContent>
-              </Card>
+                        Send Message
+                      </Button>
+                    </form>
+                  </CardContent>
+                </Card>
+              </div>
             </div>
           </div>
         </section>
       </main>
-      <Footer />
+      <Suspense fallback={<LoadingFallback />}>
+        <Footer />
+      </Suspense>
     </div>
   );
 };
