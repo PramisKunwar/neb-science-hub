@@ -54,7 +54,7 @@ export default function Header() {
         <NavigationMenu className="hidden md:flex">
           <NavigationMenuList className="gap-1">
             <NavigationMenuItem>
-              <Link to="/">
+              <Link to="/" onClick={() => window.scrollTo(0, 0)}>
                 <NavigationMenuLink
                   className={navigationMenuTriggerStyle({ className: "px-3 py-1.5" })}
                   active={location.pathname === '/'}
@@ -74,6 +74,7 @@ export default function Header() {
                           <Link
                             key={subject.id}
                             to={`/subjects/${subject.id}`}
+                            onClick={() => window.scrollTo(0, 0)}
                             className="flex items-start py-2 group border-b border-gray-100 hover:bg-gray-50 rounded-md px-2"
                           >
                             <div className="flex-1 min-w-0">
@@ -92,6 +93,7 @@ export default function Header() {
                           <Link
                             key={subject.id}
                             to={`/subjects/${subject.id}`}
+                            onClick={() => window.scrollTo(0, 0)}
                             className="flex items-start py-2 group border-b border-gray-100 hover:bg-gray-50 rounded-md px-2"
                           >
                             <div className="flex-1 min-w-0">
@@ -111,7 +113,7 @@ export default function Header() {
               </Suspense>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link to="/pyq">
+              <Link to="/pyq" onClick={() => window.scrollTo(0, 0)}>
                 <NavigationMenuLink
                   className={navigationMenuTriggerStyle({ className: "px-3 py-1.5" })}
                   active={location.pathname === '/pyq'}
@@ -121,7 +123,7 @@ export default function Header() {
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link to="/about">
+              <Link to="/about" onClick={() => window.scrollTo(0, 0)}>
                 <NavigationMenuLink
                   className={navigationMenuTriggerStyle({ className: "px-3 py-1.5" })}
                   active={location.pathname === '/about'}
@@ -131,7 +133,7 @@ export default function Header() {
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link to="/contact">
+              <Link to="/contact" onClick={() => window.scrollTo(0, 0)}>
                 <NavigationMenuLink
                   className={navigationMenuTriggerStyle({ className: "px-3 py-1.5" })}
                   active={location.pathname === '/contact'}
@@ -164,7 +166,10 @@ export default function Header() {
                   "block py-2 text-lg font-medium hover:text-nebBlue transition-colors flex items-center",
                   location.pathname === '/' ? "text-nebBlue" : "text-gray-600"
                 )}
-                onClick={toggleMobileMenu}
+                onClick={() => {
+                  toggleMobileMenu();
+                  window.scrollTo(0, 0);
+                }}
               >
                 <span className="bg-blue-50 p-1 rounded mr-2 text-nebBlue">
                   <Sparkles className="h-4 w-4" />
@@ -184,7 +189,10 @@ export default function Header() {
                           ? "text-nebBlue font-medium"
                           : "text-gray-600"
                       )}
-                      onClick={toggleMobileMenu}
+                      onClick={() => {
+                        toggleMobileMenu();
+                        window.scrollTo(0, 0);
+                      }}
                     >
                       {subject.name}
                     </Link>
@@ -197,7 +205,10 @@ export default function Header() {
                   "block py-2 text-lg font-medium hover:text-nebBlue transition-colors",
                   location.pathname === '/pyq' ? "text-nebBlue" : "text-gray-600"
                 )}
-                onClick={toggleMobileMenu}
+                onClick={() => {
+                  toggleMobileMenu();
+                  window.scrollTo(0, 0);
+                }}
               >
                 PYQ
               </Link>
@@ -207,7 +218,10 @@ export default function Header() {
                   "block py-2 text-lg font-medium hover:text-nebBlue transition-colors",
                   location.pathname === '/about' ? "text-nebBlue" : "text-gray-600"
                 )}
-                onClick={toggleMobileMenu}
+                onClick={() => {
+                  toggleMobileMenu();
+                  window.scrollTo(0, 0);
+                }}
               >
                 About
               </Link>
@@ -217,7 +231,10 @@ export default function Header() {
                   "block py-2 text-lg font-medium hover:text-nebBlue transition-colors",
                   location.pathname === '/contact' ? "text-nebBlue" : "text-gray-600"
                 )}
-                onClick={toggleMobileMenu}
+                onClick={() => {
+                  toggleMobileMenu();
+                  window.scrollTo(0, 0);
+                }}
               >
                 Contact
               </Link>

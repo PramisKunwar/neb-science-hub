@@ -287,10 +287,10 @@ const About = () => {
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Button asChild size="lg" className="bg-white text-nebBlue hover:bg-gray-100 hover:scale-105 transition-transform duration-200">
-                <Link to="/">Explore Subjects</Link>
+                <Link to="/" onClick={() => window.scrollTo(0, 0)}>Explore Subjects</Link>
               </Button>
               <Button asChild variant="outline" size="lg" className="bg-amber-500 border-amber-500 text-white hover:bg-amber-600 hover:border-amber-600 hover:scale-105 transition-all duration-200">
-                <Link to="/pyq">View Past Papers</Link>
+                <Link to="/pyq" onClick={() => window.scrollTo(0, 0)}>View Past Papers</Link>
               </Button>
             </div>
           </div>
