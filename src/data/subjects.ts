@@ -271,20 +271,7 @@ export const subjects: Subject[] = [
           { id: 17, title: "Vegetation", notesPath: "/notes/botany/vegetation.pdf" }
         ]
       },
-      {
-        name: "Unit 6: Introduction to Biology",
-        chapters: [
-          { id: 18, title: "Introduction to Biology", notesPath: "/notes/botany/intro-biology.pdf" }
-        ]
-      },
-      {
-        name: "Unit 7: Evolutionary Biology",
-        chapters: [
-          { id: 19, title: "Life and its Origin", notesPath: "/notes/botany/life-origin.pdf" },
-          { id: 20, title: "Evidences of Evolution", notesPath: "/notes/botany/evolution-evidence.pdf" },
-          { id: 21, title: "Theories of Evolution", notesPath: "/notes/botany/evolution-theories.pdf" }
-        ]
-      }
+      
     ]
   },
   {
@@ -294,38 +281,41 @@ export const subjects: Subject[] = [
     description: "Exploration of animal life, including their behavior, biology, and habitats.",
     areas: [
       {
-        name: "Unit 1: Biomolecules and Cell Biology",
+        name: "Unit 6: Introduction to Biology",
         chapters: [
-          { id: 1, title: "Cell Division", notesPath: "/notes/zoology/cell-division.pdf" }
+          { id: 1, title: "Introduction to Biology", notesPath: "/notes/botany/intro-biology.pdf" }
         ]
       },
       {
         name: "Unit 7: Evolutionary Biology",
         chapters: [
-          { id: 2, title: "Human Evolution", notesPath: "/notes/zoology/human-evolution.pdf" }
+          { id: 2, title: "Life and its Origin", notesPath: "/notes/botany/life-origin.pdf" },
+          { id: 3, title: "Evidences of Evolution", notesPath: "/notes/botany/evolution-evidence.pdf" },
+          { id: 4, title: "Theories of Evolution", notesPath: "/notes/botany/evolution-theories.pdf" },
+          { id: 5, title: "Human Evolution", notesPath: "/notes/botany/human-evolution.pdf" }
         ]
       },
       {
         name: "Unit 8: Faunal Diversity",
         chapters: [
-          { id: 3, title: "Protista", notesPath: "/notes/zoology/protista.pdf" },
-          { id: 4, title: "Animalia", notesPath: "/notes/zoology/animalia.pdf" },
-          { id: 5, title: "Earthworm", notesPath: "/notes/zoology/earthworm.pdf" },
-          { id: 6, title: "Frog", notesPath: "/notes/zoology/frog.pdf" }
+          { id: 6, title: "Protista", notesPath: "/notes/zoology/protista.pdf" },
+          { id: 7, title: "Animalia", notesPath: "/notes/zoology/animalia.pdf" },
+          { id: 8, title: "Earthworm", notesPath: "/notes/zoology/earthworm.pdf" },
+          { id: 9, title: "Frog", notesPath: "/notes/zoology/frog.pdf" }
         ]
       },
       {
         name: "Unit 9: Biota and Environment",
         chapters: [
-          { id: 7, title: "Animal Adaptation", notesPath: "/notes/zoology/adaptation.pdf" },
-          { id: 8, title: "Animal Behavior", notesPath: "/notes/zoology/behavior.pdf" },
-          { id: 9, title: "Environmental Pollution", notesPath: "/notes/zoology/pollution.pdf" }
+          { id: 10, title: "Animal Adaptation", notesPath: "/notes/zoology/adaptation.pdf" },
+          { id: 11, title: "Animal Behavior", notesPath: "/notes/zoology/behavior.pdf" },
+          { id: 12, title: "Environmental Pollution", notesPath: "/notes/zoology/pollution.pdf" }
         ]
       },
       {
         name: "Unit 10: Conservation Biology",
         chapters: [
-          { id: 10, title: "Conservation Biology", notesPath: "/notes/zoology/conservation.pdf" }
+          { id: 13, title: "Conservation Biology", notesPath: "/notes/zoology/conservation.pdf" }
         ]
       }
     ]

@@ -1,7 +1,7 @@
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { 
   Atom, FlaskConical, Calculator, Leaf, Mouse, BookText, Book, 
-  LucideIcon, Laptop 
+  LucideIcon, Laptop, Microscope, Bug
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -69,9 +69,27 @@ const SubjectCard = memo(function SubjectCard({ id, name, icon, description }: S
       mouse: Mouse,
       "book-text": BookText,
       book: Book,
-      laptop: Laptop
+      laptop: Laptop,
+      microscope: Microscope,
+      bug: Bug
     };
     return icons[iconName] || Book;
+  };
+
+  // Get a specific icon for subjects regardless of the icon prop
+  const getSubjectSpecificIcon = (subjectId: string): LucideIcon => {
+    const subjectIcons: Record<string, LucideIcon> = {
+      physics: Atom,
+      chemistry: FlaskConical,
+      mathematics: Calculator,
+      botany: Leaf,
+      zoology: Microscope, // Changed from Mouse to Microscope for zoology
+      computer: Laptop,
+      english: BookText,
+      nepali: Book
+    };
+    
+    return subjectIcons[subjectId] || getIcon(icon);
   };
 
   // Color mapping for subject cards with comprehensive theming
@@ -201,7 +219,8 @@ const SubjectCard = memo(function SubjectCard({ id, name, icon, description }: S
     return themes[subjectId] || defaultTheme;
   };
 
-  const IconComponent = getIcon(icon);
+  // Use the subject-specific icon instead of the icon prop
+  const IconComponent = getSubjectSpecificIcon(id);
   const theme = getSubjectTheme(id);
 
   // Animation class that only applies after card is visible
