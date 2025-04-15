@@ -219,7 +219,7 @@ export default function Footer() {
                   transform: isHovered === 'email' ? 'scale(1.2) rotate(-5deg)' : 'scale(1) rotate(0deg)'
                 }}
               />
-              <span className="transition-colors duration-300 group-hover:text-nebBlue">ap2d@gmail.com</span>
+              <span className="transition-colors duration-300 group-hover:text-nebBlue">ap2dshiksha@gmail.com</span>
             </div>
           </div>
         </div>

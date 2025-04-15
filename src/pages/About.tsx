@@ -1,32 +1,43 @@
-
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import { lazy, Suspense } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
-import { BookOpen, Award, Users, Target, Mail, ExternalLink, MapPin, Briefcase, Github, Linkedin, Twitter } from "lucide-react";
+import { BookOpen, Award, Users, Target, Mail, ExternalLink, MapPin, Briefcase, Facebook, Instagram, Youtube } from "lucide-react";
 import { Link } from "react-router-dom";
+
+// Lazy load components to improve performance
+const Header = lazy(() => import("@/components/Header"));
+const Footer = lazy(() => import("@/components/Footer"));
+
+// Loading fallback component
+const LoadingFallback = () => (
+  <div className="min-h-screen flex items-center justify-center">
+    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-nebBlue"></div>
+  </div>
+);
 
 const About = () => {
   return (
     <div className="min-h-screen flex flex-col">
-      <Header />
+      <Suspense fallback={<LoadingFallback />}>
+        <Header />
+      </Suspense>
       <main className="flex-1">
         {/* Header Banner with improved contrast */}
         <section className="w-full bg-gradient-to-r from-nebBlue to-blue-800 py-16 text-white">
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center text-center space-y-6">
-              <h1 className="text-3xl md:text-5xl font-bold tracking-tighter">About Us</h1>
+              <h1 className="text-3xl md:text-5xl font-bold tracking-tighter animate-fade-in">About Us</h1>
               <p className="text-lg md:text-xl text-white max-w-[700px] leading-relaxed">
                 Learn more about our mission to support Grade 11 science students in Nepal
               </p>
               {/* Clear CTA for navigation */}
               <div className="flex flex-wrap justify-center gap-4 mt-4 animate-fade-in">
-                <Button asChild size="lg" className="bg-white text-nebBlue hover:bg-gray-100">
+                <Button asChild size="lg" className="bg-white text-nebBlue hover:bg-gray-100 hover:scale-105 transition-transform duration-200">
                   <a href="#mission">Our Mission</a>
                 </Button>
-                <Button asChild variant="outline" size="lg" className="bg-transparent border-white text-white hover:bg-white/10">
+                <Button asChild variant="outline" size="lg" className="bg-transparent border-white text-white hover:bg-white/10 hover:scale-105 transition-transform duration-200">
                   <a href="#team">Our Team</a>
                 </Button>
               </div>
@@ -74,11 +85,11 @@ const About = () => {
 
               {/* Mission & Vision Cards with hover effects */}
               <div id="mission" className="grid grid-cols-1 md:grid-cols-2 gap-6 my-12">
-                <Card className="hover:shadow-md transition-all duration-300 border-l-4 border-l-nebBlue animate-fade-in">
+                <Card className="hover:shadow-lg hover:translate-y-[-4px] transition-all duration-300 border-l-4 border-l-nebBlue animate-fade-in group">
                   <CardContent className="pt-6">
                     <div className="flex items-start space-x-4">
-                      <div className="bg-nebBlue bg-opacity-10 p-3 rounded-full">
-                        <BookOpen className="h-6 w-6 text-nebBlue" />
+                      <div className="bg-nebBlue bg-opacity-10 p-3 rounded-full group-hover:bg-opacity-20 transition-all duration-300">
+                        <BookOpen className="h-6 w-6 text-nebBlue group-hover:scale-110 transition-transform duration-300" />
                       </div>
                       <div>
                         <h3 className="text-xl font-bold mb-3 text-gray-900">Our Mission</h3>
@@ -90,11 +101,11 @@ const About = () => {
                   </CardContent>
                 </Card>
 
-                <Card className="hover:shadow-md transition-all duration-300 border-l-4 border-l-purple-500 animate-fade-in">
+                <Card className="hover:shadow-lg hover:translate-y-[-4px] transition-all duration-300 border-l-4 border-l-purple-500 animate-fade-in group">
                   <CardContent className="pt-6">
                     <div className="flex items-start space-x-4">
-                      <div className="bg-purple-500 bg-opacity-10 p-3 rounded-full">
-                        <Target className="h-6 w-6 text-purple-500" />
+                      <div className="bg-purple-500 bg-opacity-10 p-3 rounded-full group-hover:bg-opacity-20 transition-all duration-300">
+                        <Target className="h-6 w-6 text-purple-500 group-hover:scale-110 transition-transform duration-300" />
                       </div>
                       <div>
                         <h3 className="text-xl font-bold mb-3 text-gray-900">Our Vision</h3>
@@ -170,42 +181,46 @@ const About = () => {
               {/* Team section with detailed information and hover cards */}
               <h2 id="team" className="text-2xl md:text-3xl font-bold mt-12 mb-6 text-gray-900">Our Team</h2>
               <p className="text-gray-700 mb-6">
-                Our team consists of educators, subject matter experts, and educational technology specialists committed to improving the learning experience for students across Nepal.
+              Our team is a dedicated collective of educators, subject matter experts, and cutting-edge educational technology specialists united by a passion for transforming and enhancing the learning journey for students across Nepal.
               </p>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                 {[
                   {
                     name: "Aarab Bashyal",
-                    role: "Founder & Physics Expert",
-                    bio: "Former NEB instructor with 6+ years of teaching experience specialized in simplifying complex physics concepts.",
-                    social: { twitter: "#", linkedin: "#", github: "#" }
+                    role: "Youtube Content Creator",
+                    bio: "Youtube Content Creator with experience creating content for NEB Science Hub.",
+                    social: { facebook: "https://www.facebook.com/profile.php?id=100071328417151", youtube: "https://www.youtube.com/@AP2DShiksha", instagram: "https://www.instagram.com/ap2dshiksha/" },
+                    color: "bg-blue-50 border-t-2 border-blue-400"
                   },
                   {
                     name: "Pranish Khanal",
-                    role: "Chemistry Specialist",
-                    bio: "MSc in Chemistry with research focus on educational methodologies for secondary education in Nepal.",
-                    social: { twitter: "#", linkedin: "#", github: "#" }
+                    role: "Copywriter",
+                    bio: "Copywriter with experience writing content for NEB Science Hub.",
+                    social: { facebook: "https://www.facebook.com/Pranish.Khanal.03", youtube: "https://www.youtube.com/@AP2DShiksha", instagram: "https://www.instagram.com/ap2dshiksha/" },
+                    color: "bg-green-50 border-t-2 border-green-400"
                   },
                   {
                     name: "Pramis Kunwar",
-                    role: "Mathematics Lead",
-                    bio: "Mathematics educator with experience developing curriculum materials for NEB students.",
-                    social: { twitter: "#", linkedin: "#", github: "#" }
+                    role: "Website Developer",
+                    bio: "Website Developer with experience developing website for NEB Science Hub.",
+                    social: { facebook: "https://www.facebook.com/PramisKunwar123/", youtube: "https://www.youtube.com/@AP2DShiksha", instagram: "https://www.instagram.com/ap2dshiksha/" },
+                    color: "bg-purple-50 border-t-2 border-purple-400"
                   },
                   {
                     name: "Deepak Puri",
-                    role: "Biology & Content Lead",
-                    bio: "Biology specialist with expertise in creating accessible scientific content for diverse student populations.",
-                    social: { twitter: "#", linkedin: "#", github: "#" }
+                    role: "Copywriter",
+                    bio: "Copywriter with experience writing content for NEB Science Hub.",
+                    social: { facebook: "https://www.facebook.com/profile.php?id=100056435271979", youtube: "https://www.youtube.com/@AP2DShiksha", instagram: "https://www.instagram.com/ap2dshiksha/" },
+                    color: "bg-amber-50 border-t-2 border-amber-400"
                   }
                 ].map((member, index) => (
                   <HoverCard key={index}>
                     <HoverCardTrigger asChild>
-                      <Card className="hover:shadow-md transition-all duration-300 cursor-pointer">
+                      <Card className={`hover:shadow-lg hover:translate-y-[-4px] transition-all duration-300 cursor-pointer ${member.color}`}>
                         <CardContent className="pt-6">
                           <div className="flex items-start space-x-4">
-                            <div className="bg-nebBlue bg-opacity-10 p-3 rounded-full">
+                            <div className="bg-nebBlue bg-opacity-10 p-3 rounded-full group-hover:bg-opacity-20 transition-all duration-300">
                               <Users className="h-6 w-6 text-nebBlue" />
                             </div>
                             <div>
@@ -224,14 +239,20 @@ const About = () => {
                         <h4 className="text-lg font-bold">{member.name}</h4>
                         <p className="text-sm text-gray-600">{member.bio}</p>
                         <div className="flex pt-2 gap-2">
-                          <Button size="sm" variant="outline" className="h-8 w-8 p-0" aria-label={`${member.name}'s Twitter`}>
-                            <Twitter className="h-4 w-4" />
+                          <Button size="sm" variant="outline" className="h-8 w-8 p-0 hover:bg-blue-50 hover:scale-110 transition-all duration-200" aria-label={`${member.name}'s Facebook`} asChild>
+                            <a href={member.social.facebook} target="_blank" rel="noopener noreferrer">
+                              <Facebook className="h-4 w-4 text-blue-600" />
+                            </a>
                           </Button>
-                          <Button size="sm" variant="outline" className="h-8 w-8 p-0" aria-label={`${member.name}'s LinkedIn`}>
-                            <Linkedin className="h-4 w-4" />
+                          <Button size="sm" variant="outline" className="h-8 w-8 p-0 hover:bg-red-50 hover:scale-110 transition-all duration-200" aria-label={`${member.name}'s YouTube`} asChild>
+                            <a href={member.social.youtube} target="_blank" rel="noopener noreferrer">
+                              <Youtube className="h-4 w-4 text-red-600" />
+                            </a>
                           </Button>
-                          <Button size="sm" variant="outline" className="h-8 w-8 p-0" aria-label={`${member.name}'s GitHub`}>
-                            <Github className="h-4 w-4" />
+                          <Button size="sm" variant="outline" className="h-8 w-8 p-0 hover:bg-pink-50 hover:scale-110 transition-all duration-200" aria-label={`${member.name}'s Instagram`} asChild>
+                            <a href={member.social.instagram} target="_blank" rel="noopener noreferrer">
+                              <Instagram className="h-4 w-4 text-pink-600" />
+                            </a>
                           </Button>
                         </div>
                       </div>
@@ -265,17 +286,19 @@ const About = () => {
               Explore our comprehensive resources designed specifically for Grade 11 science students in Nepal.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Button asChild size="lg" className="bg-white text-nebBlue hover:bg-gray-100">
+              <Button asChild size="lg" className="bg-white text-nebBlue hover:bg-gray-100 hover:scale-105 transition-transform duration-200">
                 <Link to="/">Explore Subjects</Link>
               </Button>
-              <Button asChild variant="outline" size="lg" className="border-white text-white hover:bg-white/10">
+              <Button asChild variant="outline" size="lg" className="bg-amber-500 border-amber-500 text-white hover:bg-amber-600 hover:border-amber-600 hover:scale-105 transition-all duration-200">
                 <Link to="/pyq">View Past Papers</Link>
               </Button>
             </div>
           </div>
         </section>
       </main>
-      <Footer />
+      <Suspense fallback={<LoadingFallback />}>
+        <Footer />
+      </Suspense>
     </div>
   );
 };
