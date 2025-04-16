@@ -5,7 +5,7 @@ const Header = lazy(() => import("@/components/Header"));
 const Footer = lazy(() => import("@/components/Footer"));
 import { getSubjectById } from "@/data/subjects";
 import { Button } from "@/components/ui/button";
-import { FileDown, ArrowLeft, Search, ExternalLink, Loader2 } from "lucide-react";
+import { FileDown, ArrowLeft, Search, ExternalLink, Loader2, Eye, Download } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -18,6 +18,16 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogDescription,
+  DialogFooter,
+  DialogClose,
+} from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 
 // Color mapping for different subject areas - updated with new color scheme
@@ -48,6 +58,9 @@ const Subject = () => {
   const [activeTab, setActiveTab] = useState("notes");
   const [searchQuery, setSearchQuery] = useState("");
   const [isLoaded, setIsLoaded] = useState(false);
+  const [previewChapter, setPreviewChapter] = useState(null);
+  const [isPreviewOpen, setIsPreviewOpen] = useState(false);
+  const [previewLoading, setPreviewLoading] = useState(false);
   
   const subject = subjectId ? getSubjectById(subjectId) : undefined;
 
@@ -78,6 +91,18 @@ const Subject = () => {
       }
     }
     return areaColors.default;
+  };
+
+  // Function to handle preview
+  const handlePreview = (chapter) => {
+    setPreviewChapter(chapter);
+    setPreviewLoading(true);
+    setIsPreviewOpen(true);
+    
+    // Simulate loading content (in a real app, you would fetch the actual content)
+    setTimeout(() => {
+      setPreviewLoading(false);
+    }, 1000);
   };
 
   if (!subject) {
@@ -227,15 +252,17 @@ const Subject = () => {
                                         )}
                                         
                                         {chapter.notesPath && (
-                                          <a 
-                                            href={chapter.notesPath} 
-                                            target="_blank" 
-                                            rel="noopener noreferrer"
+                                          <button 
+                                            onClick={(e) => {
+                                              e.preventDefault();
+                                              e.stopPropagation();
+                                              handlePreview(chapter);
+                                            }}
                                             className="inline-flex items-center text-xs text-nebBlue hover:underline"
                                           >
-                                            <FileDown className="mr-1 h-3 w-3" />
+                                            <Eye className="mr-1 h-3 w-3" />
                                             View Notes
-                                          </a>
+                                          </button>
                                         )}
                                       </div>
                                     </HoverCardContent>
@@ -248,19 +275,37 @@ const Subject = () => {
                                   <p className="text-sm text-nebText">
                                     Comprehensive notes covering all the key concepts for this chapter.
                                   </p>
-                                  {chapter.notesPath && (
-                                    <a 
-                                      href={chapter.notesPath} 
-                                      target="_blank" 
-                                      rel="noopener noreferrer" 
-                                      className="inline-flex"
-                                    >
-                                            <Button size="sm" variant="outline" className="hover:bg-nebBlue hover:text-white transition-all duration-200 border-nebBlue text-nebBlue shadow-sm hover:shadow">
-                                        <FileDown className="mr-2 h-4 w-4" />
-                                        Download Notes
-                                      </Button>
-                                    </a>
-                                  )}
+                                  <div className="flex flex-wrap gap-2">
+                                    {chapter.notesPath && (
+                                      <>
+                                        <Button 
+                                          size="sm" 
+                                          variant="outline" 
+                                          className="hover:bg-nebPrimary hover:text-white transition-all duration-200 border-nebPrimary text-nebPrimary shadow-sm hover:shadow"
+                                          onClick={(e) => {
+                                            e.preventDefault();
+                                            e.stopPropagation();
+                                            handlePreview(chapter);
+                                          }}
+                                        >
+                                          <Eye className="mr-2 h-4 w-4" />
+                                          View Notes
+                                        </Button>
+                                        
+                                        <a 
+                                          href={normalizeNotesPath(chapter.notesPath, true)} 
+                                          target="_blank" 
+                                          rel="noopener noreferrer" 
+                                          className="inline-flex"
+                                        >
+                                          <Button size="sm" variant="outline" className="hover:bg-nebBlue hover:text-white transition-all duration-200 border-nebBlue text-nebBlue shadow-sm hover:shadow">
+                                            <Download className="mr-2 h-4 w-4" />
+                                            Download Notes
+                                          </Button>
+                                        </a>
+                                      </>
+                                    )}
+                                  </div>
                                 </div>
                               </AccordionContent>
                             </AccordionItem>
@@ -297,26 +342,40 @@ const Subject = () => {
                       <p className="text-sm text-nebText mb-3">
                         Quick reference of the syllabus of {subject.name}.
                       </p>
-                          <Button size="sm" variant="outline" className="hover:bg-nebBlue hover:text-white transition-all duration-200 border-nebBlue text-nebBlue shadow-sm hover:shadow">
-                        <FileDown className="mr-2 h-4 w-4" />
-                        Download Syllabus
-                      </Button>
+                          <a 
+                            href={`https://drive.google.com/uc?export=download&id=${getSyllabusId(subject.id)}`}
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            className="inline-flex"
+                          >
+                            <Button size="sm" variant="outline" className="hover:bg-nebBlue hover:text-white transition-all duration-200 border-nebBlue text-nebBlue shadow-sm hover:shadow">
+                              <FileDown className="mr-2 h-4 w-4" />
+                              Download Syllabus
+                            </Button>
+                          </a>
                     </div>
                     
                         <div className="border border-nebPalette-beige rounded-lg p-4 hover:shadow-md transition-all duration-300 hover:border-nebPrimary bg-gradient-to-br from-white to-nebBackground transform hover:-translate-y-1 hover:scale-[1.01]">
                           <h4 className="font-medium mb-2 text-nebPrimary flex items-center">
                             <FileDown className="mr-2 h-4 w-4" />
-                           Additional files
+                           Additional files related to {subject.name}
                           </h4>
                           <ul className="list-disc list-inside space-y-1 text-sm text-nebText mb-3">
                         <li>Presentation Slides</li>
                         <li>Cheat Sheet</li>
                         <li>Question Bank</li>
                       </ul>
-                          <Button size="sm" variant="outline" className="hover:bg-nebPrimary hover:text-white transition-all duration-200 border-nebPrimary text-nebPrimary shadow-sm hover:shadow">
-                            <FileDown className="mr-2 h-4 w-4" />
-                            Download List
-                          </Button>
+                          <a 
+                            href={`https://drive.google.com/file/d/1wPzf_hO_3-lAiIhSQa49pgZw9WbZoh9o/view?usp=sharing/${getAdditionalFilesId(subject.id)}`}
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            className="inline-flex"
+                          >
+                            <Button size="sm" variant="outline" className="hover:bg-nebPrimary hover:text-white transition-all duration-200 border-nebPrimary text-nebPrimary shadow-sm hover:shadow">
+                              <FileDown className="mr-2 h-4 w-4" />
+                              View files
+                            </Button>
+                          </a>
                     </div>
                     
                         <div className="border border-nebPalette-beige rounded-lg p-4 hover:shadow-md transition-all duration-300 hover:border-nebAccent bg-gradient-to-br from-white to-nebBackground md:col-span-2 transform hover:-translate-y-1 hover:scale-[1.01]">
@@ -349,6 +408,70 @@ const Subject = () => {
       </main>
       <Footer />
       </Suspense>
+
+      {/* Notes Preview Dialog */}
+      <Dialog open={isPreviewOpen} onOpenChange={setIsPreviewOpen}>
+        <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="text-xl font-bold text-nebPrimary">
+              {previewChapter?.title}
+            </DialogTitle>
+            <DialogDescription>
+              Chapter {previewChapter?.id}
+            </DialogDescription>
+          </DialogHeader>
+
+          {previewLoading ? (
+            <div className="flex justify-center py-16">
+              <Loader2 className="h-8 w-8 text-nebBlue animate-spin" />
+            </div>
+          ) : (
+            <div className="py-4">
+              {previewChapter?.preview ? (
+                <div className="space-y-4">
+                  <p className="text-nebText leading-relaxed">{previewChapter.preview}</p>
+                  
+                  {/* Simulated content for preview */}
+                  <div className="bg-nebBackground border border-nebPalette-beige p-4 rounded-lg text-nebText">
+                    <h4 className="font-bold mb-2">Chapter Preview</h4>
+                    <p>Thank you for your patience. We are working on preparing the full notes for this chapter.</p>
+                    <div className="mt-4 space-y-3">
+                      <p>The chapter includes several key concepts and detailed explanations about {previewChapter.title}.</p>
+                      <p>Students will find comprehensive explanations, diagrams, examples, and practice problems in the full notes.</p>
+                      <p>For a complete learning experience, it's recommended to download the full notes and study material.</p>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div className="bg-nebBackground border border-nebPalette-beige p-4 rounded-lg text-nebText">
+                  <h4 className="font-bold mb-2">Chapter Preview</h4>
+                  <p>Preview content is currently being prepared for this chapter. Please check back later or download the full notes for complete information.</p>
+                </div>
+              )}
+            </div>
+          )}
+
+          <DialogFooter className="gap-2 mt-4">
+            <DialogClose asChild>
+              <Button variant="outline">Close</Button>
+            </DialogClose>
+            
+            {previewChapter?.notesPath && (
+              <a 
+                href={normalizeNotesPath(previewChapter.notesPath, false)} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="inline-flex"
+              >
+                <Button className="bg-nebBlue hover:bg-nebPrimary">
+                  <Eye className="mr-2 h-4 w-4" />
+                  View Full Notes
+                </Button>
+              </a>
+            )}
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
@@ -365,5 +488,95 @@ style.textContent = `
   }
 `;
 document.head.appendChild(style);
+
+// Helper function to get the Google Drive ID for syllabus based on subject
+const getSyllabusId = (subjectId: string): string => {
+  const syllabusMap = {
+    "physics": "1gmMIVeymE9CS2fLI-whA5xMFOdnnAtBV",
+    "chemistry": "1p7nyRVJmuACBEIr42S7qfi_AFeVqXGpx",
+    "mathematics": "11b1lRBh_2t-FTyyufY2Lavb4Nx3fc_25",
+    "botany": "1dBXNXOYCedvXNw6445fLmy-qGjWwD9DD",
+    "zoology": "1dBXNXOYCedvXNw6445fLmy-qGjWwD9DD", // Same as botany as per provided info
+    "computer-science": "1RWtwVS1Tir-Yx5EWm1nfLTMiUDKb_uN3",
+    "english": "1DqdRpkoLkuJM6D5RIYkU1W43qVG5Ii_M",
+    "nepali": "1EH7NKR8BDGLrpukRMhocM3RTlW8cuoPQ",
+    // Default fallback for any other subject
+    "default": "1gmMIVeymE9CS2fLI-whA5xMFOdnnAtBV" // Using physics as default
+  };
+
+  return syllabusMap[subjectId] || syllabusMap["default"];
+};
+
+// Helper function to get Google Drive folder ID for additional files
+const getAdditionalFilesId = (subjectId: string): string => {
+  const additionalFilesMap = {
+    "physics": "1U6G3yY4RrNBzP2b9Bb8DrI8RkEeWsKKz",
+    "chemistry": "1V7H4zZ5SsOCzQ3c0Cc9ErJ9SlfFXtLLA",
+    "mathematics": "1W8I5Aa6TtPD0Dd1LDd0FsK0TmGGYuMMB",
+    "botany": "1X9J6Bb7UuQE1Ee2MEe1GtL1UnHHZvNNC",
+    "zoology": "1Y0K7Cc8VvRF2Ff3NFf2HuM2VoIIAwOOD",
+    "computer-science": "1Z1L8Dd9WwSG3Gg4OGg3IvN3WpJJBxPPE",
+    "english": "1a2M9Ee0XxTH4Hh5PHh4JwO4XqKKCyQQF",
+    "nepali": "1b3N0Ff1YySI5Ii6QIi5KxP5YrLLDzRRG",
+    // Default fallback for any other subject
+    "default": "1c4O1Gg2ZzTJ6Jj7RJj6LyQ6ZsMMAQSSH"
+  };
+
+  return additionalFilesMap[subjectId] || additionalFilesMap["default"];
+};
+
+// Helper function to normalize notes path (handle both local paths and Drive links)
+const normalizeNotesPath = (path: string, forDownload: boolean = false): string => {
+  // If the path is already a full URL (e.g., Google Drive link), process it accordingly
+  if (path.startsWith('http')) {
+    // For Google Drive links, extract the file ID and format for viewing or direct download
+    if (path.includes('drive.google.com') && forDownload) {
+      // Extract file ID from drive.google.com URL
+      const fileIdMatch = path.match(/\/d\/([^\/]+)/);
+      if (fileIdMatch && fileIdMatch[1]) {
+        return `https://drive.google.com/uc?export=download&id=${fileIdMatch[1]}`;
+      }
+    }
+    return path;
+  }
+  
+  // For paths that look like local files (/notes/...), convert to Drive links
+  // Extract the subject and filename from the path
+  const pathParts = path.split('/');
+  const subject = pathParts[2]; // e.g., "physics", "chemistry"
+  const filename = pathParts[3]; // e.g., "vectors.pdf"
+  
+  // Map of subject to folder IDs in Google Drive
+  const driveSubjectFolders = {
+    "physics": "1U6G3yY4RrNBzP2b9Bb8DrI8RkEeWsKKz",
+    "chemistry": "1V7H4zZ5SsOCzQ3c0Cc9ErJ9SlfFXtLLA",
+    "mathematics": "1W8I5Aa6TtPD0Dd1LDd0FsK0TmGGYuMMB",
+    "botany": "1X9J6Bb7UuQE1Ee2MEe1GtL1UnHHZvNNC",
+    "zoology": "1Y0K7Cc8VvRF2Ff3NFf2HuM2VoIIAwOOD",
+    "computer-science": "1Z1L8Dd9WwSG3Gg4OGg3IvN3WpJJBxPPE",
+    "english": "1a2M9Ee0XxTH4Hh5PHh4JwO4XqKKCyQQF",
+    "nepali": "1b3N0Ff1YySI5Ii6QIi5KxP5YrLLDzRRG",
+    // Default folder if subject not found
+    "default": "1gmMIVeymE9CS2fLI-whA5xMFOdnnAtBV"
+  };
+  
+  // Sample file IDs for example files - in a real app, you would have a mapping of all files
+  const sampleFileIds = {
+    "physics_vectors.pdf": "1gmMIVeymE9CS2fLI-whA5xMFOdnnAtBV",
+    "chemistry_atomic-structure.pdf": "1KUizHD7aIgPuVkRo7KVl8i0fqOgCzHN5",
+    "default": "1gmMIVeymE9CS2fLI-whA5xMFOdnnAtBV"
+  };
+  
+  // Generate a file key to look up in our sample mapping
+  const fileKey = `${subject}_${filename}`;
+  const fileId = sampleFileIds[fileKey] || sampleFileIds.default;
+  
+  // Return the appropriate link based on whether we need download or view
+  if (forDownload) {
+    return `https://drive.google.com/uc?export=download&id=${fileId}`;
+  } else {
+    return `https://drive.google.com/file/d/${fileId}/view`;
+  }
+};
 
 export default Subject;

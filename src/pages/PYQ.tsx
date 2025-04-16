@@ -194,6 +194,58 @@ const examTypeColors = {
   "Chapter-wise": "bg-nebPalette-lightGray text-nebPrimary border-nebBlue"
 };
 
+// Add helper functions for question bank links
+const getQuestionBankLink = (subjectId: string): string => {
+  const questionBankMap = {
+    "physics": "1gmMIVeymE9CS2fLI-whA5xMFOdnnAtBV",
+    "chemistry": "1p7nyRVJmuACBEIr42S7qfi_AFeVqXGpx",
+    "mathematics": "11b1lRBh_2t-FTyyufY2Lavb4Nx3fc_25",
+    "botany": "1dBXNXOYCedvXNw6445fLmy-qGjWwD9DD",
+    "zoology": "1dBXNXOYCedvXNw6445fLmy-qGjWwD9DD",
+    "computer-science": "1RWtwVS1Tir-Yx5EWm1nfLTMiUDKb_uN3",
+    "english": "1DqdRpkoLkuJM6D5RIYkU1W43qVG5Ii_M",
+    "nepali": "1EH7NKR8BDGLrpukRMhocM3RTlW8cuoPQ",
+    // Default fallback
+    "default": "1gmMIVeymE9CS2fLI-whA5xMFOdnnAtBV"
+  };
+
+  return `https://drive.google.com/file/d/${questionBankMap[subjectId] || questionBankMap.default}/view`;
+};
+
+const getModelQuestionsLink = (subjectId: string): string => {
+  const modelQuestionsMap = {
+    "physics": "1hj1FKNQuFdEwk8Z4EBC4RQoFqxWnF-Y_",
+    "chemistry": "1a2NMvKDTcNWiNfVWDgIsAOepEzi1o-zG",
+    "mathematics": "1hNXFQkcFyRalxBebdvyLyYXQkmdx_br2",
+    "botany": "13lCP0rnhFZprEft8UoCyemprBVPL_fni",
+    "zoology": "13lCP0rnhFZprEft8UoCyemprBVPL_fni", // Same as biology
+    "computer-science": "1fgdVRIh2bYVeDtv9u5cII9egK2STtKCT",
+    "english": "1bP1HBzJyAGRtoG_8qPRYGi96CwlATSdC",
+    "nepali": "1yz0oUuJHytfBJzwP0ELbEIVIDvUn1RLt",
+    // Default fallback - using Physics model questions as default
+    "default": "1hj1FKNQuFdEwk8Z4EBC4RQoFqxWnF-Y_"
+  };
+
+  return `https://drive.google.com/file/d/${modelQuestionsMap[subjectId] || modelQuestionsMap.default}/view`;
+};
+
+const getStudyGuidesLink = (subjectId: string): string => {
+  const studyGuidesMap = {
+    "physics": "1gmMIVeymE9CS2fLI-whA5xMFOdnnAtBV",
+    "chemistry": "1p7nyRVJmuACBEIr42S7qfi_AFeVqXGpx",
+    "mathematics": "11b1lRBh_2t-FTyyufY2Lavb4Nx3fc_25",
+    "botany": "1dBXNXOYCedvXNw6445fLmy-qGjWwD9DD",
+    "zoology": "1dBXNXOYCedvXNw6445fLmy-qGjWwD9DD",
+    "computer-science": "1RWtwVS1Tir-Yx5EWm1nfLTMiUDKb_uN3",
+    "english": "1DqdRpkoLkuJM6D5RIYkU1W43qVG5Ii_M",
+    "nepali": "1EH7NKR8BDGLrpukRMhocM3RTlW8cuoPQ",
+    // Default fallback
+    "default": "1gmMIVeymE9CS2fLI-whA5xMFOdnnAtBV"
+  };
+
+  return `https://drive.google.com/file/d/${studyGuidesMap[subjectId] || studyGuidesMap.default}/view`;
+};
+
 const PYQ = () => {
   const [activeTab, setActiveTab] = useState("physics");
   const [isLoaded, setIsLoaded] = useState(false);
@@ -317,10 +369,17 @@ const PYQ = () => {
                         <p className="text-base text-nebText mb-5 leading-relaxed">
                           Curated questions from all previous years, organized by chapter for focused practice.
                         </p>
-                        <Button className="bg-nebBlue hover:bg-nebBlueDark text-white transition-all duration-200 flex items-center gap-2 hover:gap-3 group/btn">
-                          <FileDown className="h-4 w-4 group-hover/btn:scale-110 transition-transform duration-200" />
-                          <span>Download Question Bank</span>
-                        </Button>
+                        <a 
+                          href={getQuestionBankLink(subject.id)} 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          className="inline-flex"
+                        >
+                          <Button className="bg-nebBlue hover:bg-nebBlueDark text-white transition-all duration-200 flex items-center gap-2 hover:gap-3 group/btn">
+                            <FileDown className="h-4 w-4 group-hover/btn:scale-110 transition-transform duration-200" />
+                            <span>Download Question Bank</span>
+                          </Button>
+                        </a>
                       </div>
                       
                       <div className="border border-nebBlue rounded-lg p-6 hover:shadow-lg transition-all duration-300 hover:border-nebBlue group/card bg-nebPalette-lightGray hover:-translate-y-1 transform">
@@ -333,10 +392,17 @@ const PYQ = () => {
                         <p className="text-base text-nebText mb-5 leading-relaxed">
                           Expected question patterns for the upcoming exam with solutions.
                         </p>
-                        <Button className="bg-nebBlue hover:bg-nebBlueDark text-white transition-all duration-200 flex items-center gap-2 hover:gap-3 group/btn">
-                          <FileDown className="h-4 w-4 group-hover/btn:scale-110 transition-transform duration-200" />
-                          <span>Download Model Questions</span>
-                        </Button>
+                        <a 
+                          href={getModelQuestionsLink(subject.id)} 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          className="inline-flex"
+                        >
+                          <Button className="bg-nebBlue hover:bg-nebBlueDark text-white transition-all duration-200 flex items-center gap-2 hover:gap-3 group/btn">
+                            <FileDown className="h-4 w-4 group-hover/btn:scale-110 transition-transform duration-200" />
+                            <span>Download Model Questions</span>
+                          </Button>
+                        </a>
                       </div>
                     </div>
                   </div>
@@ -344,17 +410,24 @@ const PYQ = () => {
                   <div className="mt-8 bg-nebPalette-lightGray border rounded-lg p-5 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 transform">
                     <p className="text-center text-nebText mb-3">Need more resources? Check our collection guides</p>
                     <div className="flex justify-center">
-                      <Button 
-                        variant="outline" 
-                        className="border-current text-current hover:bg-current hover:text-white transition-all duration-200 flex items-center gap-2 hover:gap-3 font-medium group"
-                        style={{
-                          borderColor: colors.border.includes('#') ? colors.border.replace('border-[', '').replace(']', '') : '#123458',
-                          color: colors.headingText.includes('#') ? colors.headingText.replace('text-[', '').replace(']', '') : '#123458'
-                        }}
+                      <a 
+                        href={getStudyGuidesLink(subject.id)} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="inline-flex"
                       >
-                        <ExternalLink className="h-4 w-4 group-hover:rotate-12 transition-transform duration-200" />
-                        <span>View Study Guides</span>
-                      </Button>
+                        <Button 
+                          variant="outline" 
+                          className="border-current text-current hover:bg-current hover:text-white transition-all duration-200 flex items-center gap-2 hover:gap-3 font-medium group"
+                          style={{
+                            borderColor: colors.border.includes('#') ? colors.border.replace('border-[', '').replace(']', '') : '#123458',
+                            color: colors.headingText.includes('#') ? colors.headingText.replace('text-[', '').replace(']', '') : '#123458'
+                          }}
+                        >
+                          <ExternalLink className="h-4 w-4 group-hover:rotate-12 transition-transform duration-200" />
+                          <span>View Study Guides</span>
+                        </Button>
+                      </a>
                     </div>
                   </div>
                 </TabsContent>

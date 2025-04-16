@@ -13,7 +13,7 @@ const subjectLinks = [
   { name: "Chemistry", id: "chemistry" },
   { name: "Mathematics", id: "mathematics" },
   { name: "Biology", id: "biology" },
-  { name: "Computer Science", id: "computer" },
+  { name: "Computer Science", id: "computer-science" },
   { name: "English", id: "english" },
   { name: "Nepali", id: "nepali" }
 ];
