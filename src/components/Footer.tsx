@@ -90,6 +90,26 @@ export default function Footer() {
     transitionTimingFunction: 'ease-out'
   });
 
+  // Handle navigation with scroll to top
+  const handleNavigation = (to: string) => {
+    // First scroll to top with smooth behavior
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+    
+    // If it's a hash link, scroll to the target section after a small delay
+    if (to.includes('#')) {
+      setTimeout(() => {
+        const targetId = to.split('#')[1];
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+          targetElement.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 300); // Increased delay to ensure navigation completes first
+    }
+  };
+
   return (
     <footer ref={footerRef} className="bg-gray-100 border-t border-gray-200 py-12 overflow-hidden">
       <div className="container px-4 md:px-6">
@@ -140,6 +160,7 @@ export default function Footer() {
             <nav className="flex flex-col space-y-2">
               {[
                 { to: "/", label: "Home" },
+                { to: "/#subjects", label: "Subjects" },
                 { to: "/pyq", label: "Previous Year Questions" },
                 { to: "/about", label: "About" },
                 { to: "/contact", label: "Contact Us" }
@@ -150,7 +171,7 @@ export default function Footer() {
                   className={`text-gray-600 ${colors.navigation.hover} text-sm flex items-center ${colors.navigation.link}`}
                   onMouseEnter={() => setIsHovered(`link-${index}`)}
                   onMouseLeave={() => setIsHovered(null)}
-                  onClick={() => window.scrollTo(0, 0)}
+                  onClick={(e) => handleNavigation(link.to)}
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-gray-300 mr-2 transition-all duration-300 ease-in-out" 
                     style={{ 
