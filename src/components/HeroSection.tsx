@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { ArrowRight, BookOpen } from "lucide-react";
 import { useState, useEffect } from "react";
@@ -51,7 +50,7 @@ export default function HeroSection({ onExploreClick }: HeroSectionProps) {
           className={`flex flex-col items-center text-center space-y-5 md:space-y-7 transition-opacity duration-700 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
         >
           <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tighter leading-tight mb-2">
-            <span className="block">Grade 11 Science Notes</span>
+            <span className="block text-white">Grade 11 Science Notes</span>
             <span className="text-nebPalette-beige text-2xl md:text-3xl font-medium mt-2 block">Comprehensive Resources for NEB Students</span>
           </h1>
           

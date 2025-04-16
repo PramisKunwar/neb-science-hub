@@ -1,4 +1,3 @@
-
 import { useState, lazy, Suspense, useEffect } from "react";
 import { TabsContent, TabsList, TabsTrigger, Tabs } from "@/components/ui/tabs";
 import { FileDown, Clock, ExternalLink } from "lucide-react";
@@ -234,7 +233,7 @@ const PYQ = () => {
         <section className="w-full bg-gradient-to-r from-nebPrimaryDark to-nebPrimary py-16 md:py-20 text-white">
           <div className="container px-4 md:px-8 max-w-7xl mx-auto">
             <div className="flex flex-col items-center text-center space-y-6">
-              <h1 className="text-3xl md:text-5xl font-bold animate-fade-in tracking-tight leading-tight">
+              <h1 className="text-3xl md:text-5xl font-bold animate-fade-in tracking-tight leading-tight text-white">
                 Past Year Questions
               </h1>
               <p className="text-lg md:text-xl text-white max-w-[700px] leading-relaxed mb-2 font-normal">

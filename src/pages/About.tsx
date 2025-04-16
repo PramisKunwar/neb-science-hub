@@ -1,4 +1,3 @@
-
 import { lazy, Suspense } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
@@ -29,7 +28,7 @@ const About = () => {
         <section className="w-full bg-gradient-to-r from-nebPrimaryDark to-nebPrimary py-16 text-white">
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center text-center space-y-6">
-              <h1 className="text-3xl md:text-5xl font-bold tracking-tighter animate-fade-in">About Us</h1>
+              <h1 className="text-3xl md:text-5xl font-bold tracking-tighter animate-fade-in text-white">About Us</h1>
               <p className="text-lg md:text-xl text-white max-w-[700px] leading-relaxed">
                 Learn more about our mission to support Grade 11 science students in Nepal
               </p>
@@ -262,14 +261,14 @@ const About = () => {
                 ))}
               </div>
 
-              <div className="flex items-center justify-center mt-8 border-t pt-8">
-                <div className="text-center">
-                  <h3 className="text-xl font-bold text-nebText mb-2">Join Our Team</h3>
-                  <p className="text-nebText mb-4">
+              <div className="flex items-center justify-center mt-8 pt-8">
+                <div className="text-center bg-nebPrimary rounded-lg p-6 shadow-md w-full max-w-2xl">
+                  <h3 className="text-xl font-bold text-white mb-2">Join Our Team</h3>
+                  <p className="text-white mb-4">
                     Passionate about education? We're always looking for talented educators and contributors to join our mission.
                   </p>
-                  <Button asChild className="bg-nebBlue hover:bg-nebBlueDark">
-                    <Link to="/contact" className="flex items-center gap-2">
+                  <Button asChild className="bg-white hover:bg-gray-100 text-nebPrimary">
+                    <Link to="/contact" onClick={() => window.scrollTo(0, 0)} className="flex items-center gap-2">
                       <Mail className="h-4 w-4" /> Contact Us to Learn More
                     </Link>
                   </Button>
@@ -282,7 +281,7 @@ const About = () => {
         {/* Clear CTA Section */}
         <section className="w-full py-12 bg-nebPrimary text-white">
           <div className="container px-4 md:px-6 text-center">
-            <h2 className="text-2xl md:text-3xl font-bold mb-4">Ready to enhance your NEB Science studies?</h2>
+            <h2 className="text-2xl md:text-3xl font-bold mb-4 text-white">Ready to enhance your NEB Science studies?</h2>
             <p className="text-lg mb-6 max-w-2xl mx-auto">
               Explore our comprehensive resources designed specifically for Grade 11 science students in Nepal.
             </p>

@@ -1,4 +1,3 @@
-
 import { useState, lazy, Suspense } from "react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -78,7 +77,7 @@ const Contact = () => {
         <section className="w-full bg-gradient-to-r from-nebPrimaryDark to-nebPrimary py-12 text-white">
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center text-center space-y-4">
-              <h1 className="text-3xl md:text-4xl font-bold">Contact Us</h1>
+              <h1 className="text-3xl md:text-4xl font-bold text-white">Contact Us</h1>
               <p className="text-lg md:text-xl text-gray-100 max-w-[700px]">
                 Have questions or suggestions? Reach out to our team!
               </p>

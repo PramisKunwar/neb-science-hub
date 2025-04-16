@@ -20,25 +20,25 @@ import {
 } from "@/components/ui/hover-card";
 import { Input } from "@/components/ui/input";
 
-// Color mapping for different subject areas
+// Color mapping for different subject areas - updated with new color scheme
 const areaColors = {
-  "Mechanics": { bg: "bg-blue-50", border: "border-blue-200", text: "text-blue-700" },
-  "Thermodynamics": { bg: "bg-amber-50", border: "border-amber-200", text: "text-amber-700" },
-  "Waves": { bg: "bg-violet-50", border: "border-violet-200", text: "text-violet-700" },
-  "Optics": { bg: "bg-emerald-50", border: "border-emerald-200", text: "text-emerald-700" },
-  "Electricity": { bg: "bg-rose-50", border: "border-rose-200", text: "text-rose-700" },
-  "Magnetism": { bg: "bg-cyan-50", border: "border-cyan-200", text: "text-cyan-700" },
-  "Modern Physics": { bg: "bg-purple-50", border: "border-purple-200", text: "text-purple-700" },
+  "Mechanics": { bg: "bg-nebBackground", border: "border-nebBlue", text: "text-nebBlue" },
+  "Thermodynamics": { bg: "bg-nebBackground", border: "border-nebAccent", text: "text-nebAccent" },
+  "Waves": { bg: "bg-nebBackground", border: "border-nebPalette-beige", text: "text-nebPrimary" },
+  "Optics": { bg: "bg-nebBackground", border: "border-nebPrimary", text: "text-nebPrimary" },
+  "Electricity": { bg: "bg-nebBackground", border: "border-nebAccent", text: "text-nebAccent" },
+  "Magnetism": { bg: "bg-nebBackground", border: "border-nebBlue", text: "text-nebBlue" },
+  "Modern Physics": { bg: "bg-nebBackground", border: "border-nebPrimary", text: "text-nebPrimary" },
   // Default fallback
-  "default": { bg: "bg-gray-50", border: "border-gray-200", text: "text-gray-700" }
+  "default": { bg: "bg-nebBackground", border: "border-nebPalette-beige", text: "text-nebText" }
 };
 
 // Loading fallback component
 const LoadingFallback = () => (
-  <div className="min-h-screen flex items-center justify-center bg-white">
+  <div className="min-h-screen flex items-center justify-center bg-nebBackground">
     <div className="flex flex-col items-center">
       <Loader2 className="h-10 w-10 text-nebBlue animate-spin mb-4" />
-      <p className="text-gray-700">Loading content...</p>
+      <p className="text-nebText">Loading content...</p>
     </div>
   </div>
 );
@@ -82,15 +82,15 @@ const Subject = () => {
 
   if (!subject) {
     return (
-      <div className="min-h-screen flex flex-col">
+      <div className="min-h-screen flex flex-col bg-nebBackground">
         <Suspense fallback={<LoadingFallback />}>
         <Header />
         <main className="flex-1 flex items-center justify-center">
           <div className="text-center">
-            <h1 className="text-3xl font-bold mb-4">Subject Not Found</h1>
-            <p className="text-gray-600 mb-6">The subject you're looking for doesn't exist.</p>
+            <h1 className="text-3xl font-bold mb-4 text-nebText">Subject Not Found</h1>
+            <p className="text-nebText mb-6">The subject you're looking for doesn't exist.</p>
             <Link to="/">
-              <Button>
+              <Button className="bg-nebBlue hover:bg-nebPrimary text-white">
                 <ArrowLeft className="mr-2 h-4 w-4" />
                 Back to Home
               </Button>
@@ -104,20 +104,20 @@ const Subject = () => {
   }
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-nebBackground">
       <Suspense fallback={<LoadingFallback />}>
       <Header />
       <main className="flex-1">
         {/* Header Banner */}
-        <section className="w-full bg-gradient-to-r from-nebBlue to-blue-700 py-12 text-white">
+        <section className="w-full bg-gradient-to-r from-nebPrimaryDark to-nebPrimary py-12 text-white">
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center text-center space-y-4">
-              <h1 className="text-3xl md:text-4xl font-bold">{subject.name}</h1>
+              <h1 className="text-3xl md:text-4xl font-bold text-white">{subject.name}</h1>
               <p className="text-lg md:text-xl text-gray-100 max-w-[700px]">
                 {subject.description}
               </p>
               <Link to="/">
-                  <Button variant="outline" className="bg-transparent text-white border-white hover:bg-white hover:text-nebBlue transition-all duration-200">
+                  <Button variant="outline" className="bg-transparent text-white border-white hover:bg-white hover:text-nebPrimary transition-all duration-200">
                   <ArrowLeft className="mr-2 h-4 w-4" />
                   Back to Subjects
                 </Button>
@@ -131,16 +131,16 @@ const Subject = () => {
           <div className="container px-4 md:px-6">
             <Tabs defaultValue="notes" className="w-full" onValueChange={setActiveTab} value={activeTab}>
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
-                  <TabsList className="w-full max-w-md grid grid-cols-2">
+                  <TabsList className="w-full max-w-md grid grid-cols-2 bg-nebPalette-beige">
                     <TabsTrigger 
                       value="notes" 
-                      className="data-[state=active]:bg-nebBlue data-[state=active]:text-white transition-all duration-200 hover:bg-blue-50"
+                      className="data-[state=active]:bg-nebBlue data-[state=active]:text-white transition-all duration-200 hover:bg-nebBackground text-nebText"
                     >
                       Notes & Chapters
                     </TabsTrigger>
                     <TabsTrigger 
                       value="resources"
-                      className="data-[state=active]:bg-nebBlue data-[state=active]:text-white transition-all duration-200 hover:bg-blue-50"
+                      className="data-[state=active]:bg-nebBlue data-[state=active]:text-white transition-all duration-200 hover:bg-nebBackground text-nebText"
                     >
                       Resources
                     </TabsTrigger>
@@ -148,11 +148,11 @@ const Subject = () => {
                   
                   {activeTab === "notes" && (
                     <div className="relative w-full md:w-72">
-                      <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-gray-500" />
+                      <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-nebText" />
                       <Input
                         type="search"
                         placeholder="Search chapters..."
-                        className="pl-9 bg-white"
+                        className="pl-9 bg-white text-nebText border-nebPalette-beige"
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                       />
@@ -179,7 +179,7 @@ const Subject = () => {
                             className={`bg-white border rounded-lg shadow-sm transition-all duration-300 
                                       hover:shadow-md overflow-hidden ${areaColor.border}`}
                             style={{ borderTopWidth: '4px' }}>
-                            <h3 className={`px-4 py-3 text-lg font-medium bg-gray-50 border-b rounded-t-lg ${areaColor.text}`}>
+                            <h3 className={`px-4 py-3 text-lg font-medium bg-nebBackground border-b border-nebPalette-beige rounded-t-lg ${areaColor.text}`}>
                         {area.name}
                       </h3>
                       <div className="p-4">
@@ -188,38 +188,38 @@ const Subject = () => {
                                   <AccordionItem 
                                     key={chapter.id} 
                                     value={`chapter-${chapter.id}`}
-                                    className={`border border-gray-200 rounded-md mb-2 overflow-hidden 
+                                    className={`border border-nebPalette-beige rounded-md mb-2 overflow-hidden 
                                                hover:border-nebBlue hover:shadow-sm transition-all duration-200 
                                                transform hover:-translate-y-1 hover:scale-[1.01] 
                                                ${areaColor.bg} bg-opacity-30`}
                                   >
-                                    <AccordionTrigger className="text-left px-3 py-2 hover:bg-blue-50 focus:bg-blue-50 data-[state=open]:bg-blue-50 transition-colors">
+                                    <AccordionTrigger className="text-left px-3 py-2 hover:bg-nebBackground focus:bg-nebBackground data-[state=open]:bg-nebBackground transition-colors">
                                 <div className="flex items-center">
                                   <HoverCard>
                                     <HoverCardTrigger asChild>
-                                            <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-nebBlue text-white text-xs font-medium mr-2 cursor-pointer hover:bg-blue-700 transition-colors shadow-sm hover:shadow">
+                                            <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-nebBlue text-white text-xs font-medium mr-2 cursor-pointer hover:bg-nebPrimary transition-colors shadow-sm hover:shadow">
                                         {chapter.id}
                                       </span>
                                     </HoverCardTrigger>
-                                    <HoverCardContent className="w-80">
+                                    <HoverCardContent className="w-80 bg-white border-nebPalette-beige">
                                       <div className="space-y-3">
                                         <div className="flex items-center gap-2">
                                           <span className="flex items-center justify-center h-6 w-6 rounded-full bg-nebBlue text-white text-xs font-medium">
                                             {chapter.id}
                                           </span>
-                                          <h4 className="text-sm font-semibold">{chapter.title}</h4>
+                                          <h4 className="text-sm font-semibold text-nebText">{chapter.title}</h4>
                                         </div>
                                         
                                         {chapter.preview && (
-                                          <div className="bg-gray-50 p-2 rounded border border-gray-100">
-                                            <p className="text-sm text-gray-700">
+                                          <div className="bg-nebBackground p-2 rounded border border-nebPalette-beige">
+                                            <p className="text-sm text-nebText">
                                               {chapter.preview}
                                             </p>
                                           </div>
                                         )}
                                         
                                         {!chapter.preview && (
-                                          <p className="text-sm text-gray-600">
+                                          <p className="text-sm text-nebText">
                                             {chapter.notesPath 
                                               ? "Click to view comprehensive notes covering all key concepts for this chapter."
                                               : "Notes for this chapter are coming soon."}
@@ -240,12 +240,12 @@ const Subject = () => {
                                       </div>
                                     </HoverCardContent>
                                   </HoverCard>
-                                  <span className="font-medium">{chapter.title}</span>
+                                  <span className="font-medium text-nebText">{chapter.title}</span>
                                 </div>
                               </AccordionTrigger>
                                     <AccordionContent className="px-3 py-2">
                                 <div className="pt-2 space-y-4">
-                                  <p className="text-sm text-gray-600">
+                                  <p className="text-sm text-nebText">
                                     Comprehensive notes covering all the key concepts for this chapter.
                                   </p>
                                   {chapter.notesPath && (
@@ -267,7 +267,7 @@ const Subject = () => {
                           ))}
                         </Accordion>
                               {searchQuery && filteredChapters.length === 0 && (
-                                <p className="text-gray-500 text-center py-4">No chapters found matching your search.</p>
+                                <p className="text-nebText text-center py-4">No chapters found matching your search.</p>
                               )}
                             </div>
                       </div>
@@ -284,17 +284,17 @@ const Subject = () => {
                       <Loader2 className="h-8 w-8 text-nebBlue animate-spin" />
                     </div>
                   ) : (
-                    <div className="bg-white border rounded-lg shadow-sm hover:shadow-md transition-all duration-300 animate-fadeIn">
-                      <h3 className="px-4 py-3 text-lg font-medium bg-gray-50 border-b rounded-t-lg text-nebBlue">
+                    <div className="bg-white border border-nebPalette-beige rounded-lg shadow-sm hover:shadow-md transition-all duration-300 animate-fadeIn">
+                      <h3 className="px-4 py-3 text-lg font-medium bg-nebBackground border-b border-nebPalette-beige rounded-t-lg text-nebBlue">
                     Additional Resources
                   </h3>
                       <div className="p-4 grid md:grid-cols-2 gap-4">
-                        <div className="border rounded-lg p-4 hover:shadow-md transition-all duration-300 hover:border-blue-300 bg-gradient-to-br from-white to-blue-50 transform hover:-translate-y-1 hover:scale-[1.01]">
-                          <h4 className="font-medium mb-2 text-blue-700 flex items-center">
+                        <div className="border border-nebPalette-beige rounded-lg p-4 hover:shadow-md transition-all duration-300 hover:border-nebBlue bg-gradient-to-br from-white to-nebBackground transform hover:-translate-y-1 hover:scale-[1.01]">
+                          <h4 className="font-medium mb-2 text-nebBlue flex items-center">
                             <FileDown className="mr-2 h-4 w-4" />
                             Syllabus
                           </h4>
-                      <p className="text-sm text-gray-600 mb-3">
+                      <p className="text-sm text-nebText mb-3">
                         Quick reference of the syllabus of {subject.name}.
                       </p>
                           <Button size="sm" variant="outline" className="hover:bg-nebBlue hover:text-white transition-all duration-200 border-nebBlue text-nebBlue shadow-sm hover:shadow">
@@ -303,28 +303,28 @@ const Subject = () => {
                       </Button>
                     </div>
                     
-                        <div className="border rounded-lg p-4 hover:shadow-md transition-all duration-300 hover:border-green-300 bg-gradient-to-br from-white to-green-50 transform hover:-translate-y-1 hover:scale-[1.01]">
-                          <h4 className="font-medium mb-2 text-green-700 flex items-center">
+                        <div className="border border-nebPalette-beige rounded-lg p-4 hover:shadow-md transition-all duration-300 hover:border-nebPrimary bg-gradient-to-br from-white to-nebBackground transform hover:-translate-y-1 hover:scale-[1.01]">
+                          <h4 className="font-medium mb-2 text-nebPrimary flex items-center">
                             <FileDown className="mr-2 h-4 w-4" />
                            Additional files
                           </h4>
-                          <ul className="list-disc list-inside space-y-1 text-sm text-gray-600 mb-3">
+                          <ul className="list-disc list-inside space-y-1 text-sm text-nebText mb-3">
                         <li>Presentation Slides</li>
                         <li>Cheat Sheet</li>
                         <li>Question Bank</li>
                       </ul>
-                          <Button size="sm" variant="outline" className="hover:bg-green-700 hover:text-white transition-all duration-200 border-green-700 text-green-700 shadow-sm hover:shadow">
+                          <Button size="sm" variant="outline" className="hover:bg-nebPrimary hover:text-white transition-all duration-200 border-nebPrimary text-nebPrimary shadow-sm hover:shadow">
                             <FileDown className="mr-2 h-4 w-4" />
                             Download List
                           </Button>
                     </div>
                     
-                        <div className="border rounded-lg p-4 hover:shadow-md transition-all duration-300 hover:border-red-300 bg-gradient-to-br from-white to-red-50 md:col-span-2 transform hover:-translate-y-1 hover:scale-[1.01]">
-                          <h4 className="font-medium mb-2 text-red-700 flex items-center">
+                        <div className="border border-nebPalette-beige rounded-lg p-4 hover:shadow-md transition-all duration-300 hover:border-nebAccent bg-gradient-to-br from-white to-nebBackground md:col-span-2 transform hover:-translate-y-1 hover:scale-[1.01]">
+                          <h4 className="font-medium mb-2 text-nebAccent flex items-center">
                             <FileDown className="mr-2 h-4 w-4" />
                             Video Tutorials
                           </h4>
-                          <p className="text-sm text-gray-600 mb-3">
+                          <p className="text-sm text-nebText mb-3">
                         Video explanations of complex topics are available on our YouTube channel.
                       </p>
                       <a 
@@ -333,7 +333,7 @@ const Subject = () => {
                         rel="noopener noreferrer" 
                             className="inline-flex"
                       >
-                            <Button className="bg-red-600 hover:bg-red-700 text-white transition-all duration-200 flex items-center gap-2 shadow-sm hover:shadow">
+                            <Button className="bg-nebAccent hover:bg-nebAccent/90 text-white transition-all duration-200 flex items-center gap-2 shadow-sm hover:shadow">
                               <ExternalLink className="h-4 w-4" />
                         Visit YouTube Channel
                             </Button>
