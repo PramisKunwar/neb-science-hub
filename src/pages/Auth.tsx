@@ -1,8 +1,9 @@
+
 import { useState } from "react";
+import { Helmet } from "react-helmet";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import AuthForm from "@/components/auth/AuthForm";
-import { Helmet } from "react-helmet";
 
 const Auth = () => {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -58,4 +59,4 @@ const Auth = () => {
   );
 };
 
-export default Auth; 
+export default Auth;
