@@ -1,3 +1,4 @@
+
 import { useState, lazy, Suspense, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -54,25 +55,25 @@ export default function Header() {
 
   return (
     <header className={cn(
-      "sticky top-0 z-50 w-full bg-white transition-all duration-300",
-      scrolled ? "border-b border-gray-200 shadow-sm" : ""
+      "sticky top-0 z-50 w-full bg-nebPalette-lightGray transition-all duration-300",
+      scrolled ? "border-b border-nebPalette-beige shadow-sm" : ""
     )}>
       <div className="container flex items-center justify-between h-16 px-4 md:px-6 mx-auto">
         <Link to="/" className="flex items-center group transition-transform duration-300 hover:scale-105" aria-label="NEB Science Hub Home">
-          <div className="bg-nebPrimary mr-2 p-1 rounded text-white">
+          <div className="bg-nebPalette-navy mr-2 p-1 rounded text-white">
             <Bookmark className="h-5 w-5" aria-hidden="true" />
           </div>
           <div className="flex flex-col">
-            <span className="text-xl font-extrabold text-nebPrimary tracking-tight">
+            <span className="text-xl font-extrabold text-nebPalette-navy tracking-tight">
               NEB 
               <span className="relative">
                 Science
-                <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-nebPrimary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300" aria-hidden="true"></span>
+                <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-nebPalette-navy transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300" aria-hidden="true"></span>
               </span>
-              <span className="text-gray-700 font-bold"> Hub</span>
+              <span className="text-nebPalette-teal font-bold"> Hub</span>
             </span>
             {location.pathname === '/' && (
-              <span className="text-xs text-gray-500 -mt-1 font-medium tracking-wide">Your Science Resource Center</span>
+              <span className="text-xs text-nebPalette-teal -mt-1 font-medium tracking-wide">Your Science Resource Center</span>
             )}
           </div>
         </Link>
@@ -90,7 +91,7 @@ export default function Header() {
                 >
                   Home
                   {isActiveRoute('/') && (
-                    <span className="absolute -bottom-1 left-0 w-full h-1 bg-nebPrimary rounded-full"></span>
+                    <span className="absolute -bottom-1 left-0 w-full h-1 bg-nebPalette-red rounded-full"></span>
                   )}
                 </NavigationMenuLink>
               </Link>
@@ -104,7 +105,7 @@ export default function Header() {
               >
                 Subjects
                 {isActiveRoute('/subjects') && (
-                  <span className="absolute -bottom-1 left-0 w-full h-1 bg-nebPrimary rounded-full"></span>
+                  <span className="absolute -bottom-1 left-0 w-full h-1 bg-nebPalette-red rounded-full"></span>
                 )}
               </NavigationMenuTrigger>
               <Suspense fallback={<div className="p-4 text-center">Loading...</div>}>
@@ -117,18 +118,18 @@ export default function Header() {
                           to={`/subjects/${subject.id}`}
                           onClick={() => window.scrollTo(0, 0)}
                           className={cn(
-                            "flex items-start py-2 group border-b border-gray-100 hover:bg-gray-50 rounded-md px-2",
-                            isActiveRoute(`/subjects/${subject.id}`) && "bg-gray-50"
+                            "flex items-start py-2 group border-b border-nebPalette-beige hover:bg-nebPalette-lightGray rounded-md px-2",
+                            isActiveRoute(`/subjects/${subject.id}`) && "bg-nebPalette-lightGray"
                           )}
                         >
                           <div className="flex-1 min-w-0">
                             <p className={cn(
-                              "text-sm font-medium group-hover:text-nebPrimary transition-colors",
-                              isActiveRoute(`/subjects/${subject.id}`) ? "text-nebPrimary" : "text-gray-800"
+                              "text-sm font-medium group-hover:text-nebPalette-navy transition-colors",
+                              isActiveRoute(`/subjects/${subject.id}`) ? "text-nebPalette-navy" : "text-nebPalette-teal"
                             )}>
                               {subject.name}
                             </p>
-                            <p className="text-xs text-gray-500 truncate mt-0.5 pr-4">
+                            <p className="text-xs text-nebPalette-teal truncate mt-0.5 pr-4">
                               {subject.description}
                             </p>
                           </div>
@@ -142,18 +143,18 @@ export default function Header() {
                           to={`/subjects/${subject.id}`}
                           onClick={() => window.scrollTo(0, 0)}
                           className={cn(
-                            "flex items-start py-2 group border-b border-gray-100 hover:bg-gray-50 rounded-md px-2",
-                            isActiveRoute(`/subjects/${subject.id}`) && "bg-gray-50"
+                            "flex items-start py-2 group border-b border-nebPalette-beige hover:bg-nebPalette-lightGray rounded-md px-2",
+                            isActiveRoute(`/subjects/${subject.id}`) && "bg-nebPalette-lightGray"
                           )}
                         >
                           <div className="flex-1 min-w-0">
                             <p className={cn(
-                              "text-sm font-medium group-hover:text-nebPrimary transition-colors",
-                              isActiveRoute(`/subjects/${subject.id}`) ? "text-nebPrimary" : "text-gray-800"
+                              "text-sm font-medium group-hover:text-nebPalette-navy transition-colors",
+                              isActiveRoute(`/subjects/${subject.id}`) ? "text-nebPalette-navy" : "text-nebPalette-teal"
                             )}>
                               {subject.name}
                             </p>
-                            <p className="text-xs text-gray-500 truncate mt-0.5 pr-4">
+                            <p className="text-xs text-nebPalette-teal truncate mt-0.5 pr-4">
                               {subject.description}
                             </p>
                           </div>
@@ -174,7 +175,7 @@ export default function Header() {
                 >
                   PYQ
                   {isActiveRoute('/pyq') && (
-                    <span className="absolute -bottom-1 left-0 w-full h-1 bg-nebPrimary rounded-full"></span>
+                    <span className="absolute -bottom-1 left-0 w-full h-1 bg-nebPalette-red rounded-full"></span>
                   )}
                 </NavigationMenuLink>
               </Link>
@@ -189,7 +190,7 @@ export default function Header() {
                 >
                   About
                   {isActiveRoute('/about') && (
-                    <span className="absolute -bottom-1 left-0 w-full h-1 bg-nebPrimary rounded-full"></span>
+                    <span className="absolute -bottom-1 left-0 w-full h-1 bg-nebPalette-red rounded-full"></span>
                   )}
                 </NavigationMenuLink>
               </Link>
@@ -204,7 +205,7 @@ export default function Header() {
                 >
                   Contact
                   {isActiveRoute('/contact') && (
-                    <span className="absolute -bottom-1 left-0 w-full h-1 bg-nebPrimary rounded-full"></span>
+                    <span className="absolute -bottom-1 left-0 w-full h-1 bg-nebPalette-red rounded-full"></span>
                   )}
                 </NavigationMenuLink>
               </Link>
@@ -226,26 +227,26 @@ export default function Header() {
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="fixed inset-0 z-50 bg-white pt-16 px-4">
+          <div className="fixed inset-0 z-50 bg-nebPalette-lightGray pt-16 px-4">
             <nav className="space-y-3">
               <Link
                 to="/"
                 className={cn(
                   "mobile-nav-item pl-4",
-                  isActiveRoute('/') ? "mobile-nav-item-active" : "text-gray-600"
+                  isActiveRoute('/') ? "mobile-nav-item-active" : "text-nebPalette-teal"
                 )}
                 onClick={() => {
                   toggleMobileMenu();
                   window.scrollTo(0, 0);
                 }}
               >
-                <span className="bg-gray-50 p-1 rounded mr-2 text-nebPrimary">
+                <span className="bg-nebPalette-lightGray p-1 rounded mr-2 text-nebPalette-navy">
                   <Sparkles className="h-4 w-4 inline" aria-hidden="true" />
                 </span>
                 Home
               </Link>
               <div className="py-1">
-                <h3 className="text-lg font-medium mb-1 text-gray-800">Subjects</h3>
+                <h3 className="text-lg font-medium mb-1 text-nebPalette-navy">Subjects</h3>
                 <div className="ml-3 grid grid-cols-2 gap-x-2 gap-y-1 max-h-60 overflow-y-auto">
                   {subjects.map((subject) => (
                     <Link
@@ -253,7 +254,7 @@ export default function Header() {
                       to={`/subjects/${subject.id}`}
                       className={cn(
                         "mobile-nav-item pl-4",
-                        isActiveRoute(`/subjects/${subject.id}`) ? "mobile-nav-item-active" : "text-gray-600"
+                        isActiveRoute(`/subjects/${subject.id}`) ? "mobile-nav-item-active" : "text-nebPalette-teal"
                       )}
                       onClick={() => {
                         toggleMobileMenu();
@@ -269,7 +270,7 @@ export default function Header() {
                 to="/pyq"
                 className={cn(
                   "mobile-nav-item pl-4",
-                  isActiveRoute('/pyq') ? "mobile-nav-item-active" : "text-gray-600"
+                  isActiveRoute('/pyq') ? "mobile-nav-item-active" : "text-nebPalette-teal"
                 )}
                 onClick={() => {
                   toggleMobileMenu();
@@ -282,7 +283,7 @@ export default function Header() {
                 to="/about"
                 className={cn(
                   "mobile-nav-item pl-4",
-                  isActiveRoute('/about') ? "mobile-nav-item-active" : "text-gray-600"
+                  isActiveRoute('/about') ? "mobile-nav-item-active" : "text-nebPalette-teal"
                 )}
                 onClick={() => {
                   toggleMobileMenu();
@@ -295,7 +296,7 @@ export default function Header() {
                 to="/contact"
                 className={cn(
                   "mobile-nav-item pl-4", 
-                  isActiveRoute('/contact') ? "mobile-nav-item-active" : "text-gray-600"
+                  isActiveRoute('/contact') ? "mobile-nav-item-active" : "text-nebPalette-teal"
                 )}
                 onClick={() => {
                   toggleMobileMenu();

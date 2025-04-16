@@ -1,3 +1,4 @@
+
 import { useState, lazy, Suspense } from "react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -74,7 +75,7 @@ const Contact = () => {
       </Suspense>
       <main className="flex-1">
         {/* Header Banner */}
-        <section className="w-full bg-gradient-to-r from-nebBlue to-blue-700 py-12 text-white">
+        <section className="w-full bg-gradient-to-r from-nebPrimaryDark to-nebPrimary py-12 text-white">
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center text-center space-y-4">
               <h1 className="text-3xl md:text-4xl font-bold">Contact Us</h1>
@@ -85,28 +86,28 @@ const Contact = () => {
           </div>
         </section>
 
-        <section className="w-full py-12">
+        <section className="w-full py-12 bg-nebBackground">
           <div className="container px-4 md:px-6">
             <div className="grid grid-cols-1 md:grid-cols-2 md:gap-16 gap-8 max-w-5xl mx-auto md:relative">
               {/* Contact Information */}
               <div className="space-y-6 md:pr-8">
-                <h2 className="text-2xl font-bold">Get in Touch</h2>
-                <p className="text-gray-600">
+                <h2 className="text-2xl font-bold text-nebText">Get in Touch</h2>
+                <p className="text-nebText/80">
                   We value your feedback and inquiries. Use the form or contact details below to reach us.
                 </p>
 
                 <div className="space-y-6 mt-8">
-                  <Card className="border-t-4 border-t-blue-500 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                  <Card className="border-t-4 border-t-nebBlue transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
                     <CardContent className="p-6">
                       <div className="flex items-start space-x-4">
-                        <div className="bg-blue-100 p-3 rounded-full transition-transform duration-300 hover:scale-110">
-                          <Mail className="h-5 w-5 text-blue-500" />
+                        <div className="bg-nebPalette-lightGray p-3 rounded-full transition-transform duration-300 hover:scale-110">
+                          <Mail className="h-5 w-5 text-nebBlue" />
                         </div>
                         <div>
-                          <h3 className="font-medium">Email</h3>
+                          <h3 className="font-medium text-nebText">Email</h3>
                           <a 
                             href="mailto:aarabbashyal64@gmail.com" 
-                            className="text-sm text-gray-600 hover:text-nebBlue transition-colors duration-300 block flex items-center group"
+                            className="text-sm text-nebText/70 hover:text-nebBlue transition-colors duration-300 block flex items-center group"
                             aria-label="Send email to Aarab Bashyal"
                           >
                             <span>aarabbashyal64@gmail.com</span>
@@ -114,7 +115,7 @@ const Contact = () => {
                           </a>
                           <a 
                             href="mailto:pramiskunwar123@gmail.com" 
-                            className="text-sm text-gray-600 hover:text-nebBlue transition-colors duration-300 block flex items-center group"
+                            className="text-sm text-nebText/70 hover:text-nebBlue transition-colors duration-300 block flex items-center group"
                             aria-label="Send email to Pramis Kunwar"
                           >
                             <span>pramiskunwar123@gmail.com</span>
@@ -122,7 +123,7 @@ const Contact = () => {
                           </a>
                           <a 
                             href="mailto:pranishkhanal2@gmail.com" 
-                            className="text-sm text-gray-600 hover:text-nebBlue transition-colors duration-300 block flex items-center group"
+                            className="text-sm text-nebText/70 hover:text-nebBlue transition-colors duration-300 block flex items-center group"
                             aria-label="Send email to Pranish Khanal"
                           >
                             <span>pranishkhanal2@gmail.com</span>
@@ -130,7 +131,7 @@ const Contact = () => {
                           </a>
                           <a 
                             href="mailto:deepakpuri931@gmail.com" 
-                            className="text-sm text-gray-600 hover:text-nebBlue transition-colors duration-300 block flex items-center group"
+                            className="text-sm text-nebText/70 hover:text-nebBlue transition-colors duration-300 block flex items-center group"
                             aria-label="Send email to Deepak Puri"
                           >
                             <span>deepakpuri931@gmail.com</span>
@@ -141,60 +142,60 @@ const Contact = () => {
                     </CardContent>
                   </Card>
 
-                  <Card className="border-t-4 border-t-green-500 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                  <Card className="border-t-4 border-t-nebBlue transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
                     <CardContent className="p-6">
                       <div className="flex items-start space-x-4">
-                        <div className="bg-green-100 p-3 rounded-full transition-transform duration-300 hover:scale-110">
-                          <Phone className="h-5 w-5 text-green-500" />
+                        <div className="bg-nebPalette-lightGray p-3 rounded-full transition-transform duration-300 hover:scale-110">
+                          <Phone className="h-5 w-5 text-nebBlue" />
                         </div>
                         <div>
-                          <h3 className="font-medium">Phone</h3>
+                          <h3 className="font-medium text-nebText">Phone</h3>
                           <a 
                             href="tel:9847008892" 
-                            className="text-sm text-gray-600 hover:text-green-500 transition-colors duration-300 block flex items-center group"
+                            className="text-sm text-nebText/70 hover:text-nebBlue transition-colors duration-300 block flex items-center group"
                             aria-label="Call this number"
                           >
                             <span>9847008892</span>
-                            <span className="ml-2 text-green-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300">📞</span>
+                            <span className="ml-2 text-nebBlue opacity-0 group-hover:opacity-100 transition-opacity duration-300">📞</span>
                           </a>
                           <a 
                             href="tel:9866615675" 
-                            className="text-sm text-gray-600 hover:text-green-500 transition-colors duration-300 block flex items-center group"
+                            className="text-sm text-nebText/70 hover:text-nebBlue transition-colors duration-300 block flex items-center group"
                             aria-label="Call this number"
                           >
                             <span>9866615675</span>
-                            <span className="ml-2 text-green-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300">📞</span>
+                            <span className="ml-2 text-nebBlue opacity-0 group-hover:opacity-100 transition-opacity duration-300">📞</span>
                           </a>
                           <a 
                             href="tel:9805427945" 
-                            className="text-sm text-gray-600 hover:text-green-500 transition-colors duration-300 block flex items-center group"
+                            className="text-sm text-nebText/70 hover:text-nebBlue transition-colors duration-300 block flex items-center group"
                             aria-label="Call this number"
                           >
                             <span>9805427945</span>
-                            <span className="ml-2 text-green-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300">📞</span>
+                            <span className="ml-2 text-nebBlue opacity-0 group-hover:opacity-100 transition-opacity duration-300">📞</span>
                           </a>
                           <a 
                             href="tel:9767622650" 
-                            className="text-sm text-gray-600 hover:text-green-500 transition-colors duration-300 block flex items-center group"
+                            className="text-sm text-nebText/70 hover:text-nebBlue transition-colors duration-300 block flex items-center group"
                             aria-label="Call this number"
                           >
                             <span>9767622650</span>
-                            <span className="ml-2 text-green-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300">📞</span>
+                            <span className="ml-2 text-nebBlue opacity-0 group-hover:opacity-100 transition-opacity duration-300">📞</span>
                           </a>
                         </div>
                       </div>
                     </CardContent>
                   </Card>
 
-                  <Card className="border-t-4 border-t-purple-500 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                  <Card className="border-t-4 border-t-nebBlue transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
                     <CardContent className="p-6">
                       <div className="flex items-start space-x-4">
-                        <div className="bg-purple-100 p-3 rounded-full transition-transform duration-300 hover:scale-110">
-                          <MapPin className="h-5 w-5 text-purple-500" />
+                        <div className="bg-nebPalette-lightGray p-3 rounded-full transition-transform duration-300 hover:scale-110">
+                          <MapPin className="h-5 w-5 text-nebBlue" />
                         </div>
                         <div>
-                          <h3 className="font-medium">Address</h3>
-                          <p className="text-sm text-gray-600">
+                          <h3 className="font-medium text-nebText">Address</h3>
+                          <p className="text-sm text-nebText/70">
                             Manigram, Rupandehi<br />
                             Nepal
                           </p>
@@ -206,21 +207,21 @@ const Contact = () => {
               </div>
 
               {/* Divider visible only on desktop */}
-              <div className="hidden md:block absolute h-full w-px bg-gray-200 left-1/2 top-0 transform -translate-x-1/2 shadow-sm"></div>
+              <div className="hidden md:block absolute h-full w-px bg-nebPalette-beige left-1/2 top-0 transform -translate-x-1/2 shadow-sm"></div>
 
               {/* Contact Form */}
               <div className="md:pl-8">
                 <Card className="transition-all duration-300 hover:shadow-lg border-l-4 border-l-nebBlue">
                   <CardHeader>
-                    <CardTitle>Send a Message</CardTitle>
-                    <CardDescription>
+                    <CardTitle className="text-nebText">Send a Message</CardTitle>
+                    <CardDescription className="text-nebText/70">
                       Fill out the form below and we'll get back to you as soon as possible.
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
                     <form onSubmit={handleSubmit} className="space-y-4">
                       <div className="space-y-2">
-                        <label htmlFor="name" className="text-sm font-medium">
+                        <label htmlFor="name" className="text-sm font-medium text-nebText">
                           Full Name
                         </label>
                         <Input
@@ -230,12 +231,12 @@ const Contact = () => {
                           value={formState.name}
                           onChange={handleChange}
                           required
-                          className="transition-all duration-300 focus:ring-2 focus:ring-nebBlue focus:border-transparent"
+                          className="transition-all duration-300 focus:ring-2 focus:ring-nebBlue focus:border-transparent bg-nebBackground border-nebPalette-beige"
                         />
                       </div>
                       
                       <div className="space-y-2">
-                        <label htmlFor="email" className="text-sm font-medium">
+                        <label htmlFor="email" className="text-sm font-medium text-nebText">
                           Email
                         </label>
                         <Input
@@ -246,19 +247,19 @@ const Contact = () => {
                           value={formState.email}
                           onChange={handleChange}
                           required
-                          className="transition-all duration-300 focus:ring-2 focus:ring-nebBlue focus:border-transparent"
+                          className="transition-all duration-300 focus:ring-2 focus:ring-nebBlue focus:border-transparent bg-nebBackground border-nebPalette-beige"
                         />
                       </div>
                       
                       <div className="space-y-2">
-                        <label htmlFor="subject" className="text-sm font-medium">
+                        <label htmlFor="subject" className="text-sm font-medium text-nebText">
                           Subject
                         </label>
                         <Select
                           value={formState.subject}
                           onValueChange={handleSelectChange}
                         >
-                          <SelectTrigger className="transition-all duration-300 hover:border-nebBlue">
+                          <SelectTrigger className="transition-all duration-300 hover:border-nebBlue bg-nebBackground border-nebPalette-beige">
                             <SelectValue placeholder="Select a subject" />
                           </SelectTrigger>
                           <SelectContent>
@@ -272,7 +273,7 @@ const Contact = () => {
                       </div>
                       
                       <div className="space-y-2">
-                        <label htmlFor="message" className="text-sm font-medium">
+                        <label htmlFor="message" className="text-sm font-medium text-nebText">
                           Message
                         </label>
                         <Textarea
@@ -283,13 +284,13 @@ const Contact = () => {
                           value={formState.message}
                           onChange={handleChange}
                           required
-                          className="transition-all duration-300 focus:ring-2 focus:ring-nebBlue focus:border-transparent"
+                          className="transition-all duration-300 focus:ring-2 focus:ring-nebBlue focus:border-transparent bg-nebBackground border-nebPalette-beige"
                         />
                       </div>
                       
                       <Button 
                         type="submit" 
-                        className="w-full bg-nebBlue text-white hover:bg-blue-700 transition-all duration-300 hover:shadow-md transform hover:-translate-y-1"
+                        className="w-full bg-nebBlue text-white hover:bg-nebBlueDark transition-all duration-300 hover:shadow-md transform hover:-translate-y-1"
                       >
                         Send Message
                       </Button>

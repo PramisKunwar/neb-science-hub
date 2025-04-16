@@ -1,3 +1,4 @@
+
 import { type Config } from "tailwindcss"
 import { fontFamily } from "tailwindcss/defaultTheme"
 
@@ -50,18 +51,30 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // New brand colors
-        nebBlue: "hsl(var(--neb-blue))",
-        nebBlueDark: "hsl(var(--neb-blue-dark))",
-        nebAccent: "hsl(var(--neb-accent))",
-        nebBackground: "hsl(var(--neb-background))",
-        nebText: "hsl(var(--neb-text))",
+        // New color palette
+        nebPalette: {
+          lightGray: "#F1EFEC",
+          beige: "#D4C9BE",
+          navy: "#123458",
+          black: "#030303",
+          red: "#BF3952",
+          blue: "#30588C",
+          darkBlue: "#011526",
+          lightBlue: "#6093BF",
+          teal: "#254559",
+        },
+        // Updated brand colors with the new palette
+        nebBlue: "#30588C",
+        nebBlueDark: "#011526",
+        nebAccent: "#BF3952",
+        nebBackground: "#F1EFEC",
+        nebText: "#030303",
         // Updated color for the gradient effect
-        nebPrimary: "#42445A",
-        nebPrimaryLight: "#5D6080",
-        nebPrimaryDark: "#333342",
-        nebGradientStart: "#333342",
-        nebGradientEnd: "#5D6080",
+        nebPrimary: "#123458",
+        nebPrimaryLight: "#6093BF",
+        nebPrimaryDark: "#011526",
+        nebGradientStart: "#011526",
+        nebGradientEnd: "#30588C",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -135,7 +148,7 @@ export default {
         "slide-in": "slide-in 0.3s ease-out forwards"
       },
       backgroundImage: {
-        'neb-gradient': 'linear-gradient(135deg, #0A1E3D 0%, #274F9E 100%)',
+        'neb-gradient': 'linear-gradient(135deg, #011526 0%, #30588C 100%)',
       },
     },
   },
