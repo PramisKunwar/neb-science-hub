@@ -13,7 +13,7 @@ import PYQ from "./pages/PYQ";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
-import Profile from "./pages/Profile";
+import Profile from "./components/Profile";
 import Auth from "./pages/Auth";
 
 const queryClient = new QueryClient();
