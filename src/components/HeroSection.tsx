@@ -62,7 +62,7 @@ export default function HeroSection({ onExploreClick }: HeroSectionProps) {
           <div className="flex flex-col sm:flex-row gap-4 mt-2">
             <Button
               size="lg"
-              className="bg-nebPalette-red text-white hover:bg-nebPalette-red/90 border-2 border-nebPalette-red/80 shadow-lg hover:shadow-xl transform transition-all duration-300 hover:-translate-y-1 font-medium rounded-full px-8 group relative overflow-hidden"
+              className="bg-nebAccent text-white hover:bg-nebAccent/90 border-2 border-nebAccent/80 shadow-lg hover:shadow-xl transform transition-all duration-300 hover:-translate-y-1 font-medium rounded-full px-8 group relative overflow-hidden"
               onClick={onExploreClick}
             >
               <span className="relative z-10 flex items-center gap-2">
@@ -70,7 +70,7 @@ export default function HeroSection({ onExploreClick }: HeroSectionProps) {
                 <span>Explore Subjects</span>
                 <ArrowRight className="h-5 w-5 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
               </span>
-              <span className="absolute inset-0 bg-gradient-to-r from-nebPalette-red/90 to-nebPalette-red/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+              <span className="absolute inset-0 bg-gradient-to-r from-nebAccent/90 to-nebAccent/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
             </Button>
             
             <Button
