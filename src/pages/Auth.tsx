@@ -5,7 +5,8 @@ import AuthForm from "@/components/auth/AuthForm";
 // @ts-ignore
 import { Helmet } from "react-helmet-async";
 
-const Auth = () => {
+// Named export
+export const Auth = () => {
   const [isSignUp, setIsSignUp] = useState(false);
 
   return (
@@ -59,4 +60,5 @@ const Auth = () => {
   );
 };
 
-export default Auth;
+// Default export
+export default Auth; 
