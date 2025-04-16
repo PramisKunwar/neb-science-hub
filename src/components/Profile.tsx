@@ -376,7 +376,7 @@ const Profile = () => {
                              'No description available'}
                           </p>
                           <div className="mt-2 flex items-center text-xs text-gray-500">
-                            <Badge variant="outline" size="sm" className="mr-2">
+                            <Badge variant="outline" className="mr-2">
                               {bookmark.material_type === 'note' ? 'Notes' : 
                                bookmark.material_type === 'question_bank' ? 'Question Bank' : 
                                bookmark.material_type === 'exam_paper' ? 'Exam Paper' : 
