@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -7,6 +8,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
+import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 import { 
   getCurrentUser, 
   signOut, 
@@ -225,6 +227,15 @@ const Profile = () => {
             <Separator />
             
             <CardContent className="pt-6">
+              {message && (
+                <Alert className={`mb-6 ${message.type === 'error' ? 'border-destructive' : 'border-green-500'}`}>
+                  <AlertTitle>{message.type === 'error' ? 'Error' : 'Success'}</AlertTitle>
+                  <AlertDescription>
+                    {message.text}
+                  </AlertDescription>
+                </Alert>
+              )}
+
               {editMode ? (
                 <div className="space-y-4">
                   <div className="grid grid-cols-2 gap-4">
@@ -290,14 +301,6 @@ const Profile = () => {
                       </>
                     )}
                   </Button>
-                  
-                  {message && (
-                    <div className={`mt-4 p-3 rounded-md ${
-                      message.type === 'error' ? 'bg-red-50 text-red-800' : 'bg-green-50 text-green-800'
-                    }`}>
-                      <p className="text-sm">{message.text}</p>
-                    </div>
-                  )}
                 </div>
               ) : (
                 <div className="space-y-6">
@@ -328,7 +331,7 @@ const Profile = () => {
                     <h3 className="text-sm font-medium text-gray-500">Interests</h3>
                     <div className="mt-2 flex flex-wrap gap-2">
                       {[...new Set(bookmarks.map(b => b.material_type))].map((type) => (
-                        <Badge key={type} variant="outline" className="bg-nebBackground">
+                        <Badge key={type} className="bg-nebBackground px-3 py-1">
                           {type === 'note' ? 'Notes' : 
                            type === 'question_bank' ? 'Question Banks' : 
                            type === 'exam_paper' ? 'Exam Papers' : type}
@@ -413,4 +416,4 @@ const Profile = () => {
   );
 };
 
-export default Profile; 
+export default Profile;
