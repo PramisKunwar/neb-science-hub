@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -19,14 +20,14 @@ const Auth = () => {
 
       <Header />
       
-      <main className="flex-1 bg-gray-50">
+      <main className="flex-1 bg-nebBackground">
         <div className="mx-auto max-w-md px-4 py-12 sm:px-6 lg:px-8">
-          <div className="rounded-lg border border-gray-200 bg-white p-8 shadow-sm">
+          <div className="rounded-lg border border-secondary bg-nebBackground p-8 shadow-sm">
             <div className="mb-6 text-center">
-              <h1 className="text-3xl font-bold text-gray-900">
+              <h1 className="text-3xl font-bold text-nebText">
                 {isSignUp ? "Create an Account" : "Welcome Back"}
               </h1>
-              <p className="mt-2 text-gray-600">
+              <p className="mt-2 text-nebText opacity-80">
                 {isSignUp 
                   ? "Join NEB Science Hub to access exclusive content" 
                   : "Sign in to continue your learning journey"}
@@ -38,13 +39,13 @@ const Auth = () => {
               toggleMode={() => setIsSignUp(!isSignUp)} 
             />
             
-            <div className="mt-6 text-center text-sm text-gray-500">
+            <div className="mt-6 text-center text-sm text-nebText opacity-75">
               {isSignUp 
                 ? "Already have an account?" 
                 : "Don't have an account yet?"} 
               <button 
                 onClick={() => setIsSignUp(!isSignUp)}
-                className="ml-1 font-medium text-blue-600 hover:text-blue-800"
+                className="ml-1 font-medium text-nebPrimary hover:text-nebPrimary/80"
               >
                 {isSignUp ? "Sign in" : "Sign up"}
               </button>
@@ -58,4 +59,4 @@ const Auth = () => {
   );
 };
 
-export default Auth; 
+export default Auth;
