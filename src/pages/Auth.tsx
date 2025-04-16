@@ -2,7 +2,8 @@ import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import AuthForm from "@/components/auth/AuthForm";
-import { Helmet } from "react-helmet";
+// @ts-ignore
+import { Helmet } from "react-helmet-async";
 
 const Auth = () => {
   const [isSignUp, setIsSignUp] = useState(false);
