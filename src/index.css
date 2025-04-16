@@ -6,51 +6,44 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 40 9% 94%; /* #F1EFEC */
+    --foreground: 0 0% 1%; /* #030303 */
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 40 9% 94%; /* #F1EFEC */
+    --card-foreground: 0 0% 1%; /* #030303 */
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 40 9% 94%; /* #F1EFEC */
+    --popover-foreground: 0 0% 1%; /* #030303 */
 
-    --primary: 230 18% 31%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 209 64% 21%; /* #123458 */
+    --primary-foreground: 40 9% 94%; /* #F1EFEC */
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 230 18% 31%;
+    --secondary: 29 17% 79%; /* #D4C9BE */
+    --secondary-foreground: 209 64% 21%; /* #123458 */
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 29 17% 79%; /* #D4C9BE */
+    --muted-foreground: 209 33% 25%; /* #254559 */
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 230 18% 31%;
+    --accent: 29 17% 79%; /* #D4C9BE */
+    --accent-foreground: 209 64% 21%; /* #123458 */
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 347 53% 49%; /* #BF3952 */
+    --destructive-foreground: 40 9% 94%; /* #F1EFEC */
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 230 18% 31%;
+    --border: 29 17% 79%; /* #D4C9BE */
+    --input: 29 17% 79%; /* #D4C9BE */
+    --ring: 209 64% 21%; /* #123458 */
 
     --radius: 0.5rem;
 
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-background: 40 9% 94%; /* #F1EFEC */
+    --sidebar-foreground: 209 33% 25%; /* #254559 */
+    --sidebar-primary: 209 64% 21%; /* #123458 */
+    --sidebar-primary-foreground: 40 9% 94%; /* #F1EFEC */
+    --sidebar-accent: 29 17% 79%; /* #D4C9BE */
+    --sidebar-accent-foreground: 209 64% 21%; /* #123458 */
+    --sidebar-border: 29 17% 79%; /* #D4C9BE */
+    --sidebar-ring: 209 49% 56%; /* #6093BF */
     
     /* New variables for consistent spacing */
     --space-1: 0.25rem;
@@ -64,49 +57,50 @@
     --space-24: 6rem;
     
     /* Brand colors updated to new scheme */
-    --neb-blue: 230 18% 31%;
-    --neb-blue-dark: 230 18% 25%;
-    --neb-accent: 35 100% 50%;
-    --neb-background: 0 0% 100%;
-    --neb-text: 230 18% 31%;
+    --neb-blue: 213 50% 37%; /* #30588C */
+    --neb-blue-dark: 208 92% 8%; /* #011526 */
+    --neb-accent: 347 53% 49%; /* #BF3952 */
+    --neb-background: 40 9% 94%; /* #F1EFEC */
+    --neb-text: 0 0% 1%; /* #030303 */
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: 208 92% 8%; /* #011526 */
+    --foreground: 40 9% 94%; /* #F1EFEC */
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 208 92% 8%; /* #011526 */
+    --card-foreground: 40 9% 94%; /* #F1EFEC */
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 208 92% 8%; /* #011526 */
+    --popover-foreground: 40 9% 94%; /* #F1EFEC */
 
-    --primary: 230 18% 70%;
-    --primary-foreground: 230 18% 20%;
+    --primary: 209 49% 56%; /* #6093BF */
+    --primary-foreground: 208 92% 8%; /* #011526 */
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 209 33% 25%; /* #254559 */
+    --secondary-foreground: 40 9% 94%; /* #F1EFEC */
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 209 33% 25%; /* #254559 */
+    --muted-foreground: 29 17% 79%; /* #D4C9BE */
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 209 33% 25%; /* #254559 */
+    --accent-foreground: 40 9% 94%; /* #F1EFEC */
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 347 53% 49%; /* #BF3952 */
+    --destructive-foreground: 40 9% 94%; /* #F1EFEC */
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --border: 209 33% 25%; /* #254559 */
+    --input: 209 33% 25%; /* #254559 */
+    --ring: 29 17% 79%; /* #D4C9BE */
+    
+    --sidebar-background: 208 92% 8%; /* #011526 */
+    --sidebar-foreground: 40 9% 94%; /* #F1EFEC */
+    --sidebar-primary: 209 49% 56%; /* #6093BF */
+    --sidebar-primary-foreground: 0 0% 100%; /* #FFFFFF */
+    --sidebar-accent: 209 33% 25%; /* #254559 */
+    --sidebar-accent-foreground: 40 9% 94%; /* #F1EFEC */
+    --sidebar-border: 209 33% 25%; /* #254559 */
+    --sidebar-ring: 209 49% 56%; /* #6093BF */
   }
 }
 
@@ -262,12 +256,12 @@ html {
 }
 
 .nav-item-active {
-  @apply text-nebPrimary font-semibold bg-gray-100 rounded;
+  @apply text-nebPrimary font-semibold bg-nebPalette-lightGray rounded;
 }
 
 .nav-item-active::after {
   content: '';
-  @apply absolute bottom-0 left-0 w-full h-1 bg-nebPrimary transform scale-x-100 transition-transform duration-300;
+  @apply absolute bottom-0 left-0 w-full h-1 bg-nebAccent transform scale-x-100 transition-transform duration-300;
 }
 
 /* Mobile nav styles - Enhanced for clarity */
@@ -276,10 +270,10 @@ html {
 }
 
 .mobile-nav-item-active {
-  @apply text-nebPrimary font-semibold bg-gray-100 pl-4 rounded;
+  @apply text-nebPrimary font-semibold bg-nebPalette-lightGray pl-4 rounded;
 }
 
 .mobile-nav-item-active::before {
   content: '';
-  @apply absolute left-0 top-0 h-full w-2 bg-nebPrimary rounded-r;
+  @apply absolute left-0 top-0 h-full w-2 bg-nebAccent rounded-r;
 }

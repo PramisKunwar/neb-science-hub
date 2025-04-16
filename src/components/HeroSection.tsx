@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { ArrowRight, BookOpen } from "lucide-react";
 import { useState, useEffect } from "react";
@@ -51,7 +52,7 @@ export default function HeroSection({ onExploreClick }: HeroSectionProps) {
         >
           <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tighter leading-tight mb-2">
             <span className="block">Grade 11 Science Notes</span>
-            <span className="text-blue-200 text-2xl md:text-3xl font-medium mt-2 block">Comprehensive Resources for NEB Students</span>
+            <span className="text-nebPalette-beige text-2xl md:text-3xl font-medium mt-2 block">Comprehensive Resources for NEB Students</span>
           </h1>
           
           <p className="text-lg md:text-xl text-gray-100 max-w-[700px] leading-relaxed">
@@ -61,7 +62,7 @@ export default function HeroSection({ onExploreClick }: HeroSectionProps) {
           <div className="flex flex-col sm:flex-row gap-4 mt-2">
             <Button
               size="lg"
-              className="bg-amber-500 text-white hover:bg-amber-600 border-2 border-amber-400 shadow-lg hover:shadow-xl transform transition-all duration-300 hover:-translate-y-1 font-medium rounded-full px-8 group relative overflow-hidden"
+              className="bg-nebPalette-red text-white hover:bg-nebPalette-red/90 border-2 border-nebPalette-red/80 shadow-lg hover:shadow-xl transform transition-all duration-300 hover:-translate-y-1 font-medium rounded-full px-8 group relative overflow-hidden"
               onClick={onExploreClick}
             >
               <span className="relative z-10 flex items-center gap-2">
@@ -69,7 +70,7 @@ export default function HeroSection({ onExploreClick }: HeroSectionProps) {
                 <span>Explore Subjects</span>
                 <ArrowRight className="h-5 w-5 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
               </span>
-              <span className="absolute inset-0 bg-gradient-to-r from-amber-600 to-amber-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+              <span className="absolute inset-0 bg-gradient-to-r from-nebPalette-red/90 to-nebPalette-red/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
             </Button>
             
             <Button
@@ -87,7 +88,7 @@ export default function HeroSection({ onExploreClick }: HeroSectionProps) {
               <button 
                 key={subject.id}
                 onClick={() => handleSubjectClick(subject.id)}
-                className="bg-white/20 px-3 py-1 rounded-full backdrop-blur-sm hover:bg-white/30 transition-all duration-200 transform hover:scale-105 text-sm"
+                className="bg-nebPalette-teal/40 px-3 py-1 rounded-full backdrop-blur-sm hover:bg-nebPalette-teal/60 transition-all duration-200 transform hover:scale-105 text-sm"
               >
                 {subject.name}
               </button>
