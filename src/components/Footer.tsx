@@ -1,3 +1,4 @@
+
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Facebook, Instagram, Mail, Send, Youtube } from "lucide-react";
@@ -5,9 +6,7 @@ import TikTokIcon from "@/components/ui/icons/TikTokIcon";
 import { Link } from "react-router-dom";
 import { Separator } from "@/components/ui/separator";
 import { useState, useRef, useEffect, lazy, Suspense } from "react";
-
-// Lazy-load heavy components if needed in the future
-// const SomeHeavyComponent = lazy(() => import("@/components/SomeHeavyComponent"));
+import { useToast } from "@/components/ui/use-toast";
 
 // Define color categories for different sections
 const colors = {
@@ -35,6 +34,7 @@ export default function Footer() {
   const footerRef = useRef<HTMLElement>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+  const { toast } = useToast();
 
   // Detect when footer comes into view for animation
   useEffect(() => {
@@ -61,12 +61,50 @@ export default function Footer() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!emailInput) {
+      toast({
+        title: "Error",
+        description: "Please enter your email address.",
+        variant: "destructive",
+      });
+      return;
+    }
+    
+    // Simple email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(emailInput)) {
+      toast({
+        title: "Error",
+        description: "Please enter a valid email address.",
+        variant: "destructive",
+      });
+      return;
+    }
+    
     setIsSubmitting(true);
     
-    // Simulate API call
     try {
-      // In a real app, this would be an API call
-      await new Promise(resolve => setTimeout(resolve, 800));
+      const response = await fetch("https://laurvehulnkfxmmdbodf.supabase.co/functions/v1/handle-subscription", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: emailInput,
+        }),
+      });
+
+      const result = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(result.message || "Failed to subscribe");
+      }
+
+      toast({
+        title: "Subscription Successful!",
+        description: result.message || "You have successfully subscribed to our updates.",
+      });
+      
       setSubmitSuccess(true);
       setEmailInput(""); // Clear input on success
       
@@ -74,8 +112,13 @@ export default function Footer() {
       setTimeout(() => {
         setSubmitSuccess(false);
       }, 3000);
-    } catch (error) {
-      console.error("Error submitting newsletter form:", error);
+    } catch (error: any) {
+      console.error("Error subscribing:", error);
+      toast({
+        title: "Error",
+        description: error.message || "Something went wrong. Please try again.",
+        variant: "destructive",
+      });
     } finally {
       setIsSubmitting(false);
     }

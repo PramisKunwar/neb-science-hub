@@ -1,3 +1,4 @@
+
 import { useState, lazy, Suspense } from "react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -18,6 +19,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { supabase } from "@/integrations/supabase/client";
 
 // Lazy-loaded components
 const Header = lazy(() => import("@/components/Header"));
@@ -30,41 +36,137 @@ const LoadingFallback = () => (
   </div>
 );
 
+// Contact form schema
+const contactFormSchema = z.object({
+  name: z.string().min(2, { message: "Name must be at least 2 characters." }),
+  email: z.string().email({ message: "Please enter a valid email address." }),
+  subject: z.string().min(1, { message: "Please select a subject." }),
+  message: z.string().min(10, { message: "Message must be at least 10 characters." }),
+});
+
+// Subscription form schema
+const subscriptionSchema = z.object({
+  email: z.string().email({ message: "Please enter a valid email address." }),
+});
+
 const Contact = () => {
   const { toast } = useToast();
-  const [formState, setFormState] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-  });
+  const [submitting, setSubmitting] = useState(false);
+  const [subscribing, setSubscribing] = useState(false);
+  const [subscriptionEmail, setSubscriptionEmail] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("Form submitted:", formState);
-    // In a real app, we would send this data to a server
-    
-    toast({
-      title: "Message Sent!",
-      description: "Thank you for contacting us. We'll get back to you soon.",
-    });
-    
-    // Reset form
-    setFormState({
+  // Initialize form with react-hook-form
+  const contactForm = useForm<z.infer<typeof contactFormSchema>>({
+    resolver: zodResolver(contactFormSchema),
+    defaultValues: {
       name: "",
       email: "",
       subject: "",
       message: "",
-    });
+    },
+  });
+
+  // Handle contact form submission
+  const handleSubmitContactForm = async (values: z.infer<typeof contactFormSchema>) => {
+    setSubmitting(true);
+    try {
+      const response = await fetch("https://laurvehulnkfxmmdbodf.supabase.co/functions/v1/handle-contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: values.name,
+          email: values.email,
+          subject: values.subject,
+          message: values.message,
+        }),
+      });
+
+      const result = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(result.message || "Failed to submit form");
+      }
+
+      toast({
+        title: "Message Sent!",
+        description: result.message || "Thank you for contacting us. We'll get back to you soon.",
+      });
+      
+      // Reset form
+      contactForm.reset();
+    } catch (error: any) {
+      console.error("Error submitting form:", error);
+      toast({
+        title: "Error",
+        description: error.message || "Something went wrong. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setSubmitting(false);
+    }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormState(prev => ({ ...prev, [name]: value }));
-  };
+  // Handle newsletter subscription
+  const handleSubscription = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!subscriptionEmail) {
+      toast({
+        title: "Error",
+        description: "Please enter your email address.",
+        variant: "destructive",
+      });
+      return;
+    }
+    
+    // Simple email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(subscriptionEmail)) {
+      toast({
+        title: "Error",
+        description: "Please enter a valid email address.",
+        variant: "destructive",
+      });
+      return;
+    }
+    
+    setSubscribing(true);
+    try {
+      const response = await fetch("https://laurvehulnkfxmmdbodf.supabase.co/functions/v1/handle-subscription", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: subscriptionEmail,
+        }),
+      });
 
-  const handleSelectChange = (value: string) => {
-    setFormState(prev => ({ ...prev, subject: value }));
+      const result = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(result.message || "Failed to subscribe");
+      }
+
+      toast({
+        title: "Subscription Successful!",
+        description: result.message || "You have successfully subscribed to our updates.",
+      });
+      
+      // Reset subscription email
+      setSubscriptionEmail("");
+    } catch (error: any) {
+      console.error("Error subscribing:", error);
+      toast({
+        title: "Error",
+        description: error.message || "Something went wrong. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setSubscribing(false);
+    }
   };
 
   return (
@@ -218,82 +320,123 @@ const Contact = () => {
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <form onSubmit={handleSubmit} className="space-y-4">
-                      <div className="space-y-2">
-                        <label htmlFor="name" className="text-sm font-medium text-nebText">
-                          Full Name
-                        </label>
-                        <Input
-                          id="name"
+                    <Form {...contactForm}>
+                      <form onSubmit={contactForm.handleSubmit(handleSubmitContactForm)} className="space-y-4">
+                        <FormField
+                          control={contactForm.control}
                           name="name"
-                          placeholder="Your name"
-                          value={formState.name}
-                          onChange={handleChange}
-                          required
-                          className="transition-all duration-300 focus:ring-2 focus:ring-nebBlue focus:border-transparent bg-nebBackground border-nebPalette-beige"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel htmlFor="name" className="text-sm font-medium text-nebText">
+                                Full Name
+                              </FormLabel>
+                              <FormControl>
+                                <Input
+                                  id="name"
+                                  placeholder="Your name"
+                                  className="transition-all duration-300 focus:ring-2 focus:ring-nebBlue focus:border-transparent bg-nebBackground border-nebPalette-beige"
+                                  {...field}
+                                  disabled={submitting}
+                                />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
                         />
-                      </div>
-                      
-                      <div className="space-y-2">
-                        <label htmlFor="email" className="text-sm font-medium text-nebText">
-                          Email
-                        </label>
-                        <Input
-                          id="email"
+                        
+                        <FormField
+                          control={contactForm.control}
                           name="email"
-                          type="email"
-                          placeholder="your.email@example.com"
-                          value={formState.email}
-                          onChange={handleChange}
-                          required
-                          className="transition-all duration-300 focus:ring-2 focus:ring-nebBlue focus:border-transparent bg-nebBackground border-nebPalette-beige"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel htmlFor="email" className="text-sm font-medium text-nebText">
+                                Email
+                              </FormLabel>
+                              <FormControl>
+                                <Input
+                                  id="email"
+                                  type="email"
+                                  placeholder="your.email@example.com"
+                                  className="transition-all duration-300 focus:ring-2 focus:ring-nebBlue focus:border-transparent bg-nebBackground border-nebPalette-beige"
+                                  {...field}
+                                  disabled={submitting}
+                                />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
                         />
-                      </div>
-                      
-                      <div className="space-y-2">
-                        <label htmlFor="subject" className="text-sm font-medium text-nebText">
-                          Subject
-                        </label>
-                        <Select
-                          value={formState.subject}
-                          onValueChange={handleSelectChange}
-                        >
-                          <SelectTrigger className="transition-all duration-300 hover:border-nebBlue bg-nebBackground border-nebPalette-beige">
-                            <SelectValue placeholder="Select a subject" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="general">General Inquiry</SelectItem>
-                            <SelectItem value="support">Technical Support</SelectItem>
-                            <SelectItem value="feedback">Feedback</SelectItem>
-                            <SelectItem value="content">Content Request</SelectItem>
-                            <SelectItem value="other">Other</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-                      
-                      <div className="space-y-2">
-                        <label htmlFor="message" className="text-sm font-medium text-nebText">
-                          Message
-                        </label>
-                        <Textarea
-                          id="message"
+                        
+                        <FormField
+                          control={contactForm.control}
+                          name="subject"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel htmlFor="subject" className="text-sm font-medium text-nebText">
+                                Subject
+                              </FormLabel>
+                              <FormControl>
+                                <Select
+                                  onValueChange={field.onChange}
+                                  defaultValue={field.value}
+                                  disabled={submitting}
+                                >
+                                  <SelectTrigger className="transition-all duration-300 hover:border-nebBlue bg-nebBackground border-nebPalette-beige">
+                                    <SelectValue placeholder="Select a subject" />
+                                  </SelectTrigger>
+                                  <SelectContent>
+                                    <SelectItem value="general">General Inquiry</SelectItem>
+                                    <SelectItem value="support">Technical Support</SelectItem>
+                                    <SelectItem value="feedback">Feedback</SelectItem>
+                                    <SelectItem value="content">Content Request</SelectItem>
+                                    <SelectItem value="other">Other</SelectItem>
+                                  </SelectContent>
+                                </Select>
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                        
+                        <FormField
+                          control={contactForm.control}
                           name="message"
-                          placeholder="Your message..."
-                          rows={5}
-                          value={formState.message}
-                          onChange={handleChange}
-                          required
-                          className="transition-all duration-300 focus:ring-2 focus:ring-nebBlue focus:border-transparent bg-nebBackground border-nebPalette-beige"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel htmlFor="message" className="text-sm font-medium text-nebText">
+                                Message
+                              </FormLabel>
+                              <FormControl>
+                                <Textarea
+                                  id="message"
+                                  placeholder="Your message..."
+                                  rows={5}
+                                  className="transition-all duration-300 focus:ring-2 focus:ring-nebBlue focus:border-transparent bg-nebBackground border-nebPalette-beige"
+                                  {...field}
+                                  disabled={submitting}
+                                />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
                         />
-                      </div>
-                      
-                      <Button 
-                        type="submit" 
-                        className="w-full bg-nebBlue text-white hover:bg-nebBlueDark transition-all duration-300 hover:shadow-md transform hover:-translate-y-1"
-                      >
-                        Send Message
-                      </Button>
-                    </form>
+                        
+                        <Button 
+                          type="submit" 
+                          className="w-full bg-nebBlue text-white hover:bg-nebBlueDark transition-all duration-300 hover:shadow-md transform hover:-translate-y-1"
+                          disabled={submitting}
+                        >
+                          {submitting ? (
+                            <>
+                              <div className="h-4 w-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
+                              Sending...
+                            </>
+                          ) : (
+                            'Send Message'
+                          )}
+                        </Button>
+                      </form>
+                    </Form>
                   </CardContent>
                 </Card>
               </div>
