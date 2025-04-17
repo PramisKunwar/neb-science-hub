@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -22,12 +21,12 @@ import NotFound from "./pages/NotFound";
 import Auth from "./pages/Auth";
 import Profile from "./components/Profile";
 
-// Create Query Client with caching configuration
+// Create Query Client with updated caching configuration
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       staleTime: 5 * 60 * 1000, // Data considered fresh for 5 minutes
-      cacheTime: 30 * 60 * 1000, // Cache kept for 30 minutes
+      gcTime: 30 * 60 * 1000, // Cache kept for 30 minutes (replaced cacheTime)
       retry: 3, // Retry failed requests 3 times
       refetchOnWindowFocus: false, // Don't refetch when window regains focus
     },
