@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -9,19 +10,16 @@ import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 import { 
+  getCurrentUser, 
   signOut, 
   getUserProfile, 
   updateUserProfile, 
-  getUserBookmarks,
-  sanitizeInput
+  getUserBookmarks 
 } from '@/lib/supabase';
-import { useAuth } from '@/hooks/useAuth';
 import { CalendarDays, BookMarked, UserCircle, PenSquare, Loader2, Save, LogOut } from 'lucide-react';
 
 const Profile = () => {
-  // Use the new auth hook instead of manual fetching
-  const { user } = useAuth();
-  
+  const [user, setUser] = useState<any>(null);
   const [profile, setProfile] = useState<any>(null);
   const [bookmarks, setBookmarks] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
@@ -38,52 +36,46 @@ const Profile = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        if (!user) {
-          setLoading(false);
-          return;
-        }
+        const currentUser = await getCurrentUser();
         
-        // Fetch user profile data with proper error handling
-        const { data: profileData, error: profileError } = await getUserProfile(user.id);
-        
-        if (profileError) {
-          setMessage({ type: 'error', text: profileError.message });
-        } else if (profileData) {
-          setProfile(profileData);
-          // Initialize form with profile data (sanitize inputs from database)
-          setFormData({
-            fullName: profileData.full_name || '',
-            bio: profileData.bio || '',
-            school: profileData.school || '',
-            grade: profileData.grade || ''
-          });
-        }
-        
-        // Fetch user bookmarks with proper error handling
-        const { data: bookmarksData, error: bookmarksError } = await getUserBookmarks(user.id);
-        if (bookmarksError) {
-          console.error("Error fetching bookmarks:", bookmarksError);
-        } else if (bookmarksData) {
-          setBookmarks(bookmarksData);
+        if (currentUser) {
+          setUser(currentUser);
+          
+          // Fetch user profile data
+          const { data: profileData } = await getUserProfile(currentUser.id);
+          
+          if (profileData) {
+            setProfile(profileData);
+            // Initialize form with profile data
+            setFormData({
+              fullName: profileData.full_name || '',
+              bio: profileData.bio || '',
+              school: profileData.school || '',
+              grade: profileData.grade || ''
+            });
+          }
+          
+          // Fetch user bookmarks
+          const { data: bookmarksData } = await getUserBookmarks(currentUser.id);
+          if (bookmarksData) {
+            setBookmarks(bookmarksData);
+          }
         }
       } catch (error) {
         console.error("Error fetching user data:", error);
-        setMessage({ type: 'error', text: 'Failed to load profile data. Please try again.' });
       } finally {
         setLoading(false);
       }
     };
     
     fetchUserData();
-  }, [user]);
+  }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    // Sanitize input as user types
-    const sanitizedValue = sanitizeInput(value);
     setFormData({
       ...formData,
-      [name]: sanitizedValue
+      [name]: value
     });
   };
 
@@ -94,13 +86,6 @@ const Profile = () => {
     setMessage(null);
     
     try {
-      // Additional validation
-      if (formData.fullName.length > 50) {
-        setMessage({ type: 'error', text: 'Name must be 50 characters or less' });
-        setUpdating(false);
-        return;
-      }
-      
       const { error } = await updateUserProfile(user.id, {
         full_name: formData.fullName,
         bio: formData.bio,
@@ -140,11 +125,8 @@ const Profile = () => {
   };
 
   const handleSignOut = async () => {
-    try {
-      await signOut();
-    } catch (error) {
-      console.error("Error signing out:", error);
-    }
+    await signOut();
+    window.location.href = '/';
   };
 
   if (loading) {
