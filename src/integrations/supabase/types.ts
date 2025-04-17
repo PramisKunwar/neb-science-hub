@@ -9,6 +9,156 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      bookmark_tags: {
+        Row: {
+          id: string
+          name: string
+          user_id: string
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          name: string
+          user_id: string
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          name?: string
+          user_id?: string
+          created_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bookmark_tags_user_id_fkey"
+            columns: ["user_id"]
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      bookmarks: {
+        Row: {
+          id: string
+          user_id: string
+          content_type: string
+          content_id: string
+          title: string
+          description: string | null
+          url: string | null
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          user_id: string
+          content_type: string
+          content_id: string
+          title: string
+          description?: string | null
+          url?: string | null
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          user_id?: string
+          content_type?: string
+          content_id?: string
+          title?: string
+          description?: string | null
+          url?: string | null
+          created_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bookmarks_user_id_fkey"
+            columns: ["user_id"]
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      bookmarks_tags: {
+        Row: {
+          bookmark_id: string
+          tag_id: string
+        }
+        Insert: {
+          bookmark_id: string
+          tag_id: string
+        }
+        Update: {
+          bookmark_id?: string
+          tag_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bookmarks_tags_bookmark_id_fkey"
+            columns: ["bookmark_id"]
+            referencedRelation: "bookmarks"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "bookmarks_tags_tag_id_fkey"
+            columns: ["tag_id"]
+            referencedRelation: "bookmark_tags"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      contact_messages: {
+        Row: {
+          id: string
+          full_name: string
+          email: string
+          subject: string
+          message: string
+          created_at: string
+          processed: boolean
+        }
+        Insert: {
+          id?: string
+          full_name: string
+          email: string
+          subject: string
+          message: string
+          created_at?: string
+          processed?: boolean
+        }
+        Update: {
+          id?: string
+          full_name?: string
+          email?: string
+          subject?: string
+          message?: string
+          created_at?: string
+          processed?: boolean
+        }
+        Relationships: []
+      }
+      newsletter_subscriptions: {
+        Row: {
+          id: string
+          email: string
+          created_at: string
+          confirmed: boolean
+          confirmation_token: string
+        }
+        Insert: {
+          id?: string
+          email: string
+          created_at?: string
+          confirmed?: boolean
+          confirmation_token?: string
+        }
+        Update: {
+          id?: string
+          email?: string
+          created_at?: string
+          confirmed?: boolean
+          confirmation_token?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -41,6 +191,13 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      check_rate_limit: {
+        Args: {
+          ip_address: string
+          action_type: string
+        }
+        Returns: boolean
+      }
       is_authenticated: {
         Args: Record<PropertyKey, never>
         Returns: boolean

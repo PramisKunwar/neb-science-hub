@@ -1,7 +1,7 @@
 import { useState, useEffect, createContext, useContext, ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from "@/integrations/supabase/client";
-import { useToast } from "@/hooks/use-toast";
+import { toast } from "sonner";
 import { Session, User, AuthError } from "@supabase/supabase-js";
 
 interface AuthContextType {
@@ -22,7 +22,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [session, setSession] = useState<Session | null>(null);
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
-  const { toast } = useToast();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -64,15 +63,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     });
 
     if (!error) {
-      toast({
-        title: "Verification email sent",
-        description: "Please check your email to verify your account.",
+      toast.success("Verification email sent", {
+        description: "Please check your email to verify your account."
       });
     } else {
-      toast({
-        variant: "destructive",
-        title: "Registration failed",
-        description: error.message,
+      toast.error("Registration failed", {
+        description: error.message
       });
     }
     
@@ -86,16 +82,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     });
 
     if (!error) {
-      toast({
-        title: "Login successful",
-        description: "Welcome back!",
+      toast.success("Login successful", {
+        description: "Welcome back!"
       });
       navigate('/');
     } else {
-      toast({
-        variant: "destructive",
-        title: "Login failed",
-        description: error.message,
+      toast.error("Login failed", {
+        description: error.message
       });
     }
     
@@ -113,17 +106,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       });
 
       if (error) {
-        toast({
-          variant: "destructive",
-          title: "Google sign-in failed",
-          description: error.message,
+        toast.error("Google sign-in failed", {
+          description: error.message
         });
       }
     } catch (err) {
-      toast({
-        variant: "destructive",
-        title: "Google sign-in failed",
-        description: "An unexpected error occurred. Please try again.",
+      toast.error("Google sign-in failed", {
+        description: "An unexpected error occurred. Please try again."
       });
     } finally {
       setLoading(false);
@@ -131,12 +120,26 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   const signOut = async () => {
-    await supabase.auth.signOut();
-    toast({
-      title: "Logged out",
-      description: "You have been logged out successfully.",
-    });
-    navigate('/');
+    try {
+      const { error } = await supabase.auth.signOut();
+      
+      if (error) {
+        toast.error("Sign out failed", {
+          description: error.message
+        });
+        return;
+      }
+      
+      toast.success("Signed out successfully", {
+        description: "You have been signed out of your account."
+      });
+      navigate('/');
+    } catch (err) {
+      const error = err as Error;
+      toast.error("Sign out failed", {
+        description: error.message || "An unexpected error occurred"
+      });
+    }
   };
 
   const resetPassword = async (email: string) => {
@@ -145,15 +148,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     });
 
     if (!error) {
-      toast({
-        title: "Password reset email sent",
-        description: "Please check your email for the password reset link.",
+      toast.success("Password reset email sent", {
+        description: "Please check your email for the password reset link."
       });
     } else {
-      toast({
-        variant: "destructive",
-        title: "Password reset failed",
-        description: error.message,
+      toast.error("Password reset failed", {
+        description: error.message
       });
     }
     
@@ -166,16 +166,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     });
 
     if (!error) {
-      toast({
-        title: "Password updated",
-        description: "Your password has been updated successfully.",
+      toast.success("Password updated", {
+        description: "Your password has been updated successfully."
       });
       navigate('/login');
     } else {
-      toast({
-        variant: "destructive",
-        title: "Password update failed",
-        description: error.message,
+      toast.error("Password update failed", {
+        description: error.message
       });
     }
     
