@@ -29,6 +29,7 @@ import {
   DialogClose,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
+import { BookmarkButton } from "@/components/BookmarkButton";
 
 // Color mapping for different subject areas - updated with new color scheme
 const areaColors = {
@@ -268,6 +269,16 @@ const Subject = () => {
                                     </HoverCardContent>
                                   </HoverCard>
                                   <span className="font-medium text-nebText">{chapter.title}</span>
+                                  <div className="ml-auto">
+                                    <BookmarkButton
+                                      contentType="chapter"
+                                      contentId={`${subject.id}-chapter-${chapter.id}`}
+                                      title={`${subject.name} - Chapter ${chapter.id}: ${chapter.title}`}
+                                      url={chapter.notesPath ? normalizeNotesPath(chapter.notesPath, false) : undefined}
+                                      size="sm"
+                                      variant="ghost"
+                                    />
+                                  </div>
                                 </div>
                               </AccordionTrigger>
                                     <AccordionContent className="px-3 py-2">
@@ -342,17 +353,25 @@ const Subject = () => {
                       <p className="text-sm text-nebText mb-3">
                         Quick reference of the syllabus of {subject.name}.
                       </p>
-                          <a 
-                            href={`https://drive.google.com/uc?export=download&id=${getSyllabusId(subject.id)}`}
-                            target="_blank" 
-                            rel="noopener noreferrer" 
-                            className="inline-flex"
-                          >
-                            <Button size="sm" variant="outline" className="hover:bg-nebBlue hover:text-white transition-all duration-200 border-nebBlue text-nebBlue shadow-sm hover:shadow">
-                              <FileDown className="mr-2 h-4 w-4" />
-                              Download Syllabus
-                            </Button>
-                          </a>
+                          <div className="flex items-center justify-between">
+                            <a 
+                              href={`https://drive.google.com/uc?export=download&id=${getSyllabusId(subject.id)}`}
+                              target="_blank" 
+                              rel="noopener noreferrer" 
+                              className="inline-flex"
+                            >
+                              <Button size="sm" variant="outline" className="hover:bg-nebBlue hover:text-white transition-all duration-200 border-nebBlue text-nebBlue shadow-sm hover:shadow">
+                                <FileDown className="mr-2 h-4 w-4" />
+                                Download Syllabus
+                              </Button>
+                            </a>
+                            <BookmarkButton
+                              contentType="resource"
+                              contentId={`${subject.id}-syllabus`}
+                              title={`${subject.name} - Syllabus`}
+                              url={`https://drive.google.com/uc?export=download&id=${getSyllabusId(subject.id)}`}
+                            />
+                          </div>
                     </div>
                     
                         <div className="border border-nebPalette-beige rounded-lg p-4 hover:shadow-md transition-all duration-300 hover:border-nebPrimary bg-gradient-to-br from-white to-nebBackground transform hover:-translate-y-1 hover:scale-[1.01]">
@@ -365,17 +384,25 @@ const Subject = () => {
                         <li>Cheat Sheet</li>
                         <li>Question Bank</li>
                       </ul>
-                          <a 
-                            href={`https://drive.google.com/file/d/1wPzf_hO_3-lAiIhSQa49pgZw9WbZoh9o/view?usp=sharing/${getAdditionalFilesId(subject.id)}`}
-                            target="_blank" 
-                            rel="noopener noreferrer" 
-                            className="inline-flex"
-                          >
-                            <Button size="sm" variant="outline" className="hover:bg-nebPrimary hover:text-white transition-all duration-200 border-nebPrimary text-nebPrimary shadow-sm hover:shadow">
-                              <FileDown className="mr-2 h-4 w-4" />
-                              View files
-                            </Button>
-                          </a>
+                          <div className="flex items-center justify-between">
+                            <a 
+                              href={`https://drive.google.com/file/d/1wPzf_hO_3-lAiIhSQa49pgZw9WbZoh9o/view?usp=sharing/${getAdditionalFilesId(subject.id)}`}
+                              target="_blank" 
+                              rel="noopener noreferrer" 
+                              className="inline-flex"
+                            >
+                              <Button size="sm" variant="outline" className="hover:bg-nebPrimary hover:text-white transition-all duration-200 border-nebPrimary text-nebPrimary shadow-sm hover:shadow">
+                                <FileDown className="mr-2 h-4 w-4" />
+                                View files
+                              </Button>
+                            </a>
+                            <BookmarkButton
+                              contentType="resource"
+                              contentId={`${subject.id}-additional-files`}
+                              title={`${subject.name} - Additional Files`}
+                              url={`https://drive.google.com/file/d/1wPzf_hO_3-lAiIhSQa49pgZw9WbZoh9o/view?usp=sharing/${getAdditionalFilesId(subject.id)}`}
+                            />
+                          </div>
                     </div>
                     
                         <div className="border border-nebPalette-beige rounded-lg p-4 hover:shadow-md transition-all duration-300 hover:border-nebAccent bg-gradient-to-br from-white to-nebBackground md:col-span-2 transform hover:-translate-y-1 hover:scale-[1.01]">
@@ -386,17 +413,25 @@ const Subject = () => {
                           <p className="text-sm text-nebText mb-3">
                         Video explanations of complex topics are available on our YouTube channel.
                       </p>
-                      <a 
-                        href="https://www.youtube.com/@AP2DShiksha" 
-                        target="_blank" 
-                        rel="noopener noreferrer" 
-                            className="inline-flex"
-                      >
-                            <Button className="bg-nebAccent hover:bg-nebAccent/90 text-white transition-all duration-200 flex items-center gap-2 shadow-sm hover:shadow">
-                              <ExternalLink className="h-4 w-4" />
+                      <div className="flex items-center justify-between">
+                        <a 
+                          href="https://www.youtube.com/@AP2DShiksha" 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          className="inline-flex"
+                        >
+                          <Button className="bg-nebAccent hover:bg-nebAccent/90 text-white transition-all duration-200 flex items-center gap-2 shadow-sm hover:shadow">
+                            <ExternalLink className="h-4 w-4" />
                         Visit YouTube Channel
-                            </Button>
-                      </a>
+                          </Button>
+                        </a>
+                        <BookmarkButton
+                          contentType="resource"
+                          contentId={`${subject.id}-video-tutorials`}
+                          title={`${subject.name} - Video Tutorials`}
+                          url="https://www.youtube.com/@AP2DShiksha"
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>

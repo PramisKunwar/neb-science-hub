@@ -12,6 +12,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { BookmarkButton } from "@/components/BookmarkButton";
 
 // Lazy load components to improve performance
 const Header = lazy(() => import("@/components/Header"));
@@ -49,7 +50,14 @@ const PastPapersTable = ({ subject, examTypeColors, subjectColors }) => {
             </span>
           </TableCell>
           <TableCell className="py-4 text-nebText">Complete paper with marking scheme</TableCell>
-          <TableCell className="text-right py-4">
+          <TableCell className="text-right py-4 flex items-center justify-end gap-2">
+            <BookmarkButton
+              contentType="pyq"
+              contentId={`${subject.id}-2081-final`}
+              title={`${subject.name} - 2081 Final Exam`}
+              size="sm"
+              variant="outline"
+            />
             <Button className={`${subjectColors[subject.id]?.accent || 'bg-nebBlue hover:bg-nebBlueDark'} transition-all duration-200 flex items-center gap-2 hover:gap-3 group`}>
               <FileDown className="h-4 w-4 group-hover:scale-110 transition-transform duration-200" />
               <span>Download</span>
@@ -65,7 +73,14 @@ const PastPapersTable = ({ subject, examTypeColors, subjectColors }) => {
             </span>
           </TableCell>
           <TableCell className="py-4 text-nebText">Complete paper with marking scheme</TableCell>
-          <TableCell className="text-right py-4">
+          <TableCell className="text-right py-4 flex items-center justify-end gap-2">
+            <BookmarkButton
+              contentType="pyq"
+              contentId={`${subject.id}-2080-final`}
+              title={`${subject.name} - 2080 Final Exam`}
+              size="sm"
+              variant="outline"
+            />
             <Button className={`${subjectColors[subject.id]?.accent || 'bg-nebBlue hover:bg-nebBlueDark'} transition-all duration-200 flex items-center gap-2 hover:gap-3 group`}>
               <FileDown className="h-4 w-4 group-hover:scale-110 transition-transform duration-200" />
               <span>Download</span>
@@ -81,7 +96,14 @@ const PastPapersTable = ({ subject, examTypeColors, subjectColors }) => {
             </span>
           </TableCell>
           <TableCell className="py-4 text-nebText">Model questions for practice</TableCell>
-          <TableCell className="text-right py-4">
+          <TableCell className="text-right py-4 flex items-center justify-end gap-2">
+            <BookmarkButton
+              contentType="pyq"
+              contentId={`${subject.id}-2079-final`}
+              title={`${subject.name} - 2079 Final Exam`}
+              size="sm"
+              variant="outline"
+            />
             <Button className={`${subjectColors[subject.id]?.accent || 'bg-nebBlue hover:bg-nebBlueDark'} transition-all duration-200 flex items-center gap-2 hover:gap-3 group`}>
               <FileDown className="h-4 w-4 group-hover:scale-110 transition-transform duration-200" />
               <span>Download</span>
@@ -97,7 +119,14 @@ const PastPapersTable = ({ subject, examTypeColors, subjectColors }) => {
             </span>
           </TableCell>
           <TableCell className="py-4 text-nebText">Complete paper with solutions</TableCell>
-          <TableCell className="text-right py-4">
+          <TableCell className="text-right py-4 flex items-center justify-end gap-2">
+            <BookmarkButton
+              contentType="pyq"
+              contentId={`${subject.id}-2078-final`}
+              title={`${subject.name} - 2078 Final Exam`}
+              size="sm"
+              variant="outline"
+            />
             <Button className={`${subjectColors[subject.id]?.accent || 'bg-nebBlue hover:bg-nebBlueDark'} transition-all duration-200 flex items-center gap-2 hover:gap-3 group`}>
               <FileDown className="h-4 w-4 group-hover:scale-110 transition-transform duration-200" />
               <span>Download</span>

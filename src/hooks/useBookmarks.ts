@@ -7,18 +7,25 @@ import { Bookmark, BookmarkInput, Tag, ContentType } from '@/types/bookmarks';
 export function useBookmarks() {
   const [bookmarks, setBookmarks] = useState<Bookmark[]>([]);
   const [tags, setTags] = useState<Tag[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const { user } = useAuth();
   const { toast } = useToast();
 
-  // Fetch all bookmarks for the current user
+  // Fetch bookmarks and tags when user changes
   const fetchBookmarks = useCallback(async () => {
-    if (!user) return;
+    if (!user) {
+      setBookmarks([]);
+      setTags([]);
+      setIsLoading(false);
+      return;
+    }
 
+    setIsLoading(true);
+    setError(null);
+    
     try {
-      setLoading(true);
-      
-      // Get bookmarks with their associated tags
+      // Get user's bookmarks with their associated tags
       const { data: bookmarksData, error: bookmarksError } = await supabase
         .from('bookmarks')
         .select(`
@@ -32,6 +39,7 @@ export function useBookmarks() {
 
       if (bookmarksError) {
         console.error('Error fetching bookmarks:', bookmarksError);
+        setError('Failed to load bookmarks. Please try again later.');
         return;
       }
 
@@ -53,18 +61,24 @@ export function useBookmarks() {
         
       if (tagsError) {
         console.error('Error fetching tags:', tagsError);
+        setError('Failed to load tags. Please try again later.');
         return;
       }
       
       setTags(tagsData);
-    } catch (error) {
-      console.error('Error in fetchBookmarks:', error);
+    } catch (err) {
+      console.error('Error in fetchBookmarks:', err);
+      setError('An unexpected error occurred. Please try again later.');
     } finally {
-      setLoading(false);
+      setIsLoading(false);
     }
   }, [user]);
 
-  // Add a bookmark
+  useEffect(() => {
+    fetchBookmarks();
+  }, [fetchBookmarks]);
+
+  // Add a new bookmark
   const addBookmark = async (bookmarkInput: BookmarkInput) => {
     if (!user) return null;
 
@@ -220,145 +234,21 @@ export function useBookmarks() {
     );
   }, [bookmarks]);
 
-  // Get bookmark by content type and ID
+  // Get a bookmark by content ID and type
   const getBookmark = useCallback((contentId: string, contentType: ContentType): Bookmark | null => {
-    const bookmark = bookmarks.find(
-      b => b.content_type === contentType && b.content_id === contentId
-    );
-    return bookmark || null;
+    return bookmarks.find(
+      bookmark => bookmark.content_id === contentId && bookmark.content_type === contentType
+    ) || null;
   }, [bookmarks]);
-
-  // Create a new tag
-  const createTag = async (tagName: string) => {
-    if (!user) return null;
-    
-    try {
-      const { data, error } = await supabase
-        .from('bookmark_tags')
-        .insert({
-          name: tagName,
-          user_id: user.id
-        })
-        .select()
-        .single();
-        
-      if (error) {
-        console.error('Error creating tag:', error);
-        return null;
-      }
-      
-      // Update local state
-      setTags([...tags, data]);
-      return data;
-    } catch (error) {
-      console.error('Error in createTag:', error);
-      return null;
-    }
-  };
-
-  // Delete a tag
-  const deleteTag = async (tagId: string) => {
-    if (!user) return false;
-    
-    try {
-      const { error } = await supabase
-        .from('bookmark_tags')
-        .delete()
-        .eq('id', tagId)
-        .eq('user_id', user.id);
-        
-      if (error) {
-        console.error('Error deleting tag:', error);
-        return false;
-      }
-      
-      // Update local state
-      setTags(tags.filter(t => t.id !== tagId));
-      
-      // Refresh bookmarks to update tag associations
-      await fetchBookmarks();
-      
-      return true;
-    } catch (error) {
-      console.error('Error in deleteTag:', error);
-      return false;
-    }
-  };
-
-  // Add a tag to a bookmark
-  const addTagToBookmark = async (bookmarkId: string, tagId: string) => {
-    if (!user) return false;
-    
-    try {
-      const { error } = await supabase
-        .from('bookmarks_tags')
-        .insert({
-          bookmark_id: bookmarkId,
-          tag_id: tagId
-        });
-        
-      if (error) {
-        console.error('Error adding tag to bookmark:', error);
-        return false;
-      }
-      
-      // Refresh bookmarks
-      await fetchBookmarks();
-      return true;
-    } catch (error) {
-      console.error('Error in addTagToBookmark:', error);
-      return false;
-    }
-  };
-
-  // Remove a tag from a bookmark
-  const removeTagFromBookmark = async (bookmarkId: string, tagId: string) => {
-    if (!user) return false;
-    
-    try {
-      const { error } = await supabase
-        .from('bookmarks_tags')
-        .delete()
-        .eq('bookmark_id', bookmarkId)
-        .eq('tag_id', tagId);
-        
-      if (error) {
-        console.error('Error removing tag from bookmark:', error);
-        return false;
-      }
-      
-      // Refresh bookmarks
-      await fetchBookmarks();
-      return true;
-    } catch (error) {
-      console.error('Error in removeTagFromBookmark:', error);
-      return false;
-    }
-  };
-
-  // Load bookmarks when user changes
-  useEffect(() => {
-    if (user) {
-      fetchBookmarks();
-    } else {
-      setBookmarks([]);
-      setTags([]);
-      setLoading(false);
-    }
-  }, [user, fetchBookmarks]);
 
   return {
     bookmarks,
     tags,
-    loading,
-    fetchBookmarks,
+    isLoading,
+    error,
     addBookmark,
     removeBookmark,
     isBookmarked,
     getBookmark,
-    createTag,
-    deleteTag,
-    addTagToBookmark,
-    removeTagFromBookmark
   };
 } 
