@@ -1,4 +1,3 @@
-
 import { useState, lazy, Suspense, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -15,6 +14,7 @@ import { Menu, X, Bookmark, Sparkles } from "lucide-react";
 import { subjects } from "@/data/subjects";
 import { cn } from "@/lib/utils";
 import { Card, CardHeader, CardContent, CardFooter } from "@/components/ui/card";
+import { AuthStatus } from "@/components/auth/AuthStatus";
 
 // Lazy load heavy components
 const LazyContent = lazy(() => Promise.resolve({ default: NavigationMenuContent }));
@@ -79,151 +79,157 @@ export default function Header() {
         </Link>
 
         {/* Desktop Navigation */}
-        <NavigationMenu className="hidden md:flex">
-          <NavigationMenuList className="gap-1">
-            <NavigationMenuItem>
-              <Link to="/" onClick={() => window.scrollTo(0, 0)}>
-                <NavigationMenuLink
+        <div className="hidden md:flex items-center space-x-4">
+          <NavigationMenu>
+            <NavigationMenuList className="gap-1">
+              <NavigationMenuItem>
+                <Link to="/" onClick={() => window.scrollTo(0, 0)}>
+                  <NavigationMenuLink
+                    className={cn(
+                      "nav-item px-3 py-1.5 text-sm font-medium relative group",
+                      isActiveRoute('/') && "nav-item-active"
+                    )}
+                  >
+                    Home
+                    {isActiveRoute('/') && (
+                      <span className="absolute -bottom-1 left-0 w-full h-1 bg-nebPalette-red rounded-full"></span>
+                    )}
+                  </NavigationMenuLink>
+                </Link>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <NavigationMenuTrigger 
                   className={cn(
                     "nav-item px-3 py-1.5 text-sm font-medium relative group",
-                    isActiveRoute('/') && "nav-item-active"
+                    isActiveRoute('/subjects') && "nav-item-active"
                   )}
                 >
-                  Home
-                  {isActiveRoute('/') && (
+                  Subjects
+                  {isActiveRoute('/subjects') && (
                     <span className="absolute -bottom-1 left-0 w-full h-1 bg-nebPalette-red rounded-full"></span>
                   )}
-                </NavigationMenuLink>
-              </Link>
-            </NavigationMenuItem>
-            <NavigationMenuItem>
-              <NavigationMenuTrigger 
-                className={cn(
-                  "nav-item px-3 py-1.5 text-sm font-medium relative group",
-                  isActiveRoute('/subjects') && "nav-item-active"
-                )}
-              >
-                Subjects
-                {isActiveRoute('/subjects') && (
-                  <span className="absolute -bottom-1 left-0 w-full h-1 bg-nebPalette-red rounded-full"></span>
-                )}
-              </NavigationMenuTrigger>
-              <Suspense fallback={<div className="p-4 text-center">Loading...</div>}>
-                <NavigationMenuContent>
-                  <div className="w-[480px] p-4 grid grid-cols-2 gap-x-4">
-                    <div>
-                      {leftColumnSubjects.map((subject) => (
-                        <Link
-                          key={subject.id}
-                          to={`/subjects/${subject.id}`}
-                          onClick={() => window.scrollTo(0, 0)}
-                          className={cn(
-                            "flex items-start py-2 group border-b border-nebPalette-beige hover:bg-nebPalette-lightGray rounded-md px-2",
-                            isActiveRoute(`/subjects/${subject.id}`) && "bg-nebPalette-lightGray"
-                          )}
-                        >
-                          <div className="flex-1 min-w-0">
-                            <p className={cn(
-                              "text-sm font-medium group-hover:text-nebPalette-navy transition-colors",
-                              isActiveRoute(`/subjects/${subject.id}`) ? "text-nebPalette-navy" : "text-nebPalette-teal"
-                            )}>
-                              {subject.name}
-                            </p>
-                            <p className="text-xs text-nebPalette-teal truncate mt-0.5 pr-4">
-                              {subject.description}
-                            </p>
-                          </div>
-                        </Link>
-                      ))}
+                </NavigationMenuTrigger>
+                <Suspense fallback={<div className="p-4 text-center">Loading...</div>}>
+                  <NavigationMenuContent>
+                    <div className="w-[480px] p-4 grid grid-cols-2 gap-x-4">
+                      <div>
+                        {leftColumnSubjects.map((subject) => (
+                          <Link
+                            key={subject.id}
+                            to={`/subjects/${subject.id}`}
+                            onClick={() => window.scrollTo(0, 0)}
+                            className={cn(
+                              "flex items-start py-2 group border-b border-nebPalette-beige hover:bg-nebPalette-lightGray rounded-md px-2",
+                              isActiveRoute(`/subjects/${subject.id}`) && "bg-nebPalette-lightGray"
+                            )}
+                          >
+                            <div className="flex-1 min-w-0">
+                              <p className={cn(
+                                "text-sm font-medium group-hover:text-nebPalette-navy transition-colors",
+                                isActiveRoute(`/subjects/${subject.id}`) ? "text-nebPalette-navy" : "text-nebPalette-teal"
+                              )}>
+                                {subject.name}
+                              </p>
+                              <p className="text-xs text-nebPalette-teal truncate mt-0.5 pr-4">
+                                {subject.description}
+                              </p>
+                            </div>
+                          </Link>
+                        ))}
+                      </div>
+                      <div>
+                        {rightColumnSubjects.map((subject) => (
+                          <Link
+                            key={subject.id}
+                            to={`/subjects/${subject.id}`}
+                            onClick={() => window.scrollTo(0, 0)}
+                            className={cn(
+                              "flex items-start py-2 group border-b border-nebPalette-beige hover:bg-nebPalette-lightGray rounded-md px-2",
+                              isActiveRoute(`/subjects/${subject.id}`) && "bg-nebPalette-lightGray"
+                            )}
+                          >
+                            <div className="flex-1 min-w-0">
+                              <p className={cn(
+                                "text-sm font-medium group-hover:text-nebPalette-navy transition-colors",
+                                isActiveRoute(`/subjects/${subject.id}`) ? "text-nebPalette-navy" : "text-nebPalette-teal"
+                              )}>
+                                {subject.name}
+                              </p>
+                              <p className="text-xs text-nebPalette-teal truncate mt-0.5 pr-4">
+                                {subject.description}
+                              </p>
+                            </div>
+                          </Link>
+                        ))}
+                      </div>
                     </div>
-                    <div>
-                      {rightColumnSubjects.map((subject) => (
-                        <Link
-                          key={subject.id}
-                          to={`/subjects/${subject.id}`}
-                          onClick={() => window.scrollTo(0, 0)}
-                          className={cn(
-                            "flex items-start py-2 group border-b border-nebPalette-beige hover:bg-nebPalette-lightGray rounded-md px-2",
-                            isActiveRoute(`/subjects/${subject.id}`) && "bg-nebPalette-lightGray"
-                          )}
-                        >
-                          <div className="flex-1 min-w-0">
-                            <p className={cn(
-                              "text-sm font-medium group-hover:text-nebPalette-navy transition-colors",
-                              isActiveRoute(`/subjects/${subject.id}`) ? "text-nebPalette-navy" : "text-nebPalette-teal"
-                            )}>
-                              {subject.name}
-                            </p>
-                            <p className="text-xs text-nebPalette-teal truncate mt-0.5 pr-4">
-                              {subject.description}
-                            </p>
-                          </div>
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                </NavigationMenuContent>
-              </Suspense>
-            </NavigationMenuItem>
-            <NavigationMenuItem>
-              <Link to="/pyq" onClick={() => window.scrollTo(0, 0)}>
-                <NavigationMenuLink
-                  className={cn(
-                    "nav-item px-3 py-1.5 text-sm font-medium relative group",
-                    isActiveRoute('/pyq') && "nav-item-active"
-                  )}
-                >
-                  PYQ
-                  {isActiveRoute('/pyq') && (
-                    <span className="absolute -bottom-1 left-0 w-full h-1 bg-nebPalette-red rounded-full"></span>
-                  )}
-                </NavigationMenuLink>
-              </Link>
-            </NavigationMenuItem>
-            <NavigationMenuItem>
-              <Link to="/about" onClick={() => window.scrollTo(0, 0)}>
-                <NavigationMenuLink
-                  className={cn(
-                    "nav-item px-3 py-1.5 text-sm font-medium relative group",
-                    isActiveRoute('/about') && "nav-item-active"
-                  )}
-                >
-                  About
-                  {isActiveRoute('/about') && (
-                    <span className="absolute -bottom-1 left-0 w-full h-1 bg-nebPalette-red rounded-full"></span>
-                  )}
-                </NavigationMenuLink>
-              </Link>
-            </NavigationMenuItem>
-            <NavigationMenuItem>
-              <Link to="/contact" onClick={() => window.scrollTo(0, 0)}>
-                <NavigationMenuLink
-                  className={cn(
-                    "nav-item px-3 py-1.5 text-sm font-medium relative group",
-                    isActiveRoute('/contact') && "nav-item-active"
-                  )}
-                >
-                  Contact
-                  {isActiveRoute('/contact') && (
-                    <span className="absolute -bottom-1 left-0 w-full h-1 bg-nebPalette-red rounded-full"></span>
-                  )}
-                </NavigationMenuLink>
-              </Link>
-            </NavigationMenuItem>
-          </NavigationMenuList>
-        </NavigationMenu>
+                  </NavigationMenuContent>
+                </Suspense>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <Link to="/pyq" onClick={() => window.scrollTo(0, 0)}>
+                  <NavigationMenuLink
+                    className={cn(
+                      "nav-item px-3 py-1.5 text-sm font-medium relative group",
+                      isActiveRoute('/pyq') && "nav-item-active"
+                    )}
+                  >
+                    PYQ
+                    {isActiveRoute('/pyq') && (
+                      <span className="absolute -bottom-1 left-0 w-full h-1 bg-nebPalette-red rounded-full"></span>
+                    )}
+                  </NavigationMenuLink>
+                </Link>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <Link to="/about" onClick={() => window.scrollTo(0, 0)}>
+                  <NavigationMenuLink
+                    className={cn(
+                      "nav-item px-3 py-1.5 text-sm font-medium relative group",
+                      isActiveRoute('/about') && "nav-item-active"
+                    )}
+                  >
+                    About
+                    {isActiveRoute('/about') && (
+                      <span className="absolute -bottom-1 left-0 w-full h-1 bg-nebPalette-red rounded-full"></span>
+                    )}
+                  </NavigationMenuLink>
+                </Link>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <Link to="/contact" onClick={() => window.scrollTo(0, 0)}>
+                  <NavigationMenuLink
+                    className={cn(
+                      "nav-item px-3 py-1.5 text-sm font-medium relative group",
+                      isActiveRoute('/contact') && "nav-item-active"
+                    )}
+                  >
+                    Contact
+                    {isActiveRoute('/contact') && (
+                      <span className="absolute -bottom-1 left-0 w-full h-1 bg-nebPalette-red rounded-full"></span>
+                    )}
+                  </NavigationMenuLink>
+                </Link>
+              </NavigationMenuItem>
+            </NavigationMenuList>
+          </NavigationMenu>
+          
+          <AuthStatus />
+        </div>
 
-        {/* Mobile Menu Button */}
-        <Button
-          variant="outline"
-          size="icon"
-          className="md:hidden"
-          onClick={toggleMobileMenu}
-          aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
-          aria-expanded={mobileMenuOpen}
-        >
-          {mobileMenuOpen ? <X className="h-5 w-5" aria-hidden="true" /> : <Menu className="h-5 w-5" aria-hidden="true" />}
-        </Button>
+        {/* Mobile Menu Button and Auth */}
+        <div className="flex md:hidden items-center space-x-2">
+          <AuthStatus />
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={toggleMobileMenu}
+            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={mobileMenuOpen}
+          >
+            {mobileMenuOpen ? <X className="h-5 w-5" aria-hidden="true" /> : <Menu className="h-5 w-5" aria-hidden="true" />}
+          </Button>
+        </div>
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
