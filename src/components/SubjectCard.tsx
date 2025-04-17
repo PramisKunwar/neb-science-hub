@@ -6,6 +6,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { useState, useEffect, useRef, memo } from "react";
+import { BookmarkButton } from "@/components/BookmarkButton";
 
 type SubjectCardProps = {
   id: string;
@@ -228,79 +229,69 @@ const SubjectCard = memo(function SubjectCard({ id, name, icon, description }: S
     ? "transition-all duration-300" 
     : "opacity-0";
 
+  // Create bookmark item
+  const bookmarkItem = {
+    id: id,
+    type: 'subject',
+    title: name
+  };
+
   return (
-    <Card 
+    <Card
       ref={cardRef}
-      className={`h-full ${animationClass} ${theme.bg} ${theme.border} hover:shadow-lg focus-within:shadow-lg group ${isVisible ? "animate-fade-in" : ""} ${isFocused ? "animate-border-highlight" : ""}`}
+      className={`group transition-all duration-300 relative ${
+        theme.bg
+      } ${theme.border} ${
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+      } ${isHovered ? "shadow-lg transform -translate-y-1" : "shadow-md"} overflow-hidden`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      onFocus={() => {
-        setIsHovered(true);
-        setIsFocused(true);
-      }}
-      onBlur={() => {
-        setIsHovered(false);
-        setIsFocused(false);
-      }}
+      onFocus={() => setIsFocused(true)}
+      onBlur={() => setIsFocused(false)}
       style={{
-        transform: isHovered ? 'translateY(-6px)' : 'translateY(0)',
+        boxShadow: isHovered
+          ? `0 10px 25px -5px ${theme.glowColor}40, 0 8px 10px -6px ${theme.glowColor}20`
+          : "",
       }}
     >
-      <div className={`absolute top-0 left-0 w-1 h-0 ${theme.highlight} transition-all duration-300 ${isHovered ? 'h-full' : ''}`}></div>
-      <CardHeader className="pb-2 pt-5 px-6 relative">
-        <div 
-          className={`w-14 h-14 rounded-full ${theme.iconBg} shadow-sm flex items-center justify-center mb-4 border border-gray-100 transition-all duration-300 group-hover:shadow-md`} 
-          style={{
-            transform: isHovered ? 'scale(1.05)' : 'scale(1)'
-          }}
-        >
-          <IconComponent 
-            className={`h-7 w-7 ${theme.iconFg} transition-all duration-300 ${isHovered ? 'scale-110' : ''}`} 
-            strokeWidth={1.75}
-            aria-hidden="true"
-          />
-        </div>
-        <CardTitle className={`text-xl font-bold text-gray-800 transition-colors duration-300 ${theme.hoverText}`}>
-          {name}
-        </CardTitle>
-        
-        <div 
-          className="absolute top-0 right-0 w-0 h-0 border-t-[50px] border-r-[50px] border-t-transparent border-r-transparent opacity-0 group-hover:opacity-20 transition-opacity duration-500"
-          style={{ 
-            borderRightColor: theme.glowColor,
-          }}
-          aria-hidden="true"
-        ></div>
-      </CardHeader>
-      <CardContent className="px-6">
-        <p className="text-sm text-gray-600 mb-6 line-clamp-2 leading-relaxed">{description}</p>
-      </CardContent>
-      <CardFooter className="px-6 pb-5 pt-2">
-        <Link to={`/subjects/${id}`} className="w-full focus:outline-none">
-          <Button 
-            variant="outline" 
-            className={`w-full ${theme.buttonBorder} ${theme.buttonText} ${theme.buttonHoverBg} ${theme.buttonHoverText} transition-all duration-300 font-medium relative overflow-hidden focus:ring-2 focus:ring-opacity-30`}
-            style={{ 
-              "--ring-color": theme.glowColor 
-            } as React.CSSProperties}
+      <div className="flex justify-between items-start absolute top-3 right-3">
+        <BookmarkButton 
+          item={bookmarkItem}
+          variant="icon"
+          className="z-10"
+        />
+      </div>
+
+      {/* CardHeader */}
+      <CardHeader className="pb-2">
+        <div className="flex items-center">
+          <div
+            className={`p-2 rounded-lg ${theme.iconBg} mr-3 transition-colors duration-300`}
           >
-            <span className="relative z-10 group-hover:scale-105 transition-transform duration-300">
-              View Notes
-              {isHovered && (
-                <span className="absolute bottom-0 left-0 w-full h-0.5 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform origin-center duration-300"></span>
-              )}
-            </span>
-            <span 
-              className={`absolute inset-0 ${theme.highlight} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}
-              style={{
-                transformOrigin: 'left',
-                transform: isHovered ? 'scaleX(1)' : 'scaleX(0)',
-                transition: 'transform 300ms ease-out',
-              }}
-              aria-hidden="true"
-            ></span>
-          </Button>
-        </Link>
+            <IconComponent className={`h-6 w-6 ${theme.iconFg}`} />
+          </div>
+          <CardTitle
+            className={`text-lg text-gray-800 font-bold transition-colors duration-300 ${theme.hoverText}`}
+          >
+            {name}
+          </CardTitle>
+        </div>
+      </CardHeader>
+
+      {/* CardContent */}
+      <CardContent className="text-gray-600 pb-4">
+        <p>{description}</p>
+      </CardContent>
+
+      {/* CardFooter */}
+      <CardFooter className="pt-0">
+        <Button
+          asChild
+          variant="outline"
+          className={`w-full border ${theme.buttonBorder} ${theme.buttonText} ${theme.buttonHoverBg} ${theme.buttonHoverText} transition-colors duration-300`}
+        >
+          <Link to={`/subjects/${id}`}>Explore</Link>
+        </Button>
       </CardFooter>
     </Card>
   );

@@ -15,6 +15,7 @@ import { subjects } from "@/data/subjects";
 import { cn } from "@/lib/utils";
 import { Card, CardHeader, CardContent, CardFooter } from "@/components/ui/card";
 import { AuthStatus } from "@/components/auth/AuthStatus";
+import { useAuth } from "@/hooks/useAuth";
 
 // Lazy load heavy components
 const LazyContent = lazy(() => Promise.resolve({ default: NavigationMenuContent }));
@@ -52,6 +53,8 @@ export default function Header() {
   // Group subjects into columns for more compact display
   const leftColumnSubjects = subjects.slice(0, Math.ceil(subjects.length / 2));
   const rightColumnSubjects = subjects.slice(Math.ceil(subjects.length / 2));
+
+  const { user } = useAuth();
 
   return (
     <header className={cn(
@@ -211,6 +214,23 @@ export default function Header() {
                   </NavigationMenuLink>
                 </Link>
               </NavigationMenuItem>
+              {user && (
+                <NavigationMenuItem>
+                  <Link to="/bookmarks" onClick={() => window.scrollTo(0, 0)}>
+                    <NavigationMenuLink
+                      className={cn(
+                        "nav-item px-3 py-1.5 text-sm font-medium relative group",
+                        isActiveRoute('/bookmarks') && "nav-item-active"
+                      )}
+                    >
+                      Bookmarks
+                      {isActiveRoute('/bookmarks') && (
+                        <span className="absolute -bottom-1 left-0 w-full h-1 bg-nebPalette-red rounded-full"></span>
+                      )}
+                    </NavigationMenuLink>
+                  </Link>
+                </NavigationMenuItem>
+              )}
             </NavigationMenuList>
           </NavigationMenu>
           
@@ -311,6 +331,21 @@ export default function Header() {
               >
                 Contact
               </Link>
+              {user && (
+                <Link
+                  to="/bookmarks"
+                  className={cn(
+                    "mobile-nav-item pl-4",
+                    isActiveRoute('/bookmarks') ? "mobile-nav-item-active" : "text-nebPalette-teal"
+                  )}
+                  onClick={() => {
+                    toggleMobileMenu();
+                    window.scrollTo(0, 0);
+                  }}
+                >
+                  Bookmarks
+                </Link>
+              )}
             </nav>
             <Button
               variant="outline"
