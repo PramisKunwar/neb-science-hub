@@ -1,10 +1,5 @@
-
-import { RegisterForm } from "@/components/auth/RegisterForm";
+import { AuthPage } from "@/pages/AuthPage";
 
 export default function RegisterPage() {
-  return (
-    <div className="container flex items-center justify-center min-h-screen py-10">
-      <RegisterForm />
-    </div>
-  );
+  return <AuthPage />;
 }
