@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
@@ -27,7 +28,8 @@ export function useContact() {
         throw new Error("Please enter a valid email address");
       }
       
-      // Check rate limiting
+      // Check rate limiting using an IP-agnostic approach for client-side
+      // This assumes the backend will handle actual IP-based rate limiting
       const { data: rateCheckData, error: rateCheckError } = await supabase.rpc(
         "check_rate_limit",
         { ip_address: "client-side", action_type: "contact_submission" }
@@ -82,4 +84,4 @@ export function useContact() {
     submitting,
     submitContactForm,
   };
-} 
+}

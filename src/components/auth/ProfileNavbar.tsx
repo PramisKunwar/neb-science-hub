@@ -1,6 +1,8 @@
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { User, BookmarkIcon, Settings } from "lucide-react";
+import { User, BookmarkIcon, Settings, ActivityIcon } from "lucide-react";
 import { AvatarUpload } from "./AvatarUpload";
+import { useAuth } from "@/hooks/useAuth";
 
 type ProfileNavbarProps = {
   activeTab: string;
@@ -8,6 +10,7 @@ type ProfileNavbarProps = {
   username: string;
   fullName: string;
   avatarUrl: string;
+  isAdmin?: boolean;
 };
 
 export function ProfileNavbar({ 
@@ -15,7 +18,8 @@ export function ProfileNavbar({
   setActiveTab, 
   username, 
   fullName, 
-  avatarUrl 
+  avatarUrl,
+  isAdmin = false
 }: ProfileNavbarProps) {
   return (
     <div className="border-b bg-white dark:bg-gray-800 shadow-sm">
@@ -41,7 +45,7 @@ export function ProfileNavbar({
           className="w-full"
         >
           <TabsList 
-            className="w-full grid grid-cols-3 max-w-md mx-auto sm:mx-0 p-1 bg-gray-100 dark:bg-gray-700"
+            className={`w-full grid ${isAdmin ? 'grid-cols-4' : 'grid-cols-3'} max-w-md mx-auto sm:mx-0 p-1 bg-gray-100 dark:bg-gray-700`}
             aria-label="Profile navigation tabs"
           >
             <TabsTrigger 
@@ -71,9 +75,20 @@ export function ProfileNavbar({
               <span className="hidden sm:inline-block">Settings</span>
               <span className="absolute -bottom-px left-1/2 transform -translate-x-1/2 h-0.5 bg-primary w-0 data-[state=active]:w-3/4 transition-all" aria-hidden="true" />
             </TabsTrigger>
+            {isAdmin && (
+              <TabsTrigger 
+                value="monitoring" 
+                className="flex items-center justify-center gap-2 data-[state=active]:bg-primary/10 data-[state=active]:border-b-2 data-[state=active]:border-primary data-[state=active]:font-medium focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 transition-all relative"
+                aria-label="Monitoring tab"
+              >
+                <ActivityIcon className="h-4 w-4" aria-hidden="true" />
+                <span className="hidden sm:inline-block">Logs</span>
+                <span className="absolute -bottom-px left-1/2 transform -translate-x-1/2 h-0.5 bg-primary w-0 data-[state=active]:w-3/4 transition-all" aria-hidden="true" />
+              </TabsTrigger>
+            )}
           </TabsList>
         </Tabs>
       </div>
     </div>
   );
-} 
+}

@@ -11,71 +11,60 @@ export type Database = {
     Tables: {
       bookmark_tags: {
         Row: {
+          created_at: string
           id: string
           name: string
           user_id: string
-          created_at: string
         }
         Insert: {
+          created_at?: string
           id?: string
           name: string
           user_id: string
-          created_at?: string
         }
         Update: {
+          created_at?: string
           id?: string
           name?: string
           user_id?: string
-          created_at?: string
         }
-        Relationships: [
-          {
-            foreignKeyName: "bookmark_tags_user_id_fkey"
-            columns: ["user_id"]
-            referencedRelation: "users"
-            referencedColumns: ["id"]
-          }
-        ]
+        Relationships: []
       }
       bookmarks: {
         Row: {
-          id: string
-          user_id: string
-          content_type: string
           content_id: string
-          title: string
-          description: string | null
-          url: string | null
+          content_type: string
           created_at: string
+          description: string | null
+          id: string
+          title: string
+          updated_at: string
+          url: string | null
+          user_id: string
         }
         Insert: {
-          id?: string
-          user_id: string
-          content_type: string
           content_id: string
-          title: string
-          description?: string | null
-          url?: string | null
+          content_type: string
           created_at?: string
+          description?: string | null
+          id?: string
+          title: string
+          updated_at?: string
+          url?: string | null
+          user_id: string
         }
         Update: {
-          id?: string
-          user_id?: string
-          content_type?: string
           content_id?: string
-          title?: string
-          description?: string | null
-          url?: string | null
+          content_type?: string
           created_at?: string
+          description?: string | null
+          id?: string
+          title?: string
+          updated_at?: string
+          url?: string | null
+          user_id?: string
         }
-        Relationships: [
-          {
-            foreignKeyName: "bookmarks_user_id_fkey"
-            columns: ["user_id"]
-            referencedRelation: "users"
-            referencedColumns: ["id"]
-          }
-        ]
+        Relationships: []
       }
       bookmarks_tags: {
         Row: {
@@ -94,68 +83,70 @@ export type Database = {
           {
             foreignKeyName: "bookmarks_tags_bookmark_id_fkey"
             columns: ["bookmark_id"]
+            isOneToOne: false
             referencedRelation: "bookmarks"
             referencedColumns: ["id"]
           },
           {
             foreignKeyName: "bookmarks_tags_tag_id_fkey"
             columns: ["tag_id"]
+            isOneToOne: false
             referencedRelation: "bookmark_tags"
             referencedColumns: ["id"]
-          }
+          },
         ]
       }
       contact_messages: {
         Row: {
-          id: string
-          full_name: string
-          email: string
-          subject: string
-          message: string
           created_at: string
+          email: string
+          full_name: string
+          id: string
+          message: string
           processed: boolean
+          subject: string
         }
         Insert: {
-          id?: string
-          full_name: string
-          email: string
-          subject: string
-          message: string
           created_at?: string
+          email: string
+          full_name: string
+          id?: string
+          message: string
           processed?: boolean
+          subject: string
         }
         Update: {
-          id?: string
-          full_name?: string
-          email?: string
-          subject?: string
-          message?: string
           created_at?: string
+          email?: string
+          full_name?: string
+          id?: string
+          message?: string
           processed?: boolean
+          subject?: string
         }
         Relationships: []
       }
       newsletter_subscriptions: {
         Row: {
-          id: string
-          email: string
-          created_at: string
-          confirmed: boolean
           confirmation_token: string
+          confirmed: boolean
+          created_at: string
+          email: string
+          id: string
         }
         Insert: {
-          id?: string
-          email: string
-          created_at?: string
-          confirmed?: boolean
           confirmation_token?: string
+          confirmed?: boolean
+          created_at?: string
+          email: string
+          id?: string
         }
         Update: {
-          id?: string
-          email?: string
-          created_at?: string
-          confirmed?: boolean
           confirmation_token?: string
+          confirmed?: boolean
+          created_at?: string
+          email?: string
+          id?: string
         }
         Relationships: []
       }
@@ -186,16 +177,34 @@ export type Database = {
         }
         Relationships: []
       }
+      rate_limits: {
+        Row: {
+          action: string
+          client_ip: string
+          created_at: string
+          id: string
+        }
+        Insert: {
+          action: string
+          client_ip: string
+          created_at?: string
+          id?: string
+        }
+        Update: {
+          action?: string
+          client_ip?: string
+          created_at?: string
+          id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
       check_rate_limit: {
-        Args: {
-          ip_address: string
-          action_type: string
-        }
+        Args: { ip_address: string; action_type: string }
         Returns: boolean
       }
       is_authenticated: {

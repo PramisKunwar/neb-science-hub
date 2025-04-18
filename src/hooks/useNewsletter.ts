@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
@@ -25,7 +26,7 @@ export function useNewsletter() {
     setSubscribing(true);
     
     try {
-      // Check rate limiting
+      // Check rate limiting - using an IP-agnostic approach for client-side
       const { data: rateCheckData, error: rateCheckError } = await supabase.rpc(
         "check_rate_limit",
         { ip_address: "client-side", action_type: "newsletter_subscription" }
@@ -45,7 +46,7 @@ export function useNewsletter() {
         .from("newsletter_subscriptions")
         .select("id, confirmed")
         .eq("email", email)
-        .single();
+        .maybeSingle();
       
       if (existingSubscription) {
         if (existingSubscription.confirmed) {
@@ -92,4 +93,4 @@ export function useNewsletter() {
     subscribing,
     subscribe,
   };
-} 
+}
