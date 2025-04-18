@@ -3,15 +3,7 @@ import { TabsContent, TabsList, TabsTrigger, Tabs } from "@/components/ui/tabs";
 import { FileDown, Clock, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { subjects } from "@/data/subjects";
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { BookmarkButton } from "@/components/BookmarkButton";
 
 // Lazy load components to improve performance
@@ -19,16 +11,17 @@ const Header = lazy(() => import("@/components/Header"));
 const Footer = lazy(() => import("@/components/Footer"));
 
 // Loading fallback component
-const LoadingFallback = () => (
-  <div className="min-h-screen flex items-center justify-center">
+const LoadingFallback = () => <div className="min-h-screen flex items-center justify-center">
     <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-nebBlue"></div>
-  </div>
-);
+  </div>;
 
 // Table component instead of lazy loading
-const PastPapersTable = ({ subject, examTypeColors, subjectColors }) => {
-  return (
-    <Table>
+const PastPapersTable = ({
+  subject,
+  examTypeColors,
+  subjectColors
+}) => {
+  return <Table>
       <TableCaption className="mt-6 mb-2 text-base font-medium text-nebText">
         Available past papers for {subject.name}
       </TableCaption>
@@ -51,13 +44,7 @@ const PastPapersTable = ({ subject, examTypeColors, subjectColors }) => {
           </TableCell>
           <TableCell className="py-4 text-nebText">Complete paper with marking scheme</TableCell>
           <TableCell className="text-right py-4 flex items-center justify-end gap-2">
-            <BookmarkButton
-              contentType="pyq"
-              contentId={`${subject.id}-2081-final`}
-              title={`${subject.name} - 2081 Final Exam`}
-              size="sm"
-              variant="outline"
-            />
+            <BookmarkButton contentType="pyq" contentId={`${subject.id}-2081-final`} title={`${subject.name} - 2081 Final Exam`} size="sm" variant="outline" />
             <Button className={`${subjectColors[subject.id]?.accent || 'bg-nebBlue hover:bg-nebBlueDark'} transition-all duration-200 flex items-center gap-2 hover:gap-3 group`}>
               <FileDown className="h-4 w-4 group-hover:scale-110 transition-transform duration-200" />
               <span>Download</span>
@@ -74,13 +61,7 @@ const PastPapersTable = ({ subject, examTypeColors, subjectColors }) => {
           </TableCell>
           <TableCell className="py-4 text-nebText">Complete paper with marking scheme</TableCell>
           <TableCell className="text-right py-4 flex items-center justify-end gap-2">
-            <BookmarkButton
-              contentType="pyq"
-              contentId={`${subject.id}-2080-final`}
-              title={`${subject.name} - 2080 Final Exam`}
-              size="sm"
-              variant="outline"
-            />
+            <BookmarkButton contentType="pyq" contentId={`${subject.id}-2080-final`} title={`${subject.name} - 2080 Final Exam`} size="sm" variant="outline" />
             <Button className={`${subjectColors[subject.id]?.accent || 'bg-nebBlue hover:bg-nebBlueDark'} transition-all duration-200 flex items-center gap-2 hover:gap-3 group`}>
               <FileDown className="h-4 w-4 group-hover:scale-110 transition-transform duration-200" />
               <span>Download</span>
@@ -97,13 +78,7 @@ const PastPapersTable = ({ subject, examTypeColors, subjectColors }) => {
           </TableCell>
           <TableCell className="py-4 text-nebText">Model questions for practice</TableCell>
           <TableCell className="text-right py-4 flex items-center justify-end gap-2">
-            <BookmarkButton
-              contentType="pyq"
-              contentId={`${subject.id}-2079-final`}
-              title={`${subject.name} - 2079 Final Exam`}
-              size="sm"
-              variant="outline"
-            />
+            <BookmarkButton contentType="pyq" contentId={`${subject.id}-2079-final`} title={`${subject.name} - 2079 Final Exam`} size="sm" variant="outline" />
             <Button className={`${subjectColors[subject.id]?.accent || 'bg-nebBlue hover:bg-nebBlueDark'} transition-all duration-200 flex items-center gap-2 hover:gap-3 group`}>
               <FileDown className="h-4 w-4 group-hover:scale-110 transition-transform duration-200" />
               <span>Download</span>
@@ -120,13 +95,7 @@ const PastPapersTable = ({ subject, examTypeColors, subjectColors }) => {
           </TableCell>
           <TableCell className="py-4 text-nebText">Complete paper with solutions</TableCell>
           <TableCell className="text-right py-4 flex items-center justify-end gap-2">
-            <BookmarkButton
-              contentType="pyq"
-              contentId={`${subject.id}-2078-final`}
-              title={`${subject.name} - 2078 Final Exam`}
-              size="sm"
-              variant="outline"
-            />
+            <BookmarkButton contentType="pyq" contentId={`${subject.id}-2078-final`} title={`${subject.name} - 2078 Final Exam`} size="sm" variant="outline" />
             <Button className={`${subjectColors[subject.id]?.accent || 'bg-nebBlue hover:bg-nebBlueDark'} transition-all duration-200 flex items-center gap-2 hover:gap-3 group`}>
               <FileDown className="h-4 w-4 group-hover:scale-110 transition-transform duration-200" />
               <span>Download</span>
@@ -134,8 +103,7 @@ const PastPapersTable = ({ subject, examTypeColors, subjectColors }) => {
           </TableCell>
         </TableRow>
       </TableBody>
-    </Table>
-  );
+    </Table>;
 };
 
 // Custom colors for subjects based on requirements - optimized for harmony and accessibility
@@ -143,7 +111,7 @@ const PastPapersTable = ({ subject, examTypeColors, subjectColors }) => {
 const subjectColors = {
   physics: {
     border: "border-nebAccent",
-    bg: "bg-nebPalette-lightGray", 
+    bg: "bg-nebPalette-lightGray",
     accent: "bg-nebBlue hover:bg-nebBlueDark text-white",
     hover: "hover:bg-nebPalette-lightGray hover:text-nebPrimary hover:border-nebBlue",
     gradient: "from-nebPalette-lightGray to-white",
@@ -237,27 +205,24 @@ const getQuestionBankLink = (subjectId: string): string => {
     // Default fallback
     "default": "1gmMIVeymE9CS2fLI-whA5xMFOdnnAtBV"
   };
-
   return `https://drive.google.com/file/d/${questionBankMap[subjectId] || questionBankMap.default}/view`;
 };
-
 const getModelQuestionsLink = (subjectId: string): string => {
   const modelQuestionsMap = {
     "physics": "1hj1FKNQuFdEwk8Z4EBC4RQoFqxWnF-Y_",
     "chemistry": "1a2NMvKDTcNWiNfVWDgIsAOepEzi1o-zG",
     "mathematics": "1hNXFQkcFyRalxBebdvyLyYXQkmdx_br2",
     "botany": "13lCP0rnhFZprEft8UoCyemprBVPL_fni",
-    "zoology": "13lCP0rnhFZprEft8UoCyemprBVPL_fni", // Same as biology
+    "zoology": "13lCP0rnhFZprEft8UoCyemprBVPL_fni",
+    // Same as biology
     "computer-science": "1fgdVRIh2bYVeDtv9u5cII9egK2STtKCT",
     "english": "1bP1HBzJyAGRtoG_8qPRYGi96CwlATSdC",
     "nepali": "1yz0oUuJHytfBJzwP0ELbEIVIDvUn1RLt",
     // Default fallback - using Physics model questions as default
     "default": "1hj1FKNQuFdEwk8Z4EBC4RQoFqxWnF-Y_"
   };
-
   return `https://drive.google.com/file/d/${modelQuestionsMap[subjectId] || modelQuestionsMap.default}/view`;
 };
-
 const getStudyGuidesLink = (subjectId: string): string => {
   const studyGuidesMap = {
     "physics": "1gmMIVeymE9CS2fLI-whA5xMFOdnnAtBV",
@@ -271,10 +236,8 @@ const getStudyGuidesLink = (subjectId: string): string => {
     // Default fallback
     "default": "1gmMIVeymE9CS2fLI-whA5xMFOdnnAtBV"
   };
-
   return `https://drive.google.com/file/d/${studyGuidesMap[subjectId] || studyGuidesMap.default}/view`;
 };
-
 const PYQ = () => {
   const [activeTab, setActiveTab] = useState("physics");
   const [isLoaded, setIsLoaded] = useState(false);
@@ -301,11 +264,8 @@ const PYQ = () => {
   const getCurrentColors = () => {
     return subjectColors[activeTab] || getDefaultAccent();
   };
-
   const colors = getCurrentColors();
-
-  return (
-    <div className="min-h-screen flex flex-col font-sans">
+  return <div className="min-h-screen flex flex-col font-sans">
       <Suspense fallback={<LoadingFallback />}>
       <Header />
       </Suspense>
@@ -336,53 +296,29 @@ const PYQ = () => {
               </div>
             </div>
 
-            <Tabs 
-              defaultValue="physics" 
-              className="w-full" 
-              onValueChange={setActiveTab}
-              value={activeTab}
-            >
+            <Tabs defaultValue="physics" className="w-full" onValueChange={setActiveTab} value={activeTab}>
               <div className="overflow-x-auto pb-4 mb-2">
                 <TabsList className="w-full justify-start bg-nebPalette-beige/50 p-1">
-                  {subjects.map(subject => (
-                    <TabsTrigger 
-                      key={subject.id} 
-                      value={subject.id}
-                      className={`min-w-max hover:scale-105 transition-transform duration-200 text-base font-medium ${
-                        activeTab === subject.id 
-                          ? `${subjectColors[subject.id]?.bg || 'bg-nebPalette-lightGray'} ${subjectColors[subject.id]?.border || 'border-nebBlue'} border-b-2 ${subjectColors[subject.id]?.headingText || 'text-nebPrimary'} shadow-sm` 
-                          : 'bg-transparent hover:bg-nebPalette-beige text-nebText'
-                      }`}
-                    >
+                  {subjects.map(subject => <TabsTrigger key={subject.id} value={subject.id} className={`min-w-max hover:scale-105 transition-transform duration-200 text-base font-medium ${activeTab === subject.id ? `${subjectColors[subject.id]?.bg || 'bg-nebPalette-lightGray'} ${subjectColors[subject.id]?.border || 'border-nebBlue'} border-b-2 ${subjectColors[subject.id]?.headingText || 'text-nebPrimary'} shadow-sm` : 'bg-transparent hover:bg-nebPalette-beige text-nebText'}`}>
                       {subject.name}
-                    </TabsTrigger>
-                  ))}
+                    </TabsTrigger>)}
                 </TabsList>
               </div>
 
-              {subjects.map(subject => (
-                <TabsContent key={subject.id} value={subject.id} className="mt-8">
-                  <div 
-                    className={`bg-white border rounded-lg shadow-sm hover:shadow-lg transition-all duration-300 border-t-4 ${subjectColors[subject.id]?.border || 'border-nebBlue'} mb-8 hover:-translate-y-1 transform group`}
-                  >
+              {subjects.map(subject => <TabsContent key={subject.id} value={subject.id} className="mt-8">
+                  <div className={`bg-white border rounded-lg shadow-sm hover:shadow-lg transition-all duration-300 border-t-4 ${subjectColors[subject.id]?.border || 'border-nebBlue'} mb-8 hover:-translate-y-1 transform group`}>
                     <h3 className={`px-6 py-4 text-xl font-bold bg-gradient-to-r ${subjectColors[subject.id]?.gradient || 'from-nebPalette-lightGray to-nebBackground'} border-b rounded-t-lg ${subjectColors[subject.id]?.headingText || 'text-nebPrimary'} group-hover:shadow-inner transition-all duration-300`}>
                       {subject.name} Past Year Papers
                       <div className="h-1 w-0 group-hover:w-full bg-current mt-1 transition-all duration-500 rounded"></div>
                     </h3>
                     <div className="p-6">
                       <Suspense fallback={<div className="animate-pulse h-40 bg-nebPalette-lightGray rounded"></div>}>
-                        <PastPapersTable 
-                          subject={subject} 
-                          examTypeColors={examTypeColors} 
-                          subjectColors={subjectColors} 
-                        />
+                        <PastPapersTable subject={subject} examTypeColors={examTypeColors} subjectColors={subjectColors} />
                       </Suspense>
                     </div>
                   </div>
 
-                  <div 
-                    className={`mt-8 bg-white border rounded-lg shadow-sm hover:shadow-lg transition-all duration-300 border-t-4 ${subjectColors[subject.id]?.border || 'border-nebBlue'} mb-4 hover:-translate-y-1 transform group`}
-                  >
+                  <div className={`mt-8 bg-white border rounded-lg shadow-sm hover:shadow-lg transition-all duration-300 border-t-4 ${subjectColors[subject.id]?.border || 'border-nebBlue'} mb-4 hover:-translate-y-1 transform group`}>
                     <h3 className={`px-6 py-4 text-xl font-bold bg-gradient-to-r ${subjectColors[subject.id]?.gradient || 'from-nebPalette-lightGray to-nebBackground'} border-b rounded-t-lg ${subjectColors[subject.id]?.headingText || 'text-nebPrimary'} group-hover:shadow-inner transition-all duration-300`}>
                       {subject.name} Question Banks
                       <div className="h-1 w-0 group-hover:w-full bg-current mt-1 transition-all duration-500 rounded"></div>
@@ -398,12 +334,7 @@ const PYQ = () => {
                         <p className="text-base text-nebText mb-5 leading-relaxed">
                           Curated questions from all previous years, organized by chapter for focused practice.
                         </p>
-                        <a 
-                          href={getQuestionBankLink(subject.id)} 
-                          target="_blank" 
-                          rel="noopener noreferrer" 
-                          className="inline-flex"
-                        >
+                        <a href={getQuestionBankLink(subject.id)} target="_blank" rel="noopener noreferrer" className="inline-flex">
                           <Button className="bg-nebBlue hover:bg-nebBlueDark text-white transition-all duration-200 flex items-center gap-2 hover:gap-3 group/btn">
                             <FileDown className="h-4 w-4 group-hover/btn:scale-110 transition-transform duration-200" />
                             <span>Download Question Bank</span>
@@ -421,12 +352,7 @@ const PYQ = () => {
                         <p className="text-base text-nebText mb-5 leading-relaxed">
                           Expected question patterns for the upcoming exam with solutions.
                         </p>
-                        <a 
-                          href={getModelQuestionsLink(subject.id)} 
-                          target="_blank" 
-                          rel="noopener noreferrer" 
-                          className="inline-flex"
-                        >
+                        <a href={getModelQuestionsLink(subject.id)} target="_blank" rel="noopener noreferrer" className="inline-flex">
                           <Button className="bg-nebBlue hover:bg-nebBlueDark text-white transition-all duration-200 flex items-center gap-2 hover:gap-3 group/btn">
                             <FileDown className="h-4 w-4 group-hover/btn:scale-110 transition-transform duration-200" />
                             <span>Download Model Questions</span>
@@ -439,28 +365,18 @@ const PYQ = () => {
                   <div className="mt-8 bg-nebPalette-lightGray border rounded-lg p-5 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 transform">
                     <p className="text-center text-nebText mb-3">Need more resources? Check our collection guides</p>
                     <div className="flex justify-center">
-                      <a 
-                        href={getStudyGuidesLink(subject.id)} 
-                        target="_blank" 
-                        rel="noopener noreferrer" 
-                        className="inline-flex"
-                      >
-                        <Button 
-                          variant="outline" 
-                          className="border-current text-current hover:bg-current hover:text-white transition-all duration-200 flex items-center gap-2 hover:gap-3 font-medium group"
-                          style={{
-                            borderColor: colors.border.includes('#') ? colors.border.replace('border-[', '').replace(']', '') : '#123458',
-                            color: colors.headingText.includes('#') ? colors.headingText.replace('text-[', '').replace(']', '') : '#123458'
-                          }}
-                        >
+                      <a href={getStudyGuidesLink(subject.id)} target="_blank" rel="noopener noreferrer" className="inline-flex">
+                        <Button variant="outline" style={{
+                      borderColor: colors.border.includes('#') ? colors.border.replace('border-[', '').replace(']', '') : '#123458',
+                      color: colors.headingText.includes('#') ? colors.headingText.replace('text-[', '').replace(']', '') : '#123458'
+                    }} className="border-current text-current hover:text-white transition-all duration-200 flex items-center gap-2 hover:gap-3 font-medium group bg-red-600 hover:bg-red-500">
                           <ExternalLink className="h-4 w-4 group-hover:rotate-12 transition-transform duration-200" />
                           <span>View Study Guides</span>
                         </Button>
                       </a>
                     </div>
                   </div>
-                </TabsContent>
-              ))}
+                </TabsContent>)}
             </Tabs>
           </div>
         </section>
@@ -468,8 +384,6 @@ const PYQ = () => {
       <Suspense fallback={<LoadingFallback />}>
       <Footer />
       </Suspense>
-    </div>
-  );
+    </div>;
 };
-
 export default PYQ;
