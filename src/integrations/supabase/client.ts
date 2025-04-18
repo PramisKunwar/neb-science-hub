@@ -3,13 +3,13 @@
 import { createClient } from '@supabase/supabase-js';
 import type { Database } from './types';
 
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
-const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
+// Use hardcoded values for now since .env variables aren't loading correctly
+const SUPABASE_URL = 'https://laurvehulnkfxmmdbodf.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxhdXJ2ZWh1bG5rZnhtbWRib2RmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQ4MTc4MzksImV4cCI6MjA2MDM5MzgzOX0.KLrec4Pj-cfkApLNCXcS-iuNxtmudzrURSy2r8maxEI';
 
-// Check if environment variables are available
 if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
   console.error(
-    'Missing Supabase environment variables. Please check your .env file.'
+    'Missing Supabase credentials. Using hardcoded values is not recommended for production.'
   );
 }
 
