@@ -124,20 +124,12 @@ const Contact = () => {
                         </div>
                         <div>
                           <h3 className="font-medium text-nebText">Email</h3>
-                          <a href="mailto:aarabbashyal64@gmail.com" className="text-sm text-nebText/70 hover:text-nebBlue transition-colors duration-300 block flex items-center group" aria-label="Send email to Aarab Bashyal">
-                            <span>aarabbashyal64@gmail.com</span>
-                            <span className="ml-2 text-nebBlue opacity-0 group-hover:opacity-100 transition-opacity duration-300">↗</span>
-                          </a>
                           <a href="mailto:pramiskunwar123@gmail.com" className="text-sm text-nebText/70 hover:text-nebBlue transition-colors duration-300 block flex items-center group" aria-label="Send email to Pramis Kunwar">
                             <span>pramiskunwar123@gmail.com</span>
                             <span className="ml-2 text-nebBlue opacity-0 group-hover:opacity-100 transition-opacity duration-300">↗</span>
                           </a>
                           <a href="mailto:pranishkhanal2@gmail.com" className="text-sm text-nebText/70 hover:text-nebBlue transition-colors duration-300 block flex items-center group" aria-label="Send email to Pranish Khanal">
                             <span>pranishkhanal2@gmail.com</span>
-                            <span className="ml-2 text-nebBlue opacity-0 group-hover:opacity-100 transition-opacity duration-300">↗</span>
-                          </a>
-                          <a href="mailto:deepakpuri931@gmail.com" className="text-sm text-nebText/70 hover:text-nebBlue transition-colors duration-300 block flex items-center group" aria-label="Send email to Deepak Puri">
-                            <span>deepakpuri931@gmail.com</span>
                             <span className="ml-2 text-nebBlue opacity-0 group-hover:opacity-100 transition-opacity duration-300">↗</span>
                           </a>
                         </div>
@@ -153,20 +145,8 @@ const Contact = () => {
                         </div>
                         <div>
                           <h3 className="font-medium text-nebText">Phone</h3>
-                          <a href="tel:9847008892" className="text-sm text-nebText/70 hover:text-nebBlue transition-colors duration-300 block flex items-center group" aria-label="Call this number">
-                            <span>9847008892</span>
-                            <span className="ml-2 text-nebBlue opacity-0 group-hover:opacity-100 transition-opacity duration-300">📞</span>
-                          </a>
-                          <a href="tel:9866615675" className="text-sm text-nebText/70 hover:text-nebBlue transition-colors duration-300 block flex items-center group" aria-label="Call this number">
-                            <span>9866615675</span>
-                            <span className="ml-2 text-nebBlue opacity-0 group-hover:opacity-100 transition-opacity duration-300">📞</span>
-                          </a>
                           <a href="tel:9805427945" className="text-sm text-nebText/70 hover:text-nebBlue transition-colors duration-300 block flex items-center group" aria-label="Call this number">
                             <span>9805427945</span>
-                            <span className="ml-2 text-nebBlue opacity-0 group-hover:opacity-100 transition-opacity duration-300">📞</span>
-                          </a>
-                          <a href="tel:9767622650" className="text-sm text-nebText/70 hover:text-nebBlue transition-colors duration-300 block flex items-center group" aria-label="Call this number">
-                            <span>9767622650</span>
                             <span className="ml-2 text-nebBlue opacity-0 group-hover:opacity-100 transition-opacity duration-300">📞</span>
                           </a>
                         </div>

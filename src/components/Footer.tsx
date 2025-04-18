@@ -147,7 +147,8 @@ export default function Footer() {
             </h3>
             <p className="text-sm text-gray-600">
               Your one-stop resource for Grade 11 science notes, past papers, and revision materials
-              following the NEB curriculum in Nepal.
+              following the NEB curriculum in Nepal. 
+            <b> NEB Science Hub is an independent resource and not affiliated with the National Examination Board </b>
             </p>
             <div className="flex space-x-4 pt-2">
               {[
@@ -262,7 +263,7 @@ export default function Footer() {
                   transform: isHovered === 'email' ? 'scale(1.2) rotate(-5deg)' : 'scale(1) rotate(0deg)'
                 }}
               />
-              <span className="transition-colors duration-300 group-hover:text-nebBlue">ap2dshiksha@gmail.com</span>
+              <span className="transition-colors duration-300 group-hover:text-nebBlue">contact@nebsciencehub.com</span>
             </div>
           </div>
         </div>

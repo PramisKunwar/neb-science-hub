@@ -187,10 +187,10 @@ const About = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                 {[
                   {
-                    name: "Aarab Bashyal",
-                    role: "Youtube Content Creator",
-                    bio: "Youtube Content Creator with experience creating content for NEB Science Hub.",
-                    social: { facebook: "https://www.facebook.com/profile.php?id=100071328417151", youtube: "https://www.youtube.com/@AP2DShiksha", instagram: "https://www.instagram.com/ap2dshiksha/" },
+                    name: "Pramis Kunwar",
+                    role: "Website Developer",
+                    bio: "Website Developer with experience developing website for NEB Science Hub.",
+                    social: { facebook: "https://www.facebook.com/PramisKunwar123/", youtube: "https://www.youtube.com/@AP2DShiksha", instagram: "https://www.instagram.com/ap2dshiksha/" },
                     color: "bg-nebPalette-lightGray border-t-2 border-nebBlue"
                   },
                   {
@@ -200,20 +200,7 @@ const About = () => {
                     social: { facebook: "https://www.facebook.com/Pranish.Khanal.03", youtube: "https://www.youtube.com/@AP2DShiksha", instagram: "https://www.instagram.com/ap2dshiksha/" },
                     color: "bg-nebPalette-lightGray border-t-2 border-nebBlue"
                   },
-                  {
-                    name: "Pramis Kunwar",
-                    role: "Website Developer",
-                    bio: "Website Developer with experience developing website for NEB Science Hub.",
-                    social: { facebook: "https://www.facebook.com/PramisKunwar123/", youtube: "https://www.youtube.com/@AP2DShiksha", instagram: "https://www.instagram.com/ap2dshiksha/" },
-                    color: "bg-nebPalette-lightGray border-t-2 border-nebBlue"
-                  },
-                  {
-                    name: "Deepak Puri",
-                    role: "Copywriter",
-                    bio: "Copywriter with experience writing content for NEB Science Hub.",
-                    social: { facebook: "https://www.facebook.com/profile.php?id=100056435271979", youtube: "https://www.youtube.com/@AP2DShiksha", instagram: "https://www.instagram.com/ap2dshiksha/" },
-                    color: "bg-nebPalette-lightGray border-t-2 border-nebBlue"
-                  }
+
                 ].map((member, index) => (
                   <HoverCard key={index}>
                     <HoverCardTrigger asChild>
