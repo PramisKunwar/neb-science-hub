@@ -4,20 +4,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { Mail, MapPin, Phone } from "lucide-react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -31,28 +19,41 @@ const Header = lazy(() => import("@/components/Header"));
 const Footer = lazy(() => import("@/components/Footer"));
 
 // Loading fallback component
-const LoadingFallback = () => (
-  <div className="flex items-center justify-center h-20">
+const LoadingFallback = () => <div className="flex items-center justify-center h-20">
     <div className="w-8 h-8 border-4 border-nebBlue border-t-transparent rounded-full animate-spin"></div>
-  </div>
-);
+  </div>;
 
 // Contact form schema
 const contactFormSchema = z.object({
-  name: z.string().min(2, { message: "Name must be at least 2 characters." }),
-  email: z.string().email({ message: "Please enter a valid email address." }),
-  subject: z.string().min(1, { message: "Please select a subject." }),
-  message: z.string().min(10, { message: "Message must be at least 10 characters." }),
+  name: z.string().min(2, {
+    message: "Name must be at least 2 characters."
+  }),
+  email: z.string().email({
+    message: "Please enter a valid email address."
+  }),
+  subject: z.string().min(1, {
+    message: "Please select a subject."
+  }),
+  message: z.string().min(10, {
+    message: "Message must be at least 10 characters."
+  })
 });
 
 // Subscription form schema
 const subscriptionSchema = z.object({
-  email: z.string().email({ message: "Please enter a valid email address." }),
+  email: z.string().email({
+    message: "Please enter a valid email address."
+  })
 });
-
 const Contact = () => {
-  const { submitContactForm, submitting } = useContact();
-  const { subscribe, subscribing } = useNewsletter();
+  const {
+    submitContactForm,
+    submitting
+  } = useContact();
+  const {
+    subscribe,
+    subscribing
+  } = useNewsletter();
   const [subscriptionEmail, setSubscriptionEmail] = useState("");
 
   // Initialize form with react-hook-form
@@ -62,8 +63,8 @@ const Contact = () => {
       name: "",
       email: "",
       subject: "",
-      message: "",
-    },
+      message: ""
+    }
   });
 
   // Handle contact form submission
@@ -72,9 +73,8 @@ const Contact = () => {
       name: values.name,
       email: values.email,
       subject: values.subject,
-      message: values.message,
+      message: values.message
     });
-    
     if (success) {
       contactForm.reset();
     }
@@ -83,16 +83,12 @@ const Contact = () => {
   // Handle newsletter subscription
   const handleSubscription = async (e: React.FormEvent) => {
     e.preventDefault();
-    
     const success = await subscribe(subscriptionEmail);
-    
     if (success) {
       setSubscriptionEmail("");
     }
   };
-
-  return (
-    <div className="min-h-screen flex flex-col">
+  return <div className="min-h-screen flex flex-col">
       <Suspense fallback={<LoadingFallback />}>
         <Header />
       </Suspense>
@@ -128,35 +124,19 @@ const Contact = () => {
                         </div>
                         <div>
                           <h3 className="font-medium text-nebText">Email</h3>
-                          <a 
-                            href="mailto:aarabbashyal64@gmail.com" 
-                            className="text-sm text-nebText/70 hover:text-nebBlue transition-colors duration-300 block flex items-center group"
-                            aria-label="Send email to Aarab Bashyal"
-                          >
+                          <a href="mailto:aarabbashyal64@gmail.com" className="text-sm text-nebText/70 hover:text-nebBlue transition-colors duration-300 block flex items-center group" aria-label="Send email to Aarab Bashyal">
                             <span>aarabbashyal64@gmail.com</span>
                             <span className="ml-2 text-nebBlue opacity-0 group-hover:opacity-100 transition-opacity duration-300">↗</span>
                           </a>
-                          <a 
-                            href="mailto:pramiskunwar123@gmail.com" 
-                            className="text-sm text-nebText/70 hover:text-nebBlue transition-colors duration-300 block flex items-center group"
-                            aria-label="Send email to Pramis Kunwar"
-                          >
+                          <a href="mailto:pramiskunwar123@gmail.com" className="text-sm text-nebText/70 hover:text-nebBlue transition-colors duration-300 block flex items-center group" aria-label="Send email to Pramis Kunwar">
                             <span>pramiskunwar123@gmail.com</span>
                             <span className="ml-2 text-nebBlue opacity-0 group-hover:opacity-100 transition-opacity duration-300">↗</span>
                           </a>
-                          <a 
-                            href="mailto:pranishkhanal2@gmail.com" 
-                            className="text-sm text-nebText/70 hover:text-nebBlue transition-colors duration-300 block flex items-center group"
-                            aria-label="Send email to Pranish Khanal"
-                          >
+                          <a href="mailto:pranishkhanal2@gmail.com" className="text-sm text-nebText/70 hover:text-nebBlue transition-colors duration-300 block flex items-center group" aria-label="Send email to Pranish Khanal">
                             <span>pranishkhanal2@gmail.com</span>
                             <span className="ml-2 text-nebBlue opacity-0 group-hover:opacity-100 transition-opacity duration-300">↗</span>
                           </a>
-                          <a 
-                            href="mailto:deepakpuri931@gmail.com" 
-                            className="text-sm text-nebText/70 hover:text-nebBlue transition-colors duration-300 block flex items-center group"
-                            aria-label="Send email to Deepak Puri"
-                          >
+                          <a href="mailto:deepakpuri931@gmail.com" className="text-sm text-nebText/70 hover:text-nebBlue transition-colors duration-300 block flex items-center group" aria-label="Send email to Deepak Puri">
                             <span>deepakpuri931@gmail.com</span>
                             <span className="ml-2 text-nebBlue opacity-0 group-hover:opacity-100 transition-opacity duration-300">↗</span>
                           </a>
@@ -173,35 +153,19 @@ const Contact = () => {
                         </div>
                         <div>
                           <h3 className="font-medium text-nebText">Phone</h3>
-                          <a 
-                            href="tel:9847008892" 
-                            className="text-sm text-nebText/70 hover:text-nebBlue transition-colors duration-300 block flex items-center group"
-                            aria-label="Call this number"
-                          >
+                          <a href="tel:9847008892" className="text-sm text-nebText/70 hover:text-nebBlue transition-colors duration-300 block flex items-center group" aria-label="Call this number">
                             <span>9847008892</span>
                             <span className="ml-2 text-nebBlue opacity-0 group-hover:opacity-100 transition-opacity duration-300">📞</span>
                           </a>
-                          <a 
-                            href="tel:9866615675" 
-                            className="text-sm text-nebText/70 hover:text-nebBlue transition-colors duration-300 block flex items-center group"
-                            aria-label="Call this number"
-                          >
+                          <a href="tel:9866615675" className="text-sm text-nebText/70 hover:text-nebBlue transition-colors duration-300 block flex items-center group" aria-label="Call this number">
                             <span>9866615675</span>
                             <span className="ml-2 text-nebBlue opacity-0 group-hover:opacity-100 transition-opacity duration-300">📞</span>
                           </a>
-                          <a 
-                            href="tel:9805427945" 
-                            className="text-sm text-nebText/70 hover:text-nebBlue transition-colors duration-300 block flex items-center group"
-                            aria-label="Call this number"
-                          >
+                          <a href="tel:9805427945" className="text-sm text-nebText/70 hover:text-nebBlue transition-colors duration-300 block flex items-center group" aria-label="Call this number">
                             <span>9805427945</span>
                             <span className="ml-2 text-nebBlue opacity-0 group-hover:opacity-100 transition-opacity duration-300">📞</span>
                           </a>
-                          <a 
-                            href="tel:9767622650" 
-                            className="text-sm text-nebText/70 hover:text-nebBlue transition-colors duration-300 block flex items-center group"
-                            aria-label="Call this number"
-                          >
+                          <a href="tel:9767622650" className="text-sm text-nebText/70 hover:text-nebBlue transition-colors duration-300 block flex items-center group" aria-label="Call this number">
                             <span>9767622650</span>
                             <span className="ml-2 text-nebBlue opacity-0 group-hover:opacity-100 transition-opacity duration-300">📞</span>
                           </a>
@@ -244,65 +208,38 @@ const Contact = () => {
                   <CardContent>
                     <Form {...contactForm}>
                       <form onSubmit={contactForm.handleSubmit(handleSubmitContactForm)} className="space-y-4">
-                        <FormField
-                          control={contactForm.control}
-                          name="name"
-                          render={({ field }) => (
-                            <FormItem>
+                        <FormField control={contactForm.control} name="name" render={({
+                        field
+                      }) => <FormItem>
                               <FormLabel htmlFor="name" className="text-sm font-medium text-nebText">
                                 Full Name
                               </FormLabel>
                               <FormControl>
-                                <Input
-                                  id="name"
-                                  placeholder="Your name"
-                                  className="transition-all duration-300 focus:ring-2 focus:ring-nebBlue focus:border-transparent bg-nebBackground border-nebPalette-beige"
-                                  {...field}
-                                  disabled={submitting}
-                                />
+                                <Input id="name" placeholder="Your name" className="transition-all duration-300 focus:ring-2 focus:ring-nebBlue focus:border-transparent bg-nebBackground border-nebPalette-beige" {...field} disabled={submitting} />
                               </FormControl>
                               <FormMessage />
-                            </FormItem>
-                          )}
-                        />
+                            </FormItem>} />
                         
-                        <FormField
-                          control={contactForm.control}
-                          name="email"
-                          render={({ field }) => (
-                            <FormItem>
+                        <FormField control={contactForm.control} name="email" render={({
+                        field
+                      }) => <FormItem>
                               <FormLabel htmlFor="email" className="text-sm font-medium text-nebText">
                                 Email
                               </FormLabel>
                               <FormControl>
-                                <Input
-                                  id="email"
-                                  type="email"
-                                  placeholder="your.email@example.com"
-                                  className="transition-all duration-300 focus:ring-2 focus:ring-nebBlue focus:border-transparent bg-nebBackground border-nebPalette-beige"
-                                  {...field}
-                                  disabled={submitting}
-                                />
+                                <Input id="email" type="email" placeholder="your.email@example.com" className="transition-all duration-300 focus:ring-2 focus:ring-nebBlue focus:border-transparent bg-nebBackground border-nebPalette-beige" {...field} disabled={submitting} />
                               </FormControl>
                               <FormMessage />
-                            </FormItem>
-                          )}
-                        />
+                            </FormItem>} />
                         
-                        <FormField
-                          control={contactForm.control}
-                          name="subject"
-                          render={({ field }) => (
-                            <FormItem>
+                        <FormField control={contactForm.control} name="subject" render={({
+                        field
+                      }) => <FormItem>
                               <FormLabel htmlFor="subject" className="text-sm font-medium text-nebText">
                                 Subject
                               </FormLabel>
                               <FormControl>
-                                <Select
-                                  onValueChange={field.onChange}
-                                  defaultValue={field.value}
-                                  disabled={submitting}
-                                >
+                                <Select onValueChange={field.onChange} defaultValue={field.value} disabled={submitting}>
                                   <SelectTrigger className="transition-all duration-300 hover:border-nebBlue bg-nebBackground border-nebPalette-beige">
                                     <SelectValue placeholder="Select a subject" />
                                   </SelectTrigger>
@@ -316,46 +253,25 @@ const Contact = () => {
                                 </Select>
                               </FormControl>
                               <FormMessage />
-                            </FormItem>
-                          )}
-                        />
+                            </FormItem>} />
                         
-                        <FormField
-                          control={contactForm.control}
-                          name="message"
-                          render={({ field }) => (
-                            <FormItem>
+                        <FormField control={contactForm.control} name="message" render={({
+                        field
+                      }) => <FormItem>
                               <FormLabel htmlFor="message" className="text-sm font-medium text-nebText">
                                 Message
                               </FormLabel>
                               <FormControl>
-                                <Textarea
-                                  id="message"
-                                  placeholder="Your message..."
-                                  rows={5}
-                                  className="transition-all duration-300 focus:ring-2 focus:ring-nebBlue focus:border-transparent bg-nebBackground border-nebPalette-beige"
-                                  {...field}
-                                  disabled={submitting}
-                                />
+                                <Textarea id="message" placeholder="Your message..." rows={5} className="transition-all duration-300 focus:ring-2 focus:ring-nebBlue focus:border-transparent bg-nebBackground border-nebPalette-beige" {...field} disabled={submitting} />
                               </FormControl>
                               <FormMessage />
-                            </FormItem>
-                          )}
-                        />
+                            </FormItem>} />
                         
-                        <Button 
-                          type="submit" 
-                          className="w-full bg-nebBlue text-white hover:bg-nebBlueDark transition-all duration-300 hover:shadow-md transform hover:-translate-y-1"
-                          disabled={submitting}
-                        >
-                          {submitting ? (
-                            <>
+                        <Button type="submit" disabled={submitting} className="w-full text-white transition-all duration-300 hover:shadow-md transform hover:-translate-y-1 bg-[#bf3952]">
+                          {submitting ? <>
                               <div className="h-4 w-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
                               Sending...
-                            </>
-                          ) : (
-                            'Send Message'
-                          )}
+                            </> : 'Send Message'}
                         </Button>
                       </form>
                     </Form>
@@ -369,8 +285,6 @@ const Contact = () => {
       <Suspense fallback={<LoadingFallback />}>
         <Footer />
       </Suspense>
-    </div>
-  );
+    </div>;
 };
-
 export default Contact;
