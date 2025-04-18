@@ -1,3 +1,4 @@
+
 import { useState, useEffect, useCallback } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/hooks/useAuth';
@@ -43,15 +44,16 @@ export function useBookmarks() {
         return;
       }
 
-      // Format bookmark tags
+      // Format bookmark tags and ensure proper type casting
       const formattedBookmarks = bookmarksData.map(bookmark => ({
         ...bookmark,
+        content_type: bookmark.content_type as ContentType, // Explicitly cast to ContentType
         tags: bookmark.tags
           ? bookmark.tags.map((tagItem: any) => tagItem.tag)
           : []
       }));
 
-      setBookmarks(formattedBookmarks);
+      setBookmarks(formattedBookmarks as Bookmark[]);
       
       // Get all user tags
       const { data: tagsData, error: tagsError } = await supabase
@@ -251,4 +253,4 @@ export function useBookmarks() {
     isBookmarked,
     getBookmark,
   };
-} 
+}
