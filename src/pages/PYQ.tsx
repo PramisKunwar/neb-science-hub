@@ -369,7 +369,7 @@ const PYQ = () => {
                         <Button variant="outline" style={{
                       borderColor: colors.border.includes('#') ? colors.border.replace('border-[', '').replace(']', '') : '#123458',
                       color: colors.headingText.includes('#') ? colors.headingText.replace('text-[', '').replace(']', '') : '#123458'
-                    }} className="border-current text-current hover:text-white transition-all duration-200 flex items-center gap-2 hover:gap-3 font-medium group bg-red-600 hover:bg-red-500">
+                    }} className="border-current text-current hover:text-white transition-all duration-200 flex items-center gap-2 hover:gap-3 font-medium group bg-[#bf3952]">
                           <ExternalLink className="h-4 w-4 group-hover:rotate-12 transition-transform duration-200" />
                           <span>View Study Guides</span>
                         </Button>
