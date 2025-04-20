@@ -58,7 +58,7 @@ export default function Header() {
               </span>
               <span className="text-nebPalette-teal font-bold"> Hub</span>
             </span>
-            {location.pathname === '/' && <span className="text-xs text-nebPalette-teal -mt-1 font-medium tracking-wide">Your Science Resource Center</span>}
+            {location.pathname === '/' && <span className="text-xs text-nebPalette-teal -mt-1 font-medium tracking-wide hidden sm:inline-block">Your Science Resource Center</span>}
           </div>
         </Link>
 
