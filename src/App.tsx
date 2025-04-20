@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "@/hooks/useAuth";
 import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
+import { env } from "@/config";
 import Index from "./pages/Index";
 import Subject from "./pages/Subject";
 import PYQ from "./pages/PYQ";
@@ -18,13 +19,32 @@ import ResetPasswordPage from "./pages/auth/ResetPassword";
 import ProfilePage from "./pages/auth/Profile";
 import { AuthCallback } from "./pages/AuthCallback";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      // Adjust query behavior based on environment
+      retry: env.isProduction ? 3 : 1,
+      staleTime: env.isProduction ? 5 * 60 * 1000 : 0, // 5 minutes in production, 0 in development
+    },
+  },
+});
+
+// Initialize analytics only in production
+if (env.features.enableAnalytics) {
+  console.log('Analytics enabled in production mode');
+}
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <BrowserRouter>
       <AuthProvider>
         <TooltipProvider>
+          {/* Enable debug tools in development */}
+          {env.features.debugMode && (
+            <div className="fixed bottom-4 right-4 bg-yellow-100 p-2 rounded text-xs">
+              Debug Mode: {env.buildVersion}
+            </div>
+          )}
           <Toaster />
           <Sonner />
           <Routes>
