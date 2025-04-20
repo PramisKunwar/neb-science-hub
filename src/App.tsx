@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -26,9 +27,11 @@ const queryClient = new QueryClient({
       // Adjust query behavior based on environment
       retry: env.isProduction ? 3 : 1,
       staleTime: env.isProduction ? 5 * 60 * 1000 : 0, // 5 minutes in production, 0 in development
-      // Add global error handling for queries
-      onError: (error) => {
-        console.error('Query error:', error);
+      // Updated error handling approach
+      meta: {
+        onError: (error: Error) => {
+          console.error('Query error:', error);
+        },
       },
     },
   },
